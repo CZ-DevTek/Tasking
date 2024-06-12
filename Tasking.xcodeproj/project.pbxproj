@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
-		4F66B6FF2C19974600378124 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* ContentView.swift */; };
+		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
 		4F66B7012C19974800378124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7002C19974800378124 /* Assets.xcassets */; };
 		4F66B7042C19974800378124 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7032C19974800378124 /* Preview Assets.xcassets */; };
+		4F66B70D2C19984000378124 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B70C2C19984000378124 /* PriorityView.swift */; };
+		4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B70E2C1998BC00378124 /* ContextEditorView.swift */; };
+		4F66B7112C199A2C00378124 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7102C199A2C00378124 /* HomeView.swift */; };
+		4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
-		4F66B6FE2C19974600378124 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4F66B6FE2C19974600378124 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		4F66B7002C19974800378124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F66B7032C19974800378124 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4F66B70C2C19984000378124 /* PriorityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
+		4F66B70E2C1998BC00378124 /* ContextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextEditorView.swift; sourceTree = "<group>"; };
+		4F66B7102C199A2C00378124 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PriorityView + PriorityButton.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +60,11 @@
 			isa = PBXGroup;
 			children = (
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
-				4F66B6FE2C19974600378124 /* ContentView.swift */,
+				4F66B7102C199A2C00378124 /* HomeView.swift */,
+				4F66B6FE2C19974600378124 /* TaskListView.swift */,
+				4F66B70C2C19984000378124 /* PriorityView.swift */,
+				4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */,
+				4F66B70E2C1998BC00378124 /* ContextEditorView.swift */,
 				4F66B7002C19974800378124 /* Assets.xcassets */,
 				4F66B7022C19974800378124 /* Preview Content */,
 			);
@@ -137,8 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F66B6FF2C19974600378124 /* ContentView.swift in Sources */,
+				4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */,
+				4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */,
+				4F66B7112C199A2C00378124 /* HomeView.swift in Sources */,
+				4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */,
 				4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */,
+				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

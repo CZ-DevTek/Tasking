@@ -15,43 +15,54 @@ struct PriorityButton: View {
     let color: Color
     let taskManager: TaskManager
     
+    @State private var draggedTaskCount: Int
+    
     init(priority: Priority, tasks: Binding<[Task]>, allTasks: Binding<[Task]>, color: Color, taskManager: TaskManager) {
         self.priority = priority
         self._tasks = tasks
         self._allTasks = allTasks
         self.color = color
         self.taskManager = taskManager
+        _draggedTaskCount = State(initialValue: tasks.wrappedValue.filter { $0.priority == priority }.count)
     }
+    
     var destinationView: some View {
         switch priority {
-            case .importantButNotUrgent:
-                return AnyView(ScheduleItView(tasks: tasks))
-            case .importantAndUrgent:
-                return AnyView(DoItNowView(tasks: tasks))
-            case .notImportantNotUrgent:
-                return AnyView(DoItLaterView(tasks: tasks))
-            case .urgentButNotImportant:
-                return AnyView(DelegateItView(tasks: tasks))
+        case .importantButNotUrgent:
+            return AnyView(ScheduleItView())
+        case .importantAndUrgent:
+            return AnyView(DoItNowView())
+        case .notImportantNotUrgent:
+            return AnyView(DoItLaterView(tasks: tasks))
+        case .urgentButNotImportant:
+            return AnyView(DelegateItView(tasks: tasks))
         }
     }
     
     var body: some View {
-        NavigationLink(destination: destinationView) {
-            VStack {
+        NavigationLink(destination: destinationView.environmentObject(taskManager)) {
+            VStack(spacing: 8) {
                 Text(priority.rawValue)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
+                
                 Text(priority == .importantButNotUrgent ? "SCHEDULE IT" :
                         priority == .importantAndUrgent ? "DO IT NOW" :
                         priority == .notImportantNotUrgent ? "DO IT LATER" :
                         "DELEGATE IT")
-                .font(.largeTitle)
-                .foregroundColor(.white)
-                .bold()
+                    .font(.title3)
+                    .foregroundColor(Color.white)
+                    .bold()
                 
-                ForEach(tasks, id: \.self) { task in
-                    Text(task.name)
-                        .foregroundColor(.white)
+                ZStack(alignment: .center) {
+                    Circle()
+                        .foregroundColor(Color.white)
+                        .frame(width: 32, height: 32)
+                    
+                    Text("\(draggedTaskCount)")
+                        .foregroundColor(Color.green)
+                        .font(.headline)
+                        
                 }
             }
             .padding()
@@ -68,6 +79,7 @@ struct PriorityButton: View {
                                 let task = allTasks.remove(at: taskIndex)
                                 tasks.append(task)
                                 taskManager.saveTasks()
+                                updateDraggedTaskCount()
                             }
                         }
                     }
@@ -75,5 +87,13 @@ struct PriorityButton: View {
                 return true
             }
         }
+        .onAppear {
+            updateDraggedTaskCount()
+        }
+    }
+    
+    private func updateDraggedTaskCount() {
+        draggedTaskCount = tasks.filter { $0.priority == priority }.count
     }
 }
+

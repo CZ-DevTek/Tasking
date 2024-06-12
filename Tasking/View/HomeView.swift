@@ -19,7 +19,7 @@ struct HomeView: View {
             PriorityView()
                 .tabItem {
                     Image(systemName: "square.and.pencil")
-                    Text("Another")
+                    Text("Priorities")
                 }
         }
     }

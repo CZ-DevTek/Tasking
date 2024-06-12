@@ -9,7 +9,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct PriorityView: View {
-    @ObservedObject private var taskManager = TaskManager()
+    @EnvironmentObject private var taskManager: TaskManager
     
     var body: some View {
         NavigationView {
@@ -18,15 +18,6 @@ struct PriorityView: View {
                     ForEach(taskManager.tasks, id: \.self) { task in
                         HStack {
                             Text(task.name)
-                            Spacer()
-                            Button(action: {
-                                if let index = taskManager.tasks.firstIndex(of: task) {
-                                    taskManager.removeTask(at: index)
-                                }
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }
                         }
                         .onDrag {
                             NSItemProvider(object: task.name as NSString)
@@ -36,13 +27,14 @@ struct PriorityView: View {
                 .frame(maxHeight: .infinity)
                 .background(Color.gray.opacity(0.2))
                 
+                // Lower half: Priority matrix
                 VStack {
                     HStack {
                         PriorityButton(priority: .importantButNotUrgent,
                                        tasks: Binding(
-                                        get: { taskManager.priorityTasks?[.importantButNotUrgent] ?? [] },
+                                        get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
                                         set: { newValue in
-                                            taskManager.priorityTasks?[.importantButNotUrgent] = newValue
+                                            taskManager.priorityTasks[.importantButNotUrgent] = newValue
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
@@ -50,9 +42,9 @@ struct PriorityView: View {
                                        taskManager: taskManager)
                         PriorityButton(priority: .importantAndUrgent,
                                        tasks: Binding(
-                                        get: { taskManager.priorityTasks?[.importantAndUrgent] ?? [] },
+                                        get: { taskManager.priorityTasks[.importantAndUrgent] ?? [] },
                                         set: { newValue in
-                                            taskManager.priorityTasks?[.importantAndUrgent] = newValue
+                                            taskManager.priorityTasks[.importantAndUrgent] = newValue
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
@@ -62,9 +54,9 @@ struct PriorityView: View {
                     HStack {
                         PriorityButton(priority: .notImportantNotUrgent,
                                        tasks: Binding(
-                                        get: { taskManager.priorityTasks?[.notImportantNotUrgent] ?? [] },
+                                        get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
                                         set: { newValue in
-                                            taskManager.priorityTasks?[.notImportantNotUrgent] = newValue
+                                            taskManager.priorityTasks[.notImportantNotUrgent] = newValue
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
@@ -72,9 +64,9 @@ struct PriorityView: View {
                                        taskManager: taskManager)
                         PriorityButton(priority: .urgentButNotImportant,
                                        tasks: Binding(
-                                        get: { taskManager.priorityTasks?[.urgentButNotImportant] ?? [] },
+                                        get: { taskManager.priorityTasks[.urgentButNotImportant] ?? [] },
                                         set: { newValue in
-                                            taskManager.priorityTasks?[.urgentButNotImportant] = newValue
+                                            taskManager.priorityTasks[.urgentButNotImportant] = newValue
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,

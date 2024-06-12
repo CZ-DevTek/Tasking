@@ -9,13 +9,21 @@ import SwiftUI
 import Combine
 
 class TaskManager: ObservableObject {
-    @Published var tasks: [Task] = []
-    @Published var priorityTasks: [Priority: [Task]]? = [
+    @Published var tasks: [Task] = [] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    @Published var priorityTasks: [Priority: [Task]] = [
         .importantButNotUrgent: [],
         .importantAndUrgent: [],
         .notImportantNotUrgent: [],
         .urgentButNotImportant: []
-    ]
+    ] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
@@ -23,12 +31,12 @@ class TaskManager: ObservableObject {
     init() {
         loadTasks()
         loadPriorityTasks()
+        sortTasksByPriority()
     }
     
     func addTask(_ task: Task) {
         tasks.append(task)
         saveTasks()
-        savePriorityTasks()
     }
     
     func removeTask(at index: Int) {
@@ -44,7 +52,12 @@ class TaskManager: ObservableObject {
     }
     
     func updateTaskPriority(at index: Int, priority: Priority) {
-        tasks[index].priority = priority
+        var task = tasks[index]
+        task.priority = priority
+        for (key, _) in priorityTasks {
+            priorityTasks[key]?.removeAll { $0.id == task.id }
+        }
+        priorityTasks[priority]?.append(task)
         saveTasks()
         savePriorityTasks()
     }
@@ -77,4 +90,27 @@ class TaskManager: ObservableObject {
             priorityTasks = decodedPriorityTasks
         }
     }
+    func sortTasksByPriority() {
+        tasks.sort { task1, task2 in
+            if let priority1 = task1.priority, let priority2 = task2.priority {
+                return priority1.rawValue < priority2.rawValue
+            } else {
+                return false
+            }
+        }
+    }
+    func updateTaskDueDate(_ task: Task, newDate: Date) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index].dueDate = newDate
+            saveTasks()
+        }
+    }
+    func completeTask(for task: Task) {
+            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+                tasks[index].completed.toggle()
+            }
+        }
+    
 }
+
+

@@ -21,6 +21,7 @@
 		4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B71C2C19AE7200378124 /* DoItLaterView.swift */; };
 		4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B71E2C19AE8800378124 /* DelegateItView.swift */; };
 		4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7202C19B23200378124 /* StoreTaskManager.swift */; };
+		4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		4F66B71C2C19AE7200378124 /* DoItLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoItLaterView.swift; sourceTree = "<group>"; };
 		4F66B71E2C19AE8800378124 /* DelegateItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateItView.swift; sourceTree = "<group>"; };
 		4F66B7202C19B23200378124 /* StoreTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTaskManager.swift; sourceTree = "<group>"; };
+		4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
+				4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */,
 				4F66B7142C19A63F00378124 /* View */,
 				4F66B7172C19A68100378124 /* Models */,
 				4F66B7222C19B3E000378124 /* Services */,
@@ -199,6 +202,7 @@
 				4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */,
 				4F66B7192C19AE3400378124 /* ScheduleItView.swift in Sources */,
 				4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */,
+				4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */,
 				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,
 				4F66B7162C19A67700378124 /* TaskModel.swift in Sources */,

@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct YourApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let taskManager = TaskManager()
+    
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environmentObject(taskManager)
+                .onAppear {
+                    taskManager.loadTasks()
+                    taskManager.loadPriorityTasks()
+                }
         }
     }
 }

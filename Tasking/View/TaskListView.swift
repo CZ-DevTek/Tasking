@@ -10,22 +10,33 @@ import SwiftUI
 struct TaskListView: View {
     @StateObject private var taskManager = TaskManager()
     @State private var newTaskName = ""
-    
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(taskManager.tasks, id: \.self) { task in
-                    Text(task.name)
+                    HStack {
+                        Text(task.name)
+                        Spacer()
+                        if let priority = task.priority {
+                            Circle()
+                                .fill(priority.color)
+                                .frame(width: 10, height: 10)
+                        }
+                    }
+                    .onDrag {
+                        NSItemProvider(object: task.name as NSString)
+                    }
                 }
                 .onDelete { indexSet in
                     for index in indexSet {
                         taskManager.removeTask(at: index)
                     }
                 }
-                
+
                 HStack {
                     TextField("Enter task name", text: $newTaskName)
-                    
+
                     Button("Add") {
                         if !newTaskName.isEmpty {
                             taskManager.addTask(Task(name: newTaskName))
@@ -35,10 +46,10 @@ struct TaskListView: View {
                 }
             }
             .navigationTitle("Task List")
-            .navigationBarItems(trailing: EditButton())
         }
     }
 }
+
 
 #Preview {
     TaskListView()

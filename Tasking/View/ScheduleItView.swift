@@ -6,17 +6,16 @@
 //
 
 import SwiftUI
-import UserNotifications
+import EventKit
 
 struct ScheduleItView: View {
     @EnvironmentObject var taskManager: TaskManager
     @State private var selectedTask: Task?
-    @State private var showDatePicker = false
-    @State private var dueDate = Date()
+    @State private var showAlert = false
 
     var body: some View {
         VStack {
-            Text("SCHEDULE IT")
+            Text("SCHEDULE")
                 .font(.largeTitle)
                 .bold()
 
@@ -27,25 +26,9 @@ struct ScheduleItView: View {
                             Text(task.name)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            if let dueDate = task.dueDate {
-                                Text(dateFormatter.string(from: dueDate))
-                            } else {
-                                Button("Set Date") {
-                                    selectedTask = task
-                                    showDatePicker.toggle()
-                                }
-                            }
-                        }
-
-                        if task.dueDate != nil {
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                    toggleNotification(for: index)
-                                }) {
-                                    Image(systemName: "envelope")
-                                        .foregroundColor(task.hasNotification ? .green : .primary)
-                                }
+                            Button("Schedule Task") {
+                                selectedTask = task
+                                openCalendar(for: task)
                             }
                         }
                     }
@@ -53,80 +36,49 @@ struct ScheduleItView: View {
                 }
             }
         }
-        .sheet(isPresented: $showDatePicker) {
-            VStack {
-                DatePicker("Select Due Date", selection: $dueDate, displayedComponents: [.date, .hourAndMinute])
-                    .datePickerStyle(GraphicalDatePickerStyle())
-                    .padding()
-
-                Button("Confirm Date") {
-                    if let task = selectedTask {
-                        taskManager.updateTaskDueDate(task, newDate: dueDate)
-                        showDatePicker = false
-                    }
-                }
-                .padding()
-            }
-        }
         .navigationTitle("SCHEDULE IT")
-    }
-
-    func toggleNotification(for index: Int) {
-        guard let task = taskManager.scheduleItTasks[safe: index] else { return }
-
-        taskManager.scheduleItTasks[index].toggleNotification()
-        if taskManager.scheduleItTasks[index].hasNotification {
-            scheduleNotification(for: task)
-        } else {
-
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Calendar Access Denied"), message: Text("Please allow calendar access in settings."), dismissButton: .default(Text("OK")))
         }
-        taskManager.saveTasks()
     }
 
-    func scheduleNotification(for task: Task) {
-        let content = UNMutableNotificationContent()
-        content.title = "Task Reminder"
-        content.body = task.name
-        content.sound = UNNotificationSound.default
-
-        if let dueDate = task.dueDate {
-            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dueDate)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-            let request = UNNotificationRequest(identifier: task.id.uuidString, content: content, trigger: trigger)
-
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Error scheduling notification: \(error)")
+    private func openCalendar(for task: Task) {
+        let eventStore = EKEventStore()
+        
+        // Handle permission request
+        eventStore.requestFullAccessToEvents { granted, error in
+            DispatchQueue.main.async {
+                if granted {
+                    createEvent(for: task, in: eventStore)
                 } else {
-                    DispatchQueue.main.async {
-                        showAlert(title: "Notification Set", message: "Notification was set successfully on \(dateFormatter.string(from: dueDate)).")
-                    }
+                    showAlert = true
                 }
             }
         }
     }
 
-    func showAlert(title: String, message: String) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootViewController = windowScene.windows.first?.rootViewController else { return }
-
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        DispatchQueue.main.async {
-            rootViewController.present(alert, animated: true, completion: nil)
+    private func createEvent(for task: Task, in eventStore: EKEventStore) {
+        let startDate = Date()
+        let endDate = Calendar.current.date(byAdding: .hour, value: 1, to: startDate) ?? startDate
+        
+        let event = EKEvent(eventStore: eventStore)
+        event.title = task.name
+        event.startDate = startDate
+        event.endDate = endDate
+        event.calendar = eventStore.defaultCalendarForNewEvents
+        
+        do {
+            try eventStore.save(event, span: .thisEvent)
+            DispatchQueue.main.async {
+                UIApplication.shared.open(URL(string: "calshow:\(startDate.timeIntervalSince1970)")!)
+            }
+        } catch {
+            print("Error saving event: \(error)")
         }
     }
 }
 
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .short
-    return formatter
-}()
-
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        indices.contains(index) ? self[index] : nil
-    }
+#Preview {
+    ScheduleItView()
+        .environmentObject(TaskManager())
 }

@@ -16,7 +16,7 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
     var hasAlarm = false
     var hasNotification = false
     var completed: Bool = false
-
+    
     mutating func toggleAlarm() {
         hasAlarm.toggle()
     }
@@ -27,21 +27,22 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
 }
 
 public enum Priority: String, CaseIterable, Hashable, Codable {
-    case importantButNotUrgent = "Important but not urgent"
     case importantAndUrgent = "Important and urgent"
-    case notImportantNotUrgent = "Not important and not urgent"
+    case importantButNotUrgent = "Important but not urgent"
     case urgentButNotImportant = "Urgent but not important"
+    case notImportantNotUrgent = "Not important and not urgent"
     
     var color: Color {
         switch self {
-        case .importantButNotUrgent:
-            return .blue
-        case .importantAndUrgent:
-            return .red
-        case .notImportantNotUrgent:
-            return .green
-        case .urgentButNotImportant:
-            return .gray
+            case .importantAndUrgent:
+                return .red
+            case .importantButNotUrgent:
+                return .blue
+            case .urgentButNotImportant:
+                return .yellow
+            case .notImportantNotUrgent:
+                return .green
+                
         }
     }
 }

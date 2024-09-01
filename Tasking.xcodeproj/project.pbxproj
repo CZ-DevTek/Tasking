@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F2B8A3C2C84B35100433D1B /* TasksDoneTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3B2C84B35100433D1B /* TasksDoneTodayView.swift */; };
+		4F2B8A3E2C84CCAA00433D1B /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
 		4F66B7012C19974800378124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7002C19974800378124 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		4F2B8A3B2C84B35100433D1B /* TasksDoneTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDoneTodayView.swift; sourceTree = "<group>"; };
+		4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
 		4F66B6FE2C19974600378124 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				4F66B7202C19B23200378124 /* StoreTaskManager.swift */,
+				4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */,
 				4F66B7192C19AE3400378124 /* ScheduleItView.swift in Sources */,
 				4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */,
+				4F2B8A3E2C84CCAA00433D1B /* CalendarManager.swift in Sources */,
 				4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */,
 				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,

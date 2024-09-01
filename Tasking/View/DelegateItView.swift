@@ -12,7 +12,7 @@ struct DelegateItView: View {
     
     var body: some View {
         VStack {
-            Text("DELEGATE IT")
+            Text("DELEGATE")
                 .font(.largeTitle)
                 .bold()
             

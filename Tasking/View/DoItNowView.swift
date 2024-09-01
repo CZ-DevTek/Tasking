@@ -12,7 +12,7 @@ struct DoItNowView: View {
     
     var body: some View {
         VStack {
-            Text("DO IT NOW")
+            Text("DO")
                 .font(.largeTitle)
                 .bold()
             

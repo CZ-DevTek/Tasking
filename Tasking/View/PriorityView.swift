@@ -30,16 +30,6 @@ struct PriorityView: View {
                 // Lower half: Priority matrix
                 VStack {
                     HStack {
-                        PriorityButton(priority: .importantButNotUrgent,
-                                       tasks: Binding(
-                                        get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
-                                        set: { newValue in
-                                            taskManager.priorityTasks[.importantButNotUrgent] = newValue
-                                        }
-                                       ),
-                                       allTasks: $taskManager.tasks,
-                                       color: .blue,
-                                       taskManager: taskManager)
                         PriorityButton(priority: .importantAndUrgent,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.importantAndUrgent] ?? [] },
@@ -48,20 +38,20 @@ struct PriorityView: View {
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
-                                       color: .red,
+                                       color: .green,
                                        taskManager: taskManager)
-                    }
-                    HStack {
-                        PriorityButton(priority: .notImportantNotUrgent,
+                        PriorityButton(priority: .importantButNotUrgent,
                                        tasks: Binding(
-                                        get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
+                                        get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
                                         set: { newValue in
-                                            taskManager.priorityTasks[.notImportantNotUrgent] = newValue
+                                            taskManager.priorityTasks[.importantButNotUrgent] = newValue
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
-                                       color: .green,
+                                       color: .yellow,
                                        taskManager: taskManager)
+                    }
+                    HStack {
                         PriorityButton(priority: .urgentButNotImportant,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.urgentButNotImportant] ?? [] },
@@ -70,7 +60,17 @@ struct PriorityView: View {
                                         }
                                        ),
                                        allTasks: $taskManager.tasks,
-                                       color: .gray,
+                                       color: .blue,
+                                       taskManager: taskManager)
+                        PriorityButton(priority: .notImportantNotUrgent,
+                                       tasks: Binding(
+                                        get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
+                                        set: { newValue in
+                                            taskManager.priorityTasks[.notImportantNotUrgent] = newValue
+                                        }
+                                       ),
+                                       allTasks: $taskManager.tasks,
+                                       color: .red,
                                        taskManager: taskManager)
                     }
                 }
@@ -83,5 +83,6 @@ struct PriorityView: View {
 struct PriorityView_Previews: PreviewProvider {
     static var previews: some View {
         PriorityView()
+            .environmentObject(TaskManager())
     }
 }

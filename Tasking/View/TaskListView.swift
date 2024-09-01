@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskListView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var newTaskName = ""
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -35,7 +35,7 @@ struct TaskListView: View {
                         }
                     }
                 }
-
+                
                 HStack {
                     TextField("Enter task name", text: $newTaskName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -43,7 +43,7 @@ struct TaskListView: View {
                             addTask()
                         }
                         .padding(.horizontal)
-
+                    
                 }
                 .padding()
                 

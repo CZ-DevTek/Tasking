@@ -17,25 +17,16 @@ struct PriorityButton: View {
     
     @State private var draggedTaskCount: Int = 0
     
-    init(priority: Priority, tasks: Binding<[Task]>, allTasks: Binding<[Task]>, color: Color, taskManager: TaskManager) {
-        self.priority = priority
-        self._tasks = tasks
-        self._allTasks = allTasks
-        self.color = color
-        self.taskManager = taskManager
-        _draggedTaskCount = State(initialValue: tasks.wrappedValue.filter { $0.priority == priority }.count)
-    }
-    
     var destinationView: some View {
         switch priority {
-            case .importantButNotUrgent:
-                return AnyView(ScheduleItView().environmentObject(taskManager))
-            case .importantAndUrgent:
-                return AnyView(DoItNowView().environmentObject(taskManager))
-            case .notImportantNotUrgent:
+        case .importantButNotUrgent:
+            return AnyView(ScheduleItView().environmentObject(taskManager))
+        case .importantAndUrgent:
+            return AnyView(DoItNowView().environmentObject(taskManager))
+        case .notImportantNotUrgent:
                 return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
-            case .urgentButNotImportant:
-                return AnyView(DelegateItView(tasks: $tasks).environmentObject(taskManager))
+        case .urgentButNotImportant:
+            return AnyView(DelegateItView().environmentObject(taskManager))
         }
     }
     
@@ -50,9 +41,9 @@ struct PriorityButton: View {
                         priority == .importantAndUrgent ? "DO IT NOW" :
                         priority == .notImportantNotUrgent ? "DO IT LATER" :
                         "DELEGATE IT")
-                .font(.title3)
-                .foregroundColor(Color.white)
-                .bold()
+                    .font(.title3)
+                    .foregroundColor(Color.white)
+                    .bold()
                 
                 ZStack(alignment: .center) {
                     Circle()
@@ -85,16 +76,16 @@ struct PriorityButton: View {
                 }
                 return true
             }
+            .onAppear {
+                updateDraggedTaskCount()
+            }
             .onChange(of: tasks) { _, _ in
                 updateDraggedTaskCount()
             }
         }
-        .onAppear {
-            updateDraggedTaskCount()
-        }
     }
     
     private func updateDraggedTaskCount() {
-        draggedTaskCount = tasks.filter { $0.priority == priority }.count
+        draggedTaskCount = taskManager.getTasks(for: priority).count
     }
 }

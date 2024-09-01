@@ -23,7 +23,6 @@ struct DoItNowView: View {
                             taskManager.completeTask(for: task)
                             if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
                                 taskManager.doItNowTasks.remove(at: index)
-                                // Add task to TaskDoneToday
                                 taskManager.addCompletedTask(task)
                             }
                         }

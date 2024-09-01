@@ -76,6 +76,10 @@ class TaskManager: ObservableObject {
         }
     }
     
+    func clearCompletedTasks() {
+        completedTasks.removeAll()
+        saveCompletedTasks()
+    }
     
     func addCompletedTask(_ task: Task) {
         completedTasks.append(task)
@@ -148,6 +152,7 @@ class TaskManager: ObservableObject {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks.remove(at: index)
         }
+        
         saveTasks()
         savePriorityTasks()
     }
@@ -162,6 +167,26 @@ class TaskManager: ObservableObject {
                 return doItLaterTasks
             case .urgentButNotImportant:
                 return delegateItTasks
+        }
+    }
+    func moveTaskToDoItNow(_ task: Task) {
+        var updatedTask = task
+        updatedTask.name = "Delegate: \(task.name)"
+        moveTaskToPriorityList(updatedTask, priority: .importantAndUrgent)
+        if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
+            delegateItTasks.remove(at: index)
+            savePriorityTasks()
+        }
+    }
+    
+    func shareTask(_ task: Task) {
+        let taskName = task.name
+        let activityVC = UIActivityViewController(activityItems: [taskName], applicationActivities: nil)
+        
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = scene.windows.first,
+           let rootVC = window.rootViewController {
+            rootVC.present(activityVC, animated: true, completion: nil)
         }
     }
     

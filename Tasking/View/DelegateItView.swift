@@ -9,19 +9,48 @@ import SwiftUI
 
 struct DelegateItView: View {
     @EnvironmentObject var taskManager: TaskManager
-    @Binding var tasks: [Task]
-
+    
     var body: some View {
         VStack {
             Text("DELEGATE IT")
                 .font(.largeTitle)
                 .bold()
+            
             List {
                 ForEach(taskManager.delegateItTasks) { task in
-                                    Text(task.name)
+                    HStack {
+                        Text(task.name)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .contentShape(Rectangle())
+                    .contextMenu {
+                        Button(action: {
+                            taskManager.moveTaskToDoItNow(task)
+                        }) {
+                            Text("Move to DoItNow")
+                            Image(systemName: "arrow.right.circle")
+                        }
+                        
+                        Button(action: {
+                            taskManager.shareTask(task)
+                        }) {
+                            Text("Ask to")
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    taskManager.delegateItTasks.remove(atOffsets: indexSet)
                 }
             }
+            .navigationTitle("DELEGATE IT")
         }
-        .navigationTitle("DELEGATE IT")
+        .padding()
     }
 }
+
+#Preview {
+    DelegateItView()
+        .environmentObject(TaskManager())
+}
+

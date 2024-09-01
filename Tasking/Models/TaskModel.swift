@@ -26,7 +26,7 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
     }
 }
 
-public enum Priority: String, Hashable, Codable {
+public enum Priority: String, CaseIterable, Hashable, Codable {
     case importantButNotUrgent = "Important but not urgent"
     case importantAndUrgent = "Important and urgent"
     case notImportantNotUrgent = "Not important and not urgent"

@@ -30,8 +30,11 @@ class TaskManager: ObservableObject {
     @Published var doItLaterTasks: [Task] = []
     @Published var delegateItTasks: [Task] = []
     
+    @Published var completedTasks: [Task] = []
+    
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
+    private let completedTasksKey = "completedTasksKey"
     
     init() {
         loadTasks()
@@ -67,16 +70,36 @@ class TaskManager: ObservableObject {
         savePriorityTasks()
     }
     
+    func completeTask(for task: Task) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index].completed.toggle()
+        }
+    }
+    
+    
+    func addCompletedTask(_ task: Task) {
+        completedTasks.append(task)
+        saveCompletedTasks()
+    }
+    
     func saveTasks() {
         let encoder = JSONEncoder()
         if let encodedTasks = try? encoder.encode(tasks) {
             UserDefaults.standard.set(encodedTasks, forKey: tasksKey)
         }
     }
+    
     func savePriorityTasks() {
         let encoder = JSONEncoder()
         if let encodedPriorityTasks = try? encoder.encode(priorityTasks) {
             UserDefaults.standard.set(encodedPriorityTasks, forKey: priorityTasksKey)
+        }
+    }
+    
+    func saveCompletedTasks() {
+        let encoder = JSONEncoder()
+        if let encodedCompletedTasks = try? encoder.encode(completedTasks) {
+            UserDefaults.standard.set(encodedCompletedTasks, forKey: completedTasksKey)
         }
     }
     
@@ -110,13 +133,9 @@ class TaskManager: ObservableObject {
             saveTasks()
         }
     }
-    func completeTask(for task: Task) {
-            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-                tasks[index].completed.toggle()
-            }
-        }
+    
     func moveTaskToPriorityList(_ task: Task, priority: Priority) {
-            switch priority {
+        switch priority {
             case .importantButNotUrgent:
                 scheduleItTasks.append(task)
             case .importantAndUrgent:
@@ -125,16 +144,16 @@ class TaskManager: ObservableObject {
                 doItLaterTasks.append(task)
             case .urgentButNotImportant:
                 delegateItTasks.append(task)
-            }
-            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-                tasks.remove(at: index)
-            }
-            saveTasks()
-            savePriorityTasks()
         }
-
-        func getTasks(for priority: Priority) -> [Task] {
-            switch priority {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks.remove(at: index)
+        }
+        saveTasks()
+        savePriorityTasks()
+    }
+    
+    func getTasks(for priority: Priority) -> [Task] {
+        switch priority {
             case .importantButNotUrgent:
                 return scheduleItTasks
             case .importantAndUrgent:
@@ -143,8 +162,8 @@ class TaskManager: ObservableObject {
                 return doItLaterTasks
             case .urgentButNotImportant:
                 return delegateItTasks
-            }
         }
+    }
     
 }
 

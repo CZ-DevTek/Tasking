@@ -19,11 +19,25 @@ struct DoItNowView: View {
             List {
                 ForEach(taskManager.doItNowTasks) { task in
                     SwipeToDeleteRow(task: task) {
-                        taskManager.completeTask(for: task)
+                        withAnimation {
+                            taskManager.completeTask(for: task)
+                            if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
+                                taskManager.doItNowTasks.remove(at: index)
+                                // Add task to TaskDoneToday
+                                taskManager.addCompletedTask(task)
+                            }
+                        }
                     }
                 }
                 .onDelete { indexSet in
-                    taskManager.tasks.remove(atOffsets: indexSet)
+                    withAnimation {
+                        indexSet.forEach { index in
+                            let task = taskManager.doItNowTasks[index]
+                            taskManager.completeTask(for: task)
+                            taskManager.doItNowTasks.remove(at: index)
+                            taskManager.addCompletedTask(task)
+                        }
+                    }
                 }
             }
             .navigationTitle("DO IT NOW")
@@ -32,30 +46,38 @@ struct DoItNowView: View {
     }
 }
 struct SwipeToDeleteRow: View {
+    @State private var isCompleted: Bool = false
     let task: Task
     let action: () -> Void
     
     var body: some View {
         HStack {
-            Button(action: action) {
-                Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(task.completed ? .green : .gray)
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    isCompleted.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        action()
+                    }
+                }
+            }) {
+                Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(isCompleted ? .green : .gray)
                     .font(.title)
             }
             .padding(.trailing, 8)
             
             Text(task.name)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .opacity(isCompleted ? 0.5 : 1)
         }
-        .contentShape(Rectangle()) // Ensure the whole row is tappable
+        .contentShape(Rectangle())
     }
 }
-
-struct DoItNowView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            DoItNowView()
-                .environmentObject(TaskManager())
+    struct DoItNowView_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView {
+                DoItNowView()
+                    .environmentObject(TaskManager())
+            }
         }
     }
-}

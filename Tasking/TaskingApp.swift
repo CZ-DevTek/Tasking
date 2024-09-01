@@ -8,9 +8,9 @@
 import SwiftUI
 
 @main
-struct YourApp: App {
+struct MyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let taskManager = TaskManager()
+    @StateObject private var taskManager = TaskManager()
     
     var body: some Scene {
         WindowGroup {

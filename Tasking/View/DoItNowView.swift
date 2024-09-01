@@ -17,7 +17,7 @@ struct DoItNowView: View {
                 .bold()
             
             List {
-                ForEach(taskManager.tasks) { task in
+                ForEach(taskManager.doItNowTasks) { task in
                     SwipeToDeleteRow(task: task) {
                         taskManager.completeTask(for: task)
                     }

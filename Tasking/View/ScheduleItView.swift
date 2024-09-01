@@ -21,8 +21,7 @@ struct ScheduleItView: View {
                 .bold()
 
             List {
-                ForEach(taskManager.tasks.indices, id: \.self) { index in
-                    let task = taskManager.tasks[index]
+                ForEach(Array(taskManager.scheduleItTasks.enumerated()), id: \.element.id) { index, task in
                     VStack(alignment: .leading) {
                         HStack {
                             Text(task.name)
@@ -73,14 +72,13 @@ struct ScheduleItView: View {
     }
 
     func toggleNotification(for index: Int) {
-        guard let task = taskManager.tasks[safe: index] else { return }
+        guard let task = taskManager.scheduleItTasks[safe: index] else { return }
 
-        taskManager.tasks[index].toggleNotification()
-        if taskManager.tasks[index].hasNotification {
+        taskManager.scheduleItTasks[index].toggleNotification()
+        if taskManager.scheduleItTasks[index].hasNotification {
             scheduleNotification(for: task)
         } else {
-            // Remove notification if needed
-            // Code to remove notification goes here
+
         }
         taskManager.saveTasks()
     }

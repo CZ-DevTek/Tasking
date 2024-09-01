@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct DoItLaterView: View {
-    let tasks: [Task]
+    @EnvironmentObject var taskManager: TaskManager
+    @Binding var tasks: [Task]
 
     var body: some View {
         VStack {
@@ -16,8 +17,8 @@ struct DoItLaterView: View {
                 .font(.largeTitle)
                 .bold()
             List {
-                ForEach(tasks) { task in
-                    Text(task.name)
+                ForEach(taskManager.doItLaterTasks) { task in
+                                    Text(task.name)
                 }
             }
         }

@@ -15,7 +15,7 @@ struct PriorityButton: View {
     let color: Color
     let taskManager: TaskManager
     
-    @State private var draggedTaskCount: Int
+    @State private var draggedTaskCount: Int = 0
     
     init(priority: Priority, tasks: Binding<[Task]>, allTasks: Binding<[Task]>, color: Color, taskManager: TaskManager) {
         self.priority = priority
@@ -28,19 +28,19 @@ struct PriorityButton: View {
     
     var destinationView: some View {
         switch priority {
-        case .importantButNotUrgent:
-            return AnyView(ScheduleItView())
-        case .importantAndUrgent:
-            return AnyView(DoItNowView())
-        case .notImportantNotUrgent:
-            return AnyView(DoItLaterView(tasks: tasks))
-        case .urgentButNotImportant:
-            return AnyView(DelegateItView(tasks: tasks))
+            case .importantButNotUrgent:
+                return AnyView(ScheduleItView().environmentObject(taskManager))
+            case .importantAndUrgent:
+                return AnyView(DoItNowView().environmentObject(taskManager))
+            case .notImportantNotUrgent:
+                return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
+            case .urgentButNotImportant:
+                return AnyView(DelegateItView(tasks: $tasks).environmentObject(taskManager))
         }
     }
     
     var body: some View {
-        NavigationLink(destination: destinationView.environmentObject(taskManager)) {
+        NavigationLink(destination: destinationView) {
             VStack(spacing: 8) {
                 Text(priority.rawValue)
                     .font(.headline)
@@ -50,9 +50,9 @@ struct PriorityButton: View {
                         priority == .importantAndUrgent ? "DO IT NOW" :
                         priority == .notImportantNotUrgent ? "DO IT LATER" :
                         "DELEGATE IT")
-                    .font(.title3)
-                    .foregroundColor(Color.white)
-                    .bold()
+                .font(.title3)
+                .foregroundColor(Color.white)
+                .bold()
                 
                 ZStack(alignment: .center) {
                     Circle()
@@ -62,7 +62,6 @@ struct PriorityButton: View {
                     Text("\(draggedTaskCount)")
                         .foregroundColor(Color.green)
                         .font(.headline)
-                        
                 }
             }
             .padding()
@@ -77,14 +76,17 @@ struct PriorityButton: View {
                         DispatchQueue.main.async {
                             if let taskIndex = allTasks.firstIndex(where: { $0.name == string }) {
                                 let task = allTasks.remove(at: taskIndex)
-                                tasks.append(task)
-                                taskManager.saveTasks()
+                                taskManager.moveTaskToPriorityList(task, priority: priority)
+                                self.tasks = taskManager.getTasks(for: priority)
                                 updateDraggedTaskCount()
                             }
                         }
                     }
                 }
                 return true
+            }
+            .onChange(of: tasks) { _, _ in
+                updateDraggedTaskCount()
             }
         }
         .onAppear {
@@ -96,4 +98,3 @@ struct PriorityButton: View {
         draggedTaskCount = tasks.filter { $0.priority == priority }.count
     }
 }
-

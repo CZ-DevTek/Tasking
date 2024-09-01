@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject private var taskManager = TaskManager()
-    @State private var newTaskName = ""
+    @EnvironmentObject private var taskManager: TaskManager
+        @State private var newTaskName = ""
 
     var body: some View {
         NavigationView {
@@ -49,7 +49,6 @@ struct TaskListView: View {
         }
     }
 }
-
 
 #Preview {
     TaskListView()

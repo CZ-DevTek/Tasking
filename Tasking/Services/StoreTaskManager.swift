@@ -25,6 +25,11 @@ class TaskManager: ObservableObject {
         }
     }
     
+    @Published var scheduleItTasks: [Task] = []
+    @Published var doItNowTasks: [Task] = []
+    @Published var doItLaterTasks: [Task] = []
+    @Published var delegateItTasks: [Task] = []
+    
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
     
@@ -108,6 +113,36 @@ class TaskManager: ObservableObject {
     func completeTask(for task: Task) {
             if let index = tasks.firstIndex(where: { $0.id == task.id }) {
                 tasks[index].completed.toggle()
+            }
+        }
+    func moveTaskToPriorityList(_ task: Task, priority: Priority) {
+            switch priority {
+            case .importantButNotUrgent:
+                scheduleItTasks.append(task)
+            case .importantAndUrgent:
+                doItNowTasks.append(task)
+            case .notImportantNotUrgent:
+                doItLaterTasks.append(task)
+            case .urgentButNotImportant:
+                delegateItTasks.append(task)
+            }
+            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+                tasks.remove(at: index)
+            }
+            saveTasks()
+            savePriorityTasks()
+        }
+
+        func getTasks(for priority: Priority) -> [Task] {
+            switch priority {
+            case .importantButNotUrgent:
+                return scheduleItTasks
+            case .importantAndUrgent:
+                return doItNowTasks
+            case .notImportantNotUrgent:
+                return doItLaterTasks
+            case .urgentButNotImportant:
+                return delegateItTasks
             }
         }
     

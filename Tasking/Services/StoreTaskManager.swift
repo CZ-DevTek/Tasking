@@ -41,7 +41,7 @@ class TaskManager: ObservableObject {
         loadPriorityTasks()
         sortTasksByPriority()
     }
-    
+
     func addTask(_ task: Task) {
         tasks.append(task)
         saveTasks()
@@ -122,6 +122,7 @@ class TaskManager: ObservableObject {
             priorityTasks = decodedPriorityTasks
         }
     }
+
     func sortTasksByPriority() {
         tasks.sort { task1, task2 in
             if let priority1 = task1.priority, let priority2 = task2.priority {
@@ -131,6 +132,7 @@ class TaskManager: ObservableObject {
             }
         }
     }
+
     func updateTaskDueDate(_ task: Task, newDate: Date) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].dueDate = newDate
@@ -139,6 +141,8 @@ class TaskManager: ObservableObject {
     }
     
     func moveTaskToPriorityList(_ task: Task, priority: Priority) {
+        removeTaskFromCurrentList(task)
+        
         switch priority {
             case .importantButNotUrgent:
                 scheduleItTasks.append(task)
@@ -149,12 +153,17 @@ class TaskManager: ObservableObject {
             case .urgentButNotImportant:
                 delegateItTasks.append(task)
         }
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks.remove(at: index)
-        }
         
         saveTasks()
         savePriorityTasks()
+    }
+    
+    private func removeTaskFromCurrentList(_ task: Task) {
+        tasks.removeAll { $0.id == task.id }
+        scheduleItTasks.removeAll { $0.id == task.id }
+        doItNowTasks.removeAll { $0.id == task.id }
+        doItLaterTasks.removeAll { $0.id == task.id }
+        delegateItTasks.removeAll { $0.id == task.id }
     }
     
     func getTasks(for priority: Priority) -> [Task] {
@@ -169,13 +178,15 @@ class TaskManager: ObservableObject {
                 return delegateItTasks
         }
     }
+
     func moveTaskToDoItNow(_ task: Task) {
-        var updatedTask = task
-        updatedTask.name = "Delegate: \(task.name)"
-        moveTaskToPriorityList(updatedTask, priority: .importantAndUrgent)
-        if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
-            delegateItTasks.remove(at: index)
-            savePriorityTasks()
+        moveTaskToPriorityList(task, priority: .importantAndUrgent)
+    }
+
+    func removeTaskFromDoItLater(_ task: Task) {
+        if let index = doItLaterTasks.firstIndex(where: { $0.id == task.id }) {
+            doItLaterTasks.remove(at: index)
+            saveTasks()
         }
     }
     
@@ -189,7 +200,4 @@ class TaskManager: ObservableObject {
             rootVC.present(activityVC, animated: true, completion: nil)
         }
     }
-    
 }
-
-

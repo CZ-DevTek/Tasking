@@ -16,6 +16,7 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
     var hasAlarm = false
     var hasNotification = false
     var completed: Bool = false
+    var scheduled: Bool = false
     
     mutating func toggleAlarm() {
         hasAlarm.toggle()

@@ -7,28 +7,32 @@
 
 import EventKit
 
-class CalendarManager: ObservableObject {
+class CalendarManager {
     private let eventStore = EKEventStore()
-
+    
     func requestAccess(completion: @escaping (Bool) -> Void) {
-        eventStore.requestFullAccessToEvents { granted, error in
+        eventStore.requestFullAccessToEvents { granted, _ in
             DispatchQueue.main.async {
                 completion(granted)
             }
         }
     }
-
-    func createEvent(title: String, startDate: Date, endDate: Date) {
+    
+    func createEvent(for task: Task, completion: @escaping (Result<Void, Error>) -> Void) {
+        let startDate = Date()
+        let endDate = Calendar.current.date(byAdding: .hour, value: 1, to: startDate) ?? startDate
+        
         let event = EKEvent(eventStore: eventStore)
-        event.title = title
+        event.title = task.name
         event.startDate = startDate
         event.endDate = endDate
         event.calendar = eventStore.defaultCalendarForNewEvents
         
         do {
             try eventStore.save(event, span: .thisEvent)
+            completion(.success(()))
         } catch {
-            print("Error saving event: \(error)")
+            completion(.failure(error))
         }
     }
 }

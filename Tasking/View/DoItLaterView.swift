@@ -10,18 +10,72 @@ import SwiftUI
 struct DoItLaterView: View {
     @EnvironmentObject var taskManager: TaskManager
     @Binding var tasks: [Task]
-
+    
     var body: some View {
         VStack {
             Text("DO IT LATER")
                 .font(.largeTitle)
                 .bold()
+            
             List {
                 ForEach(taskManager.doItLaterTasks) { task in
-                                    Text(task.name)
+                    HStack {
+                        Text(task.name)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .contentShape(Rectangle())
+                    .contextMenu {
+
+                        Button(action: {
+                            taskManager.moveTaskToPriorityList(task, priority: .importantAndUrgent)
+                        }) {
+                            Text("Move to Do It Now")
+                            Image(systemName: "arrow.right.circle")
+                        }
+
+                        Button(action: {
+                            taskManager.moveTaskToPriorityList(task, priority: .importantButNotUrgent)
+                        }) {
+                            Text("Move to Schedule It")
+                            Image(systemName: "calendar")
+                        }
+
+                        Button(action: {
+                            taskManager.moveTaskToPriorityList(task, priority: .urgentButNotImportant)
+                        }) {
+                            Text("Move to Delegate It")
+                            Image(systemName: "person.crop.circle.badge.checkmark")
+                        }
+
+                        Button(action: {
+                            if let index = taskManager.doItLaterTasks.firstIndex(where: { $0.id == task.id }) {
+                                taskManager.doItLaterTasks.remove(at: index)
+                                taskManager.saveTasks()
+                            }
+                        }) {
+                            Text("Delete Task")
+                            Image(systemName: "trash")
+                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    taskManager.doItLaterTasks.remove(atOffsets: indexSet)
                 }
             }
+            .navigationTitle("DO IT LATER")
         }
-        .navigationTitle("DO IT LATER")
+        .padding()
     }
 }
+
+#Preview {
+    let mockTasks = [
+            Task(id: UUID(), name: "Task 1", priority: .importantAndUrgent),
+            Task(id: UUID(), name: "Task 2", priority: .importantButNotUrgent),
+            Task(id: UUID(), name: "Task 3", priority: .urgentButNotImportant)
+        ]
+        
+        return DoItLaterView(tasks: .constant(mockTasks))
+            .environmentObject(TaskManager())
+}
+

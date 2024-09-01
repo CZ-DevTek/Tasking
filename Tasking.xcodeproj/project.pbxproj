@@ -105,8 +105,8 @@
 				4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */,
 				4F66B7182C19AE3400378124 /* ScheduleItView.swift */,
 				4F66B71A2C19AE5200378124 /* DoItNowView.swift */,
-				4F66B71C2C19AE7200378124 /* DoItLaterView.swift */,
 				4F66B71E2C19AE8800378124 /* DelegateItView.swift */,
+				4F66B71C2C19AE7200378124 /* DoItLaterView.swift */,
 				4F2B8A3B2C84B35100433D1B /* TasksDoneTodayView.swift */,
 				4F66B70E2C1998BC00378124 /* ContextEditorView.swift */,
 			);

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDoneTodayView: View {
+struct CompletedTasksView: View {
     @EnvironmentObject var taskManager: TaskManager
 
     var body: some View {
@@ -53,7 +53,7 @@ struct TaskDoneTodayView: View {
 struct TaskDoneTodayView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TaskDoneTodayView()
+            CompletedTasksView()
                 .environmentObject(TaskManager())
         }
     }

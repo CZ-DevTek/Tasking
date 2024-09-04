@@ -48,10 +48,8 @@ struct DoItLaterView: View {
                         }
 
                         Button(action: {
-                            if let index = taskManager.doItLaterTasks.firstIndex(where: { $0.id == task.id }) {
-                                taskManager.doItLaterTasks.remove(at: index)
-                                taskManager.saveTasks()
-                            }
+                            taskManager.removeTaskFromCurrentList(task)
+                            taskManager.saveTasks()
                         }) {
                             Text("Delete Task")
                             Image(systemName: "trash")
@@ -59,7 +57,11 @@ struct DoItLaterView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    taskManager.doItLaterTasks.remove(atOffsets: indexSet)
+                    indexSet.forEach { index in
+                        let task = taskManager.doItLaterTasks[index]
+                        taskManager.removeTaskFromCurrentList(task)
+                        taskManager.saveTasks()
+                    }
                 }
             }
             .navigationTitle("DO IT LATER")
@@ -78,4 +80,3 @@ struct DoItLaterView: View {
         return DoItLaterView(tasks: .constant(mockTasks))
             .environmentObject(TaskManager())
 }
-

@@ -24,7 +24,7 @@ struct HomeView: View {
                     Text("Priorities")
                 }
                 .environmentObject(taskManager)
-            TaskDoneTodayView()
+            CompletedTasksView()
                             .tabItem {
                                 Image(systemName: "checkmark.circle")
                                 Text("Completed")

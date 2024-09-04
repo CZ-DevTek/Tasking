@@ -72,11 +72,11 @@ struct SwipeToDeleteRow: View {
         .contentShape(Rectangle())
     }
 }
-    struct DoItNowView_Previews: PreviewProvider {
-        static var previews: some View {
-            NavigationView {
-                DoItNowView()
-                    .environmentObject(TaskManager())
-            }
+struct DoItNowView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            DoItNowView()
+                .environmentObject(TaskManager())
         }
     }
+}

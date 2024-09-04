@@ -53,10 +53,14 @@ class TaskManager: ObservableObject {
         savePriorityTasks()
     }
     
-    func updateTaskText(at index: Int, newText: String) {
-        tasks[index].name = newText
-        saveTasks()
-        savePriorityTasks()
+    func updateTaskText(in taskList: inout [Task], taskID: UUID, newText: String) {
+        if let index = taskList.firstIndex(where: { $0.id == taskID }) {
+            taskList[index].name = newText
+            saveTasks()
+            savePriorityTasks()
+        } else {
+            print("Task not found")
+        }
     }
     
     func updateTaskPriority(at index: Int, priority: Priority) {
@@ -132,13 +136,6 @@ class TaskManager: ObservableObject {
             }
         }
     }
-
-    func updateTaskDueDate(_ task: Task, newDate: Date) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].dueDate = newDate
-            saveTasks()
-        }
-    }
     
     func moveTaskToPriorityList(_ task: Task, priority: Priority) {
         removeTaskFromCurrentList(task)
@@ -158,7 +155,7 @@ class TaskManager: ObservableObject {
         savePriorityTasks()
     }
     
-    private func removeTaskFromCurrentList(_ task: Task) {
+    func removeTaskFromCurrentList(_ task: Task) {
         tasks.removeAll { $0.id == task.id }
         scheduleItTasks.removeAll { $0.id == task.id }
         doItNowTasks.removeAll { $0.id == task.id }
@@ -178,17 +175,34 @@ class TaskManager: ObservableObject {
                 return delegateItTasks
         }
     }
-
-    func moveTaskToDoItNow(_ task: Task) {
-        moveTaskToPriorityList(task, priority: .importantAndUrgent)
+    
+    func moveTaskToTaskList(_ task: Task, from sourceList: Binding<[Task]>) {
+        sourceList.wrappedValue.removeAll { $0.id == task.id }
+        tasks.append(task)
+        saveTasks()
+        savePriorityTasks()
     }
 
-    func removeTaskFromDoItLater(_ task: Task) {
-        if let index = doItLaterTasks.firstIndex(where: { $0.id == task.id }) {
-            doItLaterTasks.remove(at: index)
-            saveTasks()
+
+    func moveTaskToCompleted(_ task: Task) {
+            var updatedTask = task
+            
+            if delegateItTasks.contains(where: { $0.id == task.id }) {
+                updatedTask.name = "Delegated: \(task.name)"
+                if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
+                    delegateItTasks.remove(at: index)
+                    savePriorityTasks()
+                }
+            } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
+                updatedTask.name = "Scheduled: \(task.name)"
+                if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
+                    scheduleItTasks.remove(at: index)
+                    savePriorityTasks()
+                }
+            }
+            
+            addCompletedTask(updatedTask)
         }
-    }
     
     func shareTask(_ task: Task) {
         let taskName = task.name

@@ -12,7 +12,6 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
     var id = UUID()
     var name: String
     var priority: Priority?
-    var dueDate: Date?
     var hasAlarm = false
     var hasNotification = false
     var completed: Bool = false

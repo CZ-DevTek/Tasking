@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */; };
-		4F2B8A3E2C84CCAA00433D1B /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
 		4F66B7012C19974800378124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7002C19974800378124 /* Assets.xcassets */; };
 		4F66B7042C19974800378124 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7032C19974800378124 /* Preview Assets.xcassets */; };
 		4F66B70D2C19984000378124 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B70C2C19984000378124 /* PriorityView.swift */; };
-		4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B70E2C1998BC00378124 /* ContextEditorView.swift */; };
 		4F66B7112C199A2C00378124 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7102C199A2C00378124 /* HomeView.swift */; };
 		4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */; };
 		4F66B7162C19A67700378124 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7152C19A67700378124 /* TaskModel.swift */; };
@@ -23,19 +21,19 @@
 		4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B71C2C19AE7200378124 /* DoItLaterView.swift */; };
 		4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B71E2C19AE8800378124 /* DelegateItView.swift */; };
 		4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7202C19B23200378124 /* StoreTaskManager.swift */; };
+		4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7A26EF2CA85E80008581AF /* LandingView.swift */; };
+		4F7A26F32CA887FB008581AF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7A26F22CA887FB008581AF /* Combine.framework */; };
 		4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksView.swift; sourceTree = "<group>"; };
-		4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
 		4F66B6FE2C19974600378124 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		4F66B7002C19974800378124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F66B7032C19974800378124 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F66B70C2C19984000378124 /* PriorityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
-		4F66B70E2C1998BC00378124 /* ContextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextEditorView.swift; sourceTree = "<group>"; };
 		4F66B7102C199A2C00378124 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PriorityView + PriorityButton.swift"; sourceTree = "<group>"; };
 		4F66B7152C19A67700378124 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -44,6 +42,8 @@
 		4F66B71C2C19AE7200378124 /* DoItLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoItLaterView.swift; sourceTree = "<group>"; };
 		4F66B71E2C19AE8800378124 /* DelegateItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateItView.swift; sourceTree = "<group>"; };
 		4F66B7202C19B23200378124 /* StoreTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTaskManager.swift; sourceTree = "<group>"; };
+		4F7A26EF2CA85E80008581AF /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		4F7A26F22CA887FB008581AF /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7A26F32CA887FB008581AF /* Combine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				4F66B6FB2C19974600378124 /* Tasking */,
+				4F7A26F12CA887FB008581AF /* Frameworks */,
 				4F66B6FA2C19974600378124 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +101,7 @@
 		4F66B7142C19A63F00378124 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4F7A26EF2CA85E80008581AF /* LandingView.swift */,
 				4F66B7102C199A2C00378124 /* HomeView.swift */,
 				4F66B6FE2C19974600378124 /* TaskListView.swift */,
 				4F66B70C2C19984000378124 /* PriorityView.swift */,
@@ -108,7 +111,6 @@
 				4F66B71E2C19AE8800378124 /* DelegateItView.swift */,
 				4F66B71C2C19AE7200378124 /* DoItLaterView.swift */,
 				4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */,
-				4F66B70E2C1998BC00378124 /* ContextEditorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,9 +127,16 @@
 			isa = PBXGroup;
 			children = (
 				4F66B7202C19B23200378124 /* StoreTaskManager.swift */,
-				4F2B8A3D2C84CCAA00433D1B /* CalendarManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4F7A26F12CA887FB008581AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F7A26F22CA887FB008581AF /* Combine.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,14 +211,13 @@
 			files = (
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
 				4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */,
+				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,
 				4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */,
 				4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */,
 				4F66B7112C199A2C00378124 /* HomeView.swift in Sources */,
 				4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */,
-				4F66B70F2C1998BC00378124 /* ContextEditorView.swift in Sources */,
 				4F66B7192C19AE3400378124 /* ScheduleItView.swift in Sources */,
 				4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */,
-				4F2B8A3E2C84CCAA00433D1B /* CalendarManager.swift in Sources */,
 				4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */,
 				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,
@@ -354,6 +362,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LandingView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -383,6 +392,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LandingView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

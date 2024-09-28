@@ -9,53 +9,61 @@ import SwiftUI
 
 struct CompletedTasksView: View {
     @EnvironmentObject var taskManager: TaskManager
-
+    
     var body: some View {
-        VStack {
-            HStack {
-                Text("Completed Tasks")
-                    .font(.largeTitle)
-                    .bold()
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        taskManager.clearCompletedTasks()
-                    }
-                }) {
-                    Text("Clear")
-                        .font(.headline)
-                        .foregroundColor(.red)
-                }
-            }
-            .padding()
-
-            if taskManager.completedTasks.isEmpty {
-                Text("There are not completed tasks.")
-                    .foregroundColor(.gray)
-                    .padding()
-            } else {
-                List {
-                    ForEach(taskManager.completedTasks) { task in
-                        HStack {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                            Text(task.name)
+        NavigationView {
+            VStack {
+                if taskManager.completedTasks.isEmpty {
+                    Text("The list of completed tasks is clean.")
+                        .foregroundColor(.gray)
+                        .padding()
+                } else {
+                    List {
+                        ForEach(taskManager.completedTasks) { task in
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                                Text(task.name)
+                            }
                         }
                     }
+                    .padding(.bottom, 50)
+                    
+                    HStack {
+                        Button(action: {
+                            withAnimation {
+                                taskManager.clearCompletedTasks()
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                                Text("Clear List")
+                                    .font(.headline)
+                                    .foregroundColor(.red)
+                            }
+                        }
+                        .padding()
+                    }
+                }
+            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Completed Tasks")
+                        .font(.custom("Noteworthy-Bold", size: 34))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
         }
-        .navigationTitle("Completed Tasks")
-        .padding()
     }
 }
 
-struct TaskDoneTodayView_Previews: PreviewProvider {
+struct CompletedTasksView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CompletedTasksView()
-                .environmentObject(TaskManager())
-        }
+        CompletedTasksView()
+            .environmentObject(TaskManager())
     }
 }
-

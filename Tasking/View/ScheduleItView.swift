@@ -14,10 +14,6 @@ struct ScheduleItView: View {
     
     var body: some View {
         VStack {
-            Text("SCHEDULE")
-                .font(.largeTitle)
-                .bold()
-            
             List {
                 ForEach(taskManager.scheduleItTasks) { task in
                     HStack {
@@ -26,6 +22,13 @@ struct ScheduleItView: View {
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
+                        Button(action: {
+                            taskManager.shareTask(task)
+                            taskManager.moveTaskToCompleted(task)
+                        }) {
+                            Text("Schedule it in calendar")
+                            Image(systemName: "calendar")
+                        }
                         Button(action: {
                             selectedTask = task
                             showPriorityAlert = true
@@ -44,7 +47,16 @@ struct ScheduleItView: View {
                     }
                 }
             }
-            .navigationTitle("SCHEDULE IT")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Schedule It")
+                        .font(.custom("Noteworthy Bold", size: 34))
+                        .foregroundColor(.yellow)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
             .alert(isPresented: $showPriorityAlert) {
                 Alert(
                     title: Text("Move Task"),
@@ -59,7 +71,9 @@ struct ScheduleItView: View {
             }
         }
         .padding()
+        
     }
+    
 }
 
 #Preview {

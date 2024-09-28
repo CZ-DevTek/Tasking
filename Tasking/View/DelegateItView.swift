@@ -14,10 +14,6 @@ struct DelegateItView: View {
     
     var body: some View {
         VStack {
-            Text("DELEGATE")
-                .font(.largeTitle)
-                .bold()
-            
             List {
                 ForEach(taskManager.delegateItTasks) { task in
                     HStack {
@@ -52,7 +48,16 @@ struct DelegateItView: View {
                     }
                 }
             }
-            .navigationTitle("DELEGATE IT")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Delegate It")
+                        .font(.custom("Noteworthy Bold", size: 34))
+                        .foregroundColor(.blue)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
             .alert(isPresented: $showPriorityAlert) {
                 Alert(
                     title: Text("Move Task"),

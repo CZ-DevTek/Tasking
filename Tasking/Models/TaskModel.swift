@@ -30,7 +30,7 @@ public enum Priority: String, CaseIterable, Hashable, Codable {
     case importantAndUrgent = "Important and urgent"
     case importantButNotUrgent = "Important but not urgent"
     case urgentButNotImportant = "Urgent but not important"
-    case notImportantNotUrgent = "Not important and not urgent"
+    case notImportantNotUrgent = "Not important nor urgent"
     
     var color: Color {
         switch self {

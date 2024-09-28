@@ -11,15 +11,26 @@ import SwiftUI
 struct MyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var taskManager = TaskManager()
+
+    @State private var showLandingView = true
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environmentObject(taskManager)
-                .onAppear {
-                    taskManager.loadTasks()
-                    taskManager.loadPriorityTasks()
-                }
+            if showLandingView {
+                LandingView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                            showLandingView = false
+                        }
+                    }
+            } else {
+                HomeView()
+                    .environmentObject(taskManager)
+                    .onAppear {
+                        taskManager.loadTasks()
+                        taskManager.loadPriorityTasks()
+                    }
+            }
         }
     }
 }

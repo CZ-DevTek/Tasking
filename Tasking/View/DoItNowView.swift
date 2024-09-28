@@ -12,10 +12,6 @@ struct DoItNowView: View {
     
     var body: some View {
         VStack {
-            Text("DO")
-                .font(.largeTitle)
-                .bold()
-            
             List {
                 ForEach(taskManager.doItNowTasks) { task in
                     SwipeToDeleteRow(task: task) {
@@ -39,7 +35,16 @@ struct DoItNowView: View {
                     }
                 }
             }
-            .navigationTitle("DO IT NOW")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Do It Now")
+                        .font(.custom("Noteworthy Bold", size: 34))
+                        .foregroundColor(.green)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
         .padding()
     }

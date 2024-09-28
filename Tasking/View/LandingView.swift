@@ -1,20 +1,50 @@
+//
+//  LandingView.swift
+//  Tasking
+//
+//  Created by Carlos Garcia Perez on 28/9/24.
+//
+
 import SwiftUI
 
 struct LandingView: View {
+    @State private var tickRotation: Double = 0
+    
     var body: some View {
         VStack {
-            Spacer()
-            Image("AppLogo") // Replace "AppLogo" with your logo image name
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200) // Adjust size as needed
-            Spacer()
+            HStack(spacing: 0) {
+                Text("T")
+                    .font(.custom("Noteworthy Bold", size: 80))
+                    .foregroundColor(.blue)
+                
+                Text("✔︎")
+                    .font(.system(size: 100, weight: .bold))
+                    .foregroundColor(.green)
+                    .rotationEffect(.degrees(tickRotation))
+                    .animation(.easeInOut(duration: 2), value: tickRotation)
+                
+                Text("S")
+                    .font(.custom("Noteworthy Bold", size: 80))
+                    .foregroundColor(.yellow)
+                
+                Text("K")
+                    .font(.custom("Noteworthy Bold", size: 80))
+                    .foregroundColor(.red)
+                
+                Text("S")
+                    .font(.custom("Noteworthy Bold", size: 80))
+                    .foregroundColor(.black)
+            }
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                withAnimation {
+                    tickRotation = 180
+                }
+            }
         }
-        .background(Color.white) // Set background color
-        .edgesIgnoringSafeArea(.all) // Extend view to cover the whole screen
     }
 }
-
 #Preview {
     LandingView()
 }

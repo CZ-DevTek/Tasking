@@ -62,10 +62,18 @@ struct TaskListView: View {
                 .background(Color.clear)
                 .padding(.bottom, 20)
             }
-            .navigationTitle("Task List")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Task List")
+                        .font(.custom("Noteworthy Bold", size: 34))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
     }
-    
     private func addTask() {
         if !newTaskName.isEmpty {
             taskManager.addTask(Task(name: newTaskName))

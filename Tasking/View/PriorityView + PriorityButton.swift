@@ -32,22 +32,21 @@ struct PriorityButton: View {
     
     var body: some View {
         NavigationLink(destination: destinationView) {
-            VStack(spacing: 8) {
+            VStack(spacing: 4) {
                 Text(priority == .importantAndUrgent ? "DO" :
                         priority == .importantButNotUrgent ? "SCHEDULE" :
                         priority == .urgentButNotImportant ? "DELEGATE" :
                         "DO IT LATER")
-                    .font(.title2)
-                    .foregroundColor(Color.white)
-                    .bold()
+                .font(.custom("Noteworthy-Bold", size: 20))
+                .foregroundColor(.white)
                 Text(priority.rawValue)
-                    .font(.headline)
-                    .foregroundColor(Color.white)
+                    .font(.custom("Noteworthy-Bold", size: 12))
+                    .foregroundColor(.white)
                                
                 ZStack(alignment: .center) {
                     Circle()
                         .foregroundColor(Color.white)
-                        .frame(width: 32, height: 32)
+                        .frame(width: 28, height: 28)
                     
                     Text("\(draggedTaskCount)")
                         .foregroundColor(Color.green)

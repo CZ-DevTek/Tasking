@@ -41,7 +41,7 @@ class TaskManager: ObservableObject {
         loadPriorityTasks()
         sortTasksByPriority()
     }
-
+    
     func addTask(_ task: Task) {
         tasks.append(task)
         saveTasks()
@@ -126,7 +126,7 @@ class TaskManager: ObservableObject {
             priorityTasks = decodedPriorityTasks
         }
     }
-
+    
     func sortTasksByPriority() {
         tasks.sort { task1, task2 in
             if let priority1 = task1.priority, let priority2 = task2.priority {
@@ -182,27 +182,27 @@ class TaskManager: ObservableObject {
         saveTasks()
         savePriorityTasks()
     }
-
-
+    
+    
     func moveTaskToCompleted(_ task: Task) {
-            var updatedTask = task
-            
-            if delegateItTasks.contains(where: { $0.id == task.id }) {
-                updatedTask.name = "Delegated: \(task.name)"
-                if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
-                    delegateItTasks.remove(at: index)
-                    savePriorityTasks()
-                }
-            } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
-                updatedTask.name = "Scheduled: \(task.name)"
-                if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
-                    scheduleItTasks.remove(at: index)
-                    savePriorityTasks()
-                }
+        var updatedTask = task
+        
+        if delegateItTasks.contains(where: { $0.id == task.id }) {
+            updatedTask.name = "Delegated: \(task.name)"
+            if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
+                delegateItTasks.remove(at: index)
+                savePriorityTasks()
             }
-            
-            addCompletedTask(updatedTask)
+        } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
+            updatedTask.name = "Scheduled: \(task.name)"
+            if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
+                scheduleItTasks.remove(at: index)
+                savePriorityTasks()
+            }
         }
+        
+        addCompletedTask(updatedTask)
+    }
     
     func shareTask(_ task: Task) {
         let taskName = task.name

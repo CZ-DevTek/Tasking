@@ -13,10 +13,6 @@ struct DoItLaterView: View {
     
     var body: some View {
         VStack {
-            Text("DO IT LATER")
-                .font(.largeTitle)
-                .bold()
-            
             List {
                 ForEach(taskManager.doItLaterTasks) { task in
                     HStack {
@@ -64,7 +60,16 @@ struct DoItLaterView: View {
                     }
                 }
             }
-            .navigationTitle("DO IT LATER")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Do It Later")
+                        .font(.custom("Noteworthy Bold", size: 34))
+                        .foregroundColor(.yellow)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
         .padding()
     }

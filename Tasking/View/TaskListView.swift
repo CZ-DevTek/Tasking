@@ -52,14 +52,13 @@ struct TaskListView: View {
                         .onSubmit {
                             addTask()
                         }
-                        .padding(.horizontal)
                     
                 }
                 .padding()
                 Spacer()
                 
                 VStack {
-                    Text("After write the tasks, take  some minutes to establish priorities")
+                    Text("After you write the tasks, take  some minutes to establish priorities")
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 20)
@@ -74,7 +73,7 @@ struct TaskListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Task List")
+                    Text("Tasks List")
                         .font(.custom("Noteworthy Bold", size: 34))
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .center)

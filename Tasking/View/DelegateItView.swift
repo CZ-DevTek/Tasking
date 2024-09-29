@@ -72,6 +72,7 @@ struct DelegateItView: View {
             }
         }
         .padding()
+        .background(Color.blue.opacity(0.2))
     }
 }
 

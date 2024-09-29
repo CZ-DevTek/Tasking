@@ -47,6 +47,7 @@ struct DoItNowView: View {
             }
         }
         .padding()
+        .background(Color.green.opacity(0.2))
     }
 }
 struct SwipeToDeleteRow: View {

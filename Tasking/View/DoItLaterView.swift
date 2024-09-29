@@ -66,12 +66,13 @@ struct DoItLaterView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Do It Later")
                         .font(.custom("Noteworthy Bold", size: 34))
-                        .foregroundColor(.yellow)
+                        .foregroundColor(.red)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
         }
         .padding()
+        .background(Color.red.opacity(0.2))
     }
 }
 

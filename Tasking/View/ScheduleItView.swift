@@ -71,7 +71,7 @@ struct ScheduleItView: View {
             }
         }
         .padding()
-        
+        .background(Color.yellow.opacity(0.2))
     }
     
 }

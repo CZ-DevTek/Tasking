@@ -49,12 +49,10 @@ struct ScheduleItView: View {
                         indexSet.forEach { index in
                             let task = taskManager.scheduleItTasks[index]
                             taskManager.moveTaskToTaskList(task, from: $taskManager.scheduleItTasks)
-                            
                         }
                     }
                 }
             }
-            
             .scrollContentBackground(.hidden)
             .background(.yellow.opacity(0.3))
             .cornerRadius(20)

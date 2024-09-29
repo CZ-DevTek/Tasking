@@ -21,10 +21,10 @@ struct PriorityView: View {
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(
-                                    Capsule()
-                                        .fill(.white)
-                                        .padding(2)
-                                )
+                            Capsule()
+                                .fill(.white)
+                                .padding(2)
+                        )
                         .onDrag {
                             NSItemProvider(object: task.name as NSString)
                         }

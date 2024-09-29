@@ -25,11 +25,11 @@ struct HomeView: View {
                 }
                 .environmentObject(taskManager)
             CompletedTasksView()
-                            .tabItem {
-                                Image(systemName: "checkmark.circle")
-                                Text("Completed")
-                            }
-                            .environmentObject(taskManager)
+                .tabItem {
+                    Image(systemName: "checkmark.circle")
+                    Text("Completed")
+                }
+                .environmentObject(taskManager)
         }
     }
 }

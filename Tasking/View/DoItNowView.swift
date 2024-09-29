@@ -16,7 +16,7 @@ struct DoItNowView: View {
                 Color.green.opacity(0.3)
                 List {
                     ForEach(taskManager.doItNowTasks) { task in
-                        SwipeToDeleteRow(task: task) {
+                        TapToCompleteTask(task: task) {
                             withAnimation {
                                 taskManager.completeTask(for: task)
                                 if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
@@ -62,7 +62,7 @@ struct DoItNowView: View {
         .background(.green.opacity(0.2))
     }
 }
-struct SwipeToDeleteRow: View {
+struct TapToCompleteTask: View {
     @State private var isCompleted: Bool = false
     let task: Task
     let action: () -> Void

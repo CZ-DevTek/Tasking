@@ -21,28 +21,28 @@ struct DoItLaterView: View {
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
-
+                        
                         Button(action: {
                             taskManager.moveTaskToPriorityList(task, priority: .importantAndUrgent)
                         }) {
                             Text("Move to Do It Now")
                             Image(systemName: "arrow.right.circle")
                         }
-
+                        
                         Button(action: {
                             taskManager.moveTaskToPriorityList(task, priority: .importantButNotUrgent)
                         }) {
                             Text("Move to Schedule It")
                             Image(systemName: "calendar")
                         }
-
+                        
                         Button(action: {
                             taskManager.moveTaskToPriorityList(task, priority: .urgentButNotImportant)
                         }) {
                             Text("Move to Delegate It")
                             Image(systemName: "person.crop.circle.badge.checkmark")
                         }
-
+                        
                         Button(action: {
                             taskManager.removeTaskFromCurrentList(task)
                             taskManager.saveTasks()
@@ -53,10 +53,10 @@ struct DoItLaterView: View {
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
-                                Capsule()
-                                    .fill(.white)
-                                    .padding(2)
-                            )
+                        Capsule()
+                            .fill(.white)
+                            .padding(2)
+                    )
                 }
                 .onDelete { indexSet in
                     indexSet.forEach { index in
@@ -87,11 +87,11 @@ struct DoItLaterView: View {
 
 #Preview {
     let mockTasks = [
-            Task(id: UUID(), name: "Task 1", priority: .importantAndUrgent),
-            Task(id: UUID(), name: "Task 2", priority: .importantButNotUrgent),
-            Task(id: UUID(), name: "Task 3", priority: .urgentButNotImportant)
-        ]
-        
-        return DoItLaterView(tasks: .constant(mockTasks))
-            .environmentObject(TaskManager())
+        Task(id: UUID(), name: "Task 1", priority: .importantAndUrgent),
+        Task(id: UUID(), name: "Task 2", priority: .importantButNotUrgent),
+        Task(id: UUID(), name: "Task 3", priority: .urgentButNotImportant)
+    ]
+    
+    return DoItLaterView(tasks: .constant(mockTasks))
+        .environmentObject(TaskManager())
 }

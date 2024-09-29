@@ -19,14 +19,14 @@ struct PriorityButton: View {
     
     var destinationView: some View {
         switch priority {
-        case .importantAndUrgent:
-            return AnyView(DoItNowView().environmentObject(taskManager))
-        case .importantButNotUrgent:
-            return AnyView(ScheduleItView().environmentObject(taskManager))
-        case .notImportantNotUrgent:
+            case .importantAndUrgent:
+                return AnyView(DoItNowView().environmentObject(taskManager))
+            case .importantButNotUrgent:
+                return AnyView(ScheduleItView().environmentObject(taskManager))
+            case .notImportantNotUrgent:
                 return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
-        case .urgentButNotImportant:
-            return AnyView(DelegateItView().environmentObject(taskManager))
+            case .urgentButNotImportant:
+                return AnyView(DelegateItView().environmentObject(taskManager))
         }
     }
     
@@ -42,7 +42,7 @@ struct PriorityButton: View {
                 Text(priority.rawValue)
                     .font(.custom("Noteworthy-Bold", size: 12))
                     .foregroundColor(.white)
-                               
+                
                 ZStack(alignment: .center) {
                     Circle()
                         .foregroundColor(Color.white)

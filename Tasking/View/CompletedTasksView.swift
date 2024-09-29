@@ -25,6 +25,12 @@ struct CompletedTasksView: View {
                                     .foregroundColor(.green)
                                 Text(task.name)
                             }
+                            
+                        }
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                taskManager.removeCompletedTask(at: index)
+                            }
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(

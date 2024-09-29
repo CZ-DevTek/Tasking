@@ -52,28 +52,6 @@ class TaskManager: ObservableObject {
         saveTasks()
         savePriorityTasks()
     }
-    
-    func updateTaskText(in taskList: inout [Task], taskID: UUID, newText: String) {
-        if let index = taskList.firstIndex(where: { $0.id == taskID }) {
-            taskList[index].name = newText
-            saveTasks()
-            savePriorityTasks()
-        } else {
-            print("Task not found")
-        }
-    }
-    
-    func updateTaskPriority(at index: Int, priority: Priority) {
-        var task = tasks[index]
-        task.priority = priority
-        for (key, _) in priorityTasks {
-            priorityTasks[key]?.removeAll { $0.id == task.id }
-        }
-        priorityTasks[priority]?.append(task)
-        saveTasks()
-        savePriorityTasks()
-    }
-    
     func completeTask(for task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].completed.toggle()
@@ -84,9 +62,14 @@ class TaskManager: ObservableObject {
         completedTasks.removeAll()
         saveCompletedTasks()
     }
-    
     func addCompletedTask(_ task: Task) {
         completedTasks.append(task)
+        saveCompletedTasks()
+    }
+    
+    func removeCompletedTask(at index: Int) {
+        guard index >= 0 && index < completedTasks.count else { return }
+        completedTasks.remove(at: index)
         saveCompletedTasks()
     }
     
@@ -200,7 +183,6 @@ class TaskManager: ObservableObject {
                 savePriorityTasks()
             }
         }
-        
         addCompletedTask(updatedTask)
     }
     

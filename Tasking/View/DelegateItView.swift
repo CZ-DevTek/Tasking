@@ -40,10 +40,10 @@ struct DelegateItView: View {
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
-                                Capsule()
-                                    .fill(.white)
-                                    .padding(2)
-                                )
+                        Capsule()
+                            .fill(.white)
+                            .padding(2)
+                    )
                 }
                 .onDelete { indexSet in
                     withAnimation {

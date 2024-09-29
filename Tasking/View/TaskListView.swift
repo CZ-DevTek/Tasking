@@ -30,10 +30,10 @@ struct TaskListView: View {
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(
-                                    Capsule()
-                                        .fill(.white)
-                                        .padding(2)
-                                )
+                            Capsule()
+                                .fill(.white)
+                                .padding(2)
+                        )
                     }
                     .onDelete { indexSet in
                         for index in indexSet {
@@ -52,7 +52,6 @@ struct TaskListView: View {
                         .onSubmit {
                             addTask()
                         }
-                    
                 }
                 .padding()
                 Spacer()

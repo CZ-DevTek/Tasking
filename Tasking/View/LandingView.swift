@@ -14,7 +14,6 @@ struct LandingView: View {
         VStack {
             HStack(spacing: 0) {
                 Text("T")
-                    .font(.custom("Noteworthy Bold", size: 80))
                     .foregroundColor(.blue)
                 
                 Text("✔︎")
@@ -24,17 +23,15 @@ struct LandingView: View {
                     .animation(.easeInOut(duration: 2), value: tickRotation)
                 
                 Text("S")
-                    .font(.custom("Noteworthy Bold", size: 80))
                     .foregroundColor(.yellow)
                 
                 Text("K")
-                    .font(.custom("Noteworthy Bold", size: 80))
                     .foregroundColor(.red)
                 
                 Text("S")
-                    .font(.custom("Noteworthy Bold", size: 80))
                     .foregroundColor(.black)
             }
+            .font(.custom("Noteworthy Bold", size: 80))
             .background(Color.white)
             .edgesIgnoringSafeArea(.all)
             .onAppear {

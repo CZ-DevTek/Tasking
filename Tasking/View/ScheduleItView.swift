@@ -37,16 +37,27 @@ struct ScheduleItView: View {
                             Image(systemName: "arrow.left.circle")
                         }
                     }
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(
+                        Capsule()
+                            .fill(Color.white)
+                            .padding(2)
+                    )
                 }
                 .onDelete { indexSet in
                     withAnimation {
                         indexSet.forEach { index in
                             let task = taskManager.scheduleItTasks[index]
                             taskManager.moveTaskToTaskList(task, from: $taskManager.scheduleItTasks)
+                            
                         }
                     }
                 }
             }
+            
+            .scrollContentBackground(.hidden)
+            .background(.yellow.opacity(0.3))
+            .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -71,7 +82,7 @@ struct ScheduleItView: View {
             }
         }
         .padding()
-        .background(Color.yellow.opacity(0.2))
+        .background(.yellow.opacity(0.2))
     }
     
 }

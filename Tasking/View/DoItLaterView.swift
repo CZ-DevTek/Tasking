@@ -51,6 +51,12 @@ struct DoItLaterView: View {
                             Image(systemName: "trash")
                         }
                     }
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(
+                                Capsule()
+                                    .fill(.white)
+                                    .padding(2)
+                            )
                 }
                 .onDelete { indexSet in
                     indexSet.forEach { index in
@@ -60,6 +66,9 @@ struct DoItLaterView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(.red.opacity(0.3))
+            .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -72,7 +81,7 @@ struct DoItLaterView: View {
             }
         }
         .padding()
-        .background(Color.red.opacity(0.2))
+        .background(.red.opacity(0.2))
     }
 }
 

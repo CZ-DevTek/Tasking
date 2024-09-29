@@ -12,29 +12,41 @@ struct DoItNowView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach(taskManager.doItNowTasks) { task in
-                    SwipeToDeleteRow(task: task) {
+            ZStack {
+                Color.green.opacity(0.3)
+                List {
+                    ForEach(taskManager.doItNowTasks) { task in
+                        SwipeToDeleteRow(task: task) {
+                            withAnimation {
+                                taskManager.completeTask(for: task)
+                                if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
+                                    taskManager.doItNowTasks.remove(at: index)
+                                    taskManager.addCompletedTask(task)
+                                }
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(
+                            Capsule()
+                                .fill(Color.white)
+                                .padding(2)
+                        )
+                    }
+                    .onDelete { indexSet in
                         withAnimation {
-                            taskManager.completeTask(for: task)
-                            if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
+                            indexSet.forEach { index in
+                                let task = taskManager.doItNowTasks[index]
+                                taskManager.completeTask(for: task)
                                 taskManager.doItNowTasks.remove(at: index)
                                 taskManager.addCompletedTask(task)
                             }
                         }
                     }
                 }
-                .onDelete { indexSet in
-                    withAnimation {
-                        indexSet.forEach { index in
-                            let task = taskManager.doItNowTasks[index]
-                            taskManager.completeTask(for: task)
-                            taskManager.doItNowTasks.remove(at: index)
-                            taskManager.addCompletedTask(task)
-                        }
-                    }
-                }
+                .scrollContentBackground(.hidden)
+                .background(.green.opacity(0.2))
             }
+            .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -47,7 +59,7 @@ struct DoItNowView: View {
             }
         }
         .padding()
-        .background(Color.green.opacity(0.2))
+        .background(.green.opacity(0.2))
     }
 }
 struct SwipeToDeleteRow: View {

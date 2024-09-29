@@ -28,6 +28,12 @@ struct TaskListView: View {
                         .onDrag {
                             NSItemProvider(object: task.name as NSString)
                         }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(
+                                    Capsule()
+                                        .fill(.white)
+                                        .padding(2)
+                                )
                     }
                     .onDelete { indexSet in
                         for index in indexSet {
@@ -35,6 +41,10 @@ struct TaskListView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
+                .background(.gray.opacity(0.2))
+                .cornerRadius(20)
+                .padding()
                 
                 HStack {
                     TextField("Enter task name", text: $newTaskName)
@@ -46,7 +56,6 @@ struct TaskListView: View {
                     
                 }
                 .padding()
-                
                 Spacer()
                 
                 VStack {
@@ -59,7 +68,6 @@ struct TaskListView: View {
                         .foregroundColor(.gray)
                         .font(.title2)
                 }
-                .background(Color.clear)
                 .padding(.bottom, 20)
             }
             .navigationTitle("")

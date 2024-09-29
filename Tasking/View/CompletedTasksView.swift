@@ -26,8 +26,16 @@ struct CompletedTasksView: View {
                                 Text(task.name)
                             }
                         }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(
+                                    Capsule()
+                                        .fill(.white)
+                                        .padding(2)
+                                )
                     }
-                    .padding(.bottom, 50)
+                    .cornerRadius(20)
+                    .padding()
+                   
                     
                     HStack {
                         Button(action: {
@@ -43,10 +51,11 @@ struct CompletedTasksView: View {
                                     .foregroundColor(.red)
                             }
                         }
-                        .padding()
                     }
+                    .padding()
                 }
             }
+            .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

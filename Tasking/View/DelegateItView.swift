@@ -38,6 +38,12 @@ struct DelegateItView: View {
                             Image(systemName: "arrow.left.circle")
                         }
                     }
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(
+                                Capsule()
+                                    .fill(.white)
+                                    .padding(2)
+                                )
                 }
                 .onDelete { indexSet in
                     withAnimation {
@@ -48,6 +54,9 @@ struct DelegateItView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(.blue.opacity(0.3))
+            .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -72,7 +81,7 @@ struct DelegateItView: View {
             }
         }
         .padding()
-        .background(Color.blue.opacity(0.2))
+        .background(.blue.opacity(0.2))
     }
 }
 

@@ -19,13 +19,20 @@ struct PriorityView: View {
                         HStack {
                             Text(task.name)
                         }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(
+                                    Capsule()
+                                        .fill(.white)
+                                        .padding(2)
+                                )
                         .onDrag {
                             NSItemProvider(object: task.name as NSString)
                         }
                     }
                 }
                 .frame(maxHeight: .infinity)
-                .background(Color.gray.opacity(0.2))
+                .background(.gray.opacity(0.2))
+                .cornerRadius(20)
                 
                 // Lower half: Priority matrix
                 VStack {

@@ -52,6 +52,19 @@ class TaskManager: ObservableObject {
         saveTasks()
         savePriorityTasks()
     }
+    func removeTask(with id: UUID) {
+        tasks.removeAll { $0.id == id }
+    }
+    
+    func updateTask(id: UUID, newName: String) {
+        if let index = tasks.firstIndex(where: { $0.id == id }) {
+            tasks[index].name = newName
+        }
+    }
+    func moveTasks(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
+            tasks.move(fromOffsets: indices, toOffset: newOffset)
+        }
+    
     func completeTask(for task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].completed.toggle()

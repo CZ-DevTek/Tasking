@@ -34,13 +34,13 @@ struct CompletedTasksView: View {
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(
-                            Capsule()
-                                .fill(.white)
-                                .padding(2)
-                        )
+                                    Capsule()
+                                        .fill(.white)
+                                        .padding(2)
+                                )
                     }
                     .cornerRadius(20)
-                    .padding(.horizontal)
+                    .padding(.top)
                    
                     
                     HStack {
@@ -58,7 +58,7 @@ struct CompletedTasksView: View {
                             }
                         }
                     }
-                    padding(.bottom)
+                    .padding(.bottom)
                 }
             }
             .cornerRadius(20)

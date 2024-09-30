@@ -24,6 +24,7 @@
 		4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7A26EF2CA85E80008581AF /* LandingView.swift */; };
 		4F7A26F32CA887FB008581AF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7A26F22CA887FB008581AF /* Combine.framework */; };
 		4FC6B35B2CA9C8D700677B1C /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6B35A2CA9C8D700677B1C /* InfoView.swift */; };
+		4FC6B35D2CAB575000677B1C /* CustomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6B35C2CAB575000677B1C /* CustomList.swift */; };
 		4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		4F7A26EF2CA85E80008581AF /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		4F7A26F22CA887FB008581AF /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		4FC6B35A2CA9C8D700677B1C /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		4FC6B35C2CAB575000677B1C /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
 		4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				4F66B7172C19A68100378124 /* Models */,
 				4F66B7222C19B3E000378124 /* Services */,
 				4F66B7002C19974800378124 /* Assets.xcassets */,
+				4FC6B35C2CAB575000677B1C /* CustomList.swift */,
 				4F66B7022C19974800378124 /* Preview Content */,
 			);
 			path = Tasking;
@@ -214,6 +217,7 @@
 			files = (
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
 				4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */,
+				4FC6B35D2CAB575000677B1C /* CustomList.swift in Sources */,
 				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,
 				4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */,
 				4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */,

@@ -12,7 +12,7 @@ struct PriorityView: View {
     @EnvironmentObject private var taskManager: TaskManager
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 List {
                     ForEach(taskManager.tasks, id: \.self) { task in

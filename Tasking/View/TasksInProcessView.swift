@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TasksInProcessView: View {
-    @EnvironmentObject var taskManager: TaskManager
+    @EnvironmentObject private var taskManager: TaskManager
     
     var body: some View {
         NavigationView {
@@ -16,24 +16,21 @@ struct TasksInProcessView: View {
                 ForEach(taskManager.allPriorityTasks) { task in
                     HStack {
                         Text(task.name)
-                            .foregroundColor(task.priority?.color ?? .black)
+                            .foregroundColor(task.priority?.color ?? .black) // Set text color based on priority
                         Spacer()
                     }
-                    .background(task.priority?.color.opacity(0.2) ?? Color.clear)
+                    .background(task.priority?.color.opacity(0.2) ?? Color.clear) // Set row background based on priority
                     .contextMenu {
                         Button(action: {
-                            taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
+                            // Action to edit the task
                         }) {
-                            Text("Schedule it in calendar")
-                            Image(systemName: "calendar")
+                            Text("Edit")
                         }
                         Button(action: {
-                            taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
+                            // Action to delete the task
+                            taskManager.removeTask(with: task.id)
                         }) {
-                            Text("Ask to")
-                            Image(systemName: "square.and.arrow.up")
+                            Text("Delete")
                         }
                     }
                 }
@@ -54,29 +51,32 @@ struct TasksInProcessView: View {
             .padding()
         }
     }
-    
     private func deleteTasks(at offsets: IndexSet) {
-        offsets.map { taskManager.allPriorityTasks[$0] }.forEach { task in
-            taskManager.removeTask(with: task.id)
+            offsets.map { taskManager.allPriorityTasks[$0] }.forEach { task in
+                taskManager.removeTask(with: task.id)
+            }
+        }
+        
+        private func moveTasks(from source: IndexSet, to destination: Int) {
+            // Gather tasks to move
+            var tasksToMove: [Task] = []
+            for index in source {
+                let task = taskManager.allPriorityTasks[index]
+                tasksToMove.append(task)
+            }
+
+            // Remove tasks from the current list
+            for task in tasksToMove {
+                taskManager.removeTask(with: task.id)
+            }
+
+            // Insert tasks into the new position
+            for (offset, task) in tasksToMove.enumerated() {
+                let newIndex = destination > source.first! ? destination - offset : destination + offset
+                taskManager.tasks.insert(task, at: newIndex)
+            }
+
+            // Sort tasks to maintain priority order
+            taskManager.sortTasksByPriority()
         }
     }
-    
-    private func moveTasks(from source: IndexSet, to destination: Int) {
-        var tasksToMove: [Task] = []
-        for index in source {
-            let task = taskManager.allPriorityTasks[index]
-            tasksToMove.append(task)
-        }
-
-        for task in tasksToMove {
-            taskManager.removeTask(with: task.id)
-        }
-
-        for (offset, task) in tasksToMove.enumerated() {
-            let newIndex = destination > source.first! ? destination - offset : destination + offset
-            taskManager.tasks.insert(task, at: newIndex)
-        }
-
-        taskManager.sortTasksByPriority()
-    }
-}

@@ -45,18 +45,21 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                         .fill(.white)
                         .padding(2)
                 )
-                .swipeActions(edge: .trailing) {
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    // Delete button triggers on full swipe
+                    Button(role: .destructive) {
+                        deleteAction(item)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    
+                    // Edit button is shown but not triggered on full swipe
                     Button {
                         editingItemID = item.id
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
                     .tint(.blue)
-                    Button(role: .destructive) {
-                        deleteAction(item)
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
                 }
             }
             .onMove(perform: moveAction)
@@ -67,6 +70,3 @@ struct CustomList<Item: Identifiable & Equatable>: View {
         .padding()
     }
 }
-
-
-

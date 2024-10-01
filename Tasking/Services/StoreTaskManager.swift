@@ -62,8 +62,8 @@ class TaskManager: ObservableObject {
         }
     }
     func moveTasks(fromOffsets indices: IndexSet, toOffset newOffset: Int) {
-            tasks.move(fromOffsets: indices, toOffset: newOffset)
-        }
+        tasks.move(fromOffsets: indices, toOffset: newOffset)
+    }
     
     func completeTask(for task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
@@ -198,7 +198,6 @@ class TaskManager: ObservableObject {
         }
         addCompletedTask(updatedTask)
     }
-    
     func shareTask(_ task: Task) {
         let taskName = task.name
         let activityVC = UIActivityViewController(activityItems: [taskName], applicationActivities: nil)
@@ -210,3 +209,11 @@ class TaskManager: ObservableObject {
         }
     }
 }
+
+
+extension TaskManager {
+    var allPriorityTasks: [Task] {
+        return scheduleItTasks + doItNowTasks + doItLaterTasks + delegateItTasks
+    }
+}
+

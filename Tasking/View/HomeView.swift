@@ -15,7 +15,7 @@ struct HomeView: View {
             TabView {
                 TaskListView()
                     .tabItem {
-                        Image(systemName: "list.bullet")
+                        Image(systemName: "pencil.and.list.clipboard")
                         Text("Tasks")
                     }
                     .environmentObject(taskManager)
@@ -24,6 +24,13 @@ struct HomeView: View {
                     .tabItem {
                         Image(systemName: "square.and.pencil")
                         Text("Priorities")
+                    }
+                    .environmentObject(taskManager)
+                
+                TasksInProcessView()
+                    .tabItem {
+                        Image(systemName: "list.bullet.clipboard")
+                        Text("onGoing")
                     }
                     .environmentObject(taskManager)
                     

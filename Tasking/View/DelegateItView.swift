@@ -29,7 +29,6 @@ struct DelegateItView: View {
                             Text("Ask to")
                             Image(systemName: "square.and.arrow.up")
                         }
-                        
                         Button(action: {
                             selectedTask = task
                             showPriorityAlert = true

@@ -52,7 +52,6 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                         Label("Edit", systemImage: "pencil")
                     }
                     .tint(.blue)
-
                     Button(role: .destructive) {
                         deleteAction(item)
                     } label: {
@@ -66,10 +65,8 @@ struct CustomList<Item: Identifiable & Equatable>: View {
         .background(.gray.opacity(0.2))
         .cornerRadius(20)
         .padding()
-        .toolbar {
-            EditButton() // Required for enabling drag-and-drop reordering
-        }
     }
 }
+
 
 

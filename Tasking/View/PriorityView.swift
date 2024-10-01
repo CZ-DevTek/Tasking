@@ -14,25 +14,22 @@ struct PriorityView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                List {
-                    ForEach(taskManager.tasks, id: \.self) { task in
-                        HStack {
-                            Text(task.name)
-                        }
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(
-                            Capsule()
-                                .fill(.white)
-                                .padding(2)
-                        )
-                        .onDrag {
-                            NSItemProvider(object: task.name as NSString)
-                        }
+                CustomList(
+                    items: $taskManager.tasks,
+                    deleteAction: { task in
+                        taskManager.removeTask(with: task.id)
+                    },
+                    updateAction: { task, newName in
+                        taskManager.updateTask(id: task.id, newName: newName)
+                    },
+                    labelForItem: { task in
+                        task.name
+                    },
+                    moveAction: { indices, newOffset in
+                        taskManager.moveTasks(fromOffsets: indices, toOffset: newOffset)
                     }
-                }
+                )
                 .frame(maxHeight: .infinity)
-                .background(.gray.opacity(0.2))
-                .cornerRadius(20)
                 
                 // Lower half: Priority matrix
                 VStack {
@@ -87,6 +84,7 @@ struct PriorityView: View {
         }
     }
 }
+
 struct PriorityView_Previews: PreviewProvider {
     static var previews: some View {
         PriorityView()

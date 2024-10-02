@@ -45,5 +45,14 @@ public enum Priority: String, CaseIterable, Hashable, Codable {
                 
         }
     }
+    var sortOrder: Int {
+        switch self {
+            case .importantAndUrgent: return 0
+            case .importantButNotUrgent: return 1
+            case .urgentButNotImportant: return 2
+            case .notImportantNotUrgent: return 3
+        }
+    }
 }
+
 

@@ -15,20 +15,20 @@ class TaskManager: ObservableObject {
         }
     }
     @Published var priorityTasks: [Priority: [Task]] = [
-        .importantButNotUrgent: [],
         .importantAndUrgent: [],
-        .notImportantNotUrgent: [],
-        .urgentButNotImportant: []
+        .importantButNotUrgent: [],
+        .urgentButNotImportant: [],
+        .notImportantNotUrgent: []
     ] {
         willSet {
             objectWillChange.send()
         }
     }
     
-    @Published var scheduleItTasks: [Task] = []
     @Published var doItNowTasks: [Task] = []
-    @Published var doItLaterTasks: [Task] = []
+    @Published var scheduleItTasks: [Task] = []
     @Published var delegateItTasks: [Task] = []
+    @Published var doItLaterTasks: [Task] = []
     
     @Published var completedTasks: [Task] = []
     
@@ -137,14 +137,14 @@ class TaskManager: ObservableObject {
         removeTaskFromCurrentList(task)
         
         switch priority {
-            case .importantButNotUrgent:
-                scheduleItTasks.append(task)
             case .importantAndUrgent:
                 doItNowTasks.append(task)
-            case .notImportantNotUrgent:
-                doItLaterTasks.append(task)
+            case .importantButNotUrgent:
+                scheduleItTasks.append(task)
             case .urgentButNotImportant:
                 delegateItTasks.append(task)
+            case .notImportantNotUrgent:
+                doItLaterTasks.append(task)
         }
         
         saveTasks()
@@ -153,22 +153,22 @@ class TaskManager: ObservableObject {
     
     func removeTaskFromCurrentList(_ task: Task) {
         tasks.removeAll { $0.id == task.id }
-        scheduleItTasks.removeAll { $0.id == task.id }
         doItNowTasks.removeAll { $0.id == task.id }
-        doItLaterTasks.removeAll { $0.id == task.id }
+        scheduleItTasks.removeAll { $0.id == task.id }
         delegateItTasks.removeAll { $0.id == task.id }
+        doItLaterTasks.removeAll { $0.id == task.id }
     }
     
     func getTasks(for priority: Priority) -> [Task] {
         switch priority {
-            case .importantButNotUrgent:
-                return scheduleItTasks
             case .importantAndUrgent:
                 return doItNowTasks
-            case .notImportantNotUrgent:
-                return doItLaterTasks
+            case .importantButNotUrgent:
+                return scheduleItTasks
             case .urgentButNotImportant:
                 return delegateItTasks
+            case .notImportantNotUrgent:
+                return doItLaterTasks
         }
     }
     
@@ -208,12 +208,64 @@ class TaskManager: ObservableObject {
             rootVC.present(activityVC, animated: true, completion: nil)
         }
     }
+    func color(for task: Task) -> Color {
+        if doItNowTasks.contains(where: { $0.id == task.id }) {
+            return .green
+        } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
+            return .yellow
+        } else if delegateItTasks.contains(where: { $0.id == task.id }) {
+            return .blue
+        } else if doItLaterTasks.contains(where: { $0.id == task.id }) {
+            return .red
+        } else {
+            return .white
+        }
+    }
+    
+    func destinationView(for task: Task) -> some View {
+        switch task.priority {
+        case .importantAndUrgent:
+            return AnyView(DoItNowView())
+        case .importantButNotUrgent:
+            return AnyView(ScheduleItView())
+        case .urgentButNotImportant:
+            return AnyView(DelegateItView())
+        case .notImportantNotUrgent:
+                return AnyView(DoItLaterView())
+        default:
+            return AnyView(EmptyView())
+        }
+    }
 }
+
+
+
 
 
 extension TaskManager {
     var allPriorityTasks: [Task] {
-        return scheduleItTasks + doItNowTasks + doItLaterTasks + delegateItTasks
+        return  doItNowTasks + scheduleItTasks + delegateItTasks + doItLaterTasks
+    }
+    var sortedTasks: [Task] {
+        return allPriorityTasks.sorted { (task1, task2) -> Bool in
+            let priority1 = priority(for: task1)
+            let priority2 = priority(for: task2)
+            return priority1.rawValue < priority2.rawValue
+        }
+    }
+    func priority(for task: Task) -> Priority {
+        if doItNowTasks.contains(where: { $0.id == task.id }) {
+            return .importantAndUrgent
+        } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
+            return .importantButNotUrgent
+        } else if delegateItTasks.contains(where: { $0.id == task.id }) {
+            return .urgentButNotImportant
+        } else if doItLaterTasks.contains(where: { $0.id == task.id }) {
+            return .notImportantNotUrgent
+        } else {
+            return .notImportantNotUrgent
+        }
     }
 }
+
 

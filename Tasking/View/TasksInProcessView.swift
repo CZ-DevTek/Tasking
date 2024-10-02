@@ -20,22 +20,6 @@ struct TasksInProcessView: View {
                         Spacer()
                     }
                     .background(task.priority?.color.opacity(0.2) ?? Color.clear)
-                    .contextMenu {
-                        Button(action: {
-                            taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
-                        }) {
-                            Text("Schedule it in calendar")
-                            Image(systemName: "calendar")
-                        }
-                        Button(action: {
-                            taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
-                        }) {
-                            Text("Ask to")
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                    }
                 }
                 .onDelete(perform: deleteTasks)
                 .onMove(perform: moveTasks)

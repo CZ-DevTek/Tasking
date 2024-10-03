@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TasksInProcessView: View {
-    @EnvironmentObject var taskManager: TaskManager
+    @EnvironmentObject private var taskManager: TaskManager
     @Binding var selectedTab: Int
     
     var body: some View {

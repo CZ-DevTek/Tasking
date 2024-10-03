@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DoItNowView: View {
-    @EnvironmentObject var taskManager: TaskManager
+    @EnvironmentObject private var taskManager: TaskManager
 
     var body: some View {
         VStack {

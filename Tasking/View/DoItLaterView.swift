@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DoItLaterView: View {
-    @EnvironmentObject var taskManager: TaskManager
+    @EnvironmentObject private var taskManager: TaskManager
     @Binding var tasks: [Task]
     
     var body: some View {

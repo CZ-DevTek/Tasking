@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DelegateItView: View {
-    @EnvironmentObject var taskManager: TaskManager
+    @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
     

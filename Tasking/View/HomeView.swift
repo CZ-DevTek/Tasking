@@ -21,7 +21,7 @@ struct HomeView: View {
                     }
                     .tag(0)
                     .environmentObject(taskManager)
-                
+
                 PriorityView()
                     .tabItem {
                         Image(systemName: "square.and.pencil")
@@ -29,17 +29,15 @@ struct HomeView: View {
                     }
                     .tag(1)
                     .environmentObject(taskManager)
-                
-                TasksInProcessView { task in
-                    handleTaskTap(task)
-                }
-                .tabItem {
-                    Image(systemName: "list.bullet.clipboard")
-                    Text("onGoing")
-                }
-                .tag(2)
-                .environmentObject(taskManager)
-                
+
+                TasksInProcessView(selectedTab: $selectedTab)
+                    .tabItem {
+                        Image(systemName: "list.bullet.clipboard")
+                        Text("On Going")
+                    }
+                    .tag(2)
+                    .environmentObject(taskManager)
+
                 CompletedTasksView()
                     .tabItem {
                         Image(systemName: "checkmark.circle")
@@ -66,7 +64,8 @@ struct HomeView: View {
         }
     }
 
-    private func handleTaskTap(_ task: Task) {
-        selectedTab = 1 
+    func handleTaskTap(_ task: Task) {
+        selectedTab = 1
     }
 }
+

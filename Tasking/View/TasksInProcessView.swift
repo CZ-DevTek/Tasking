@@ -10,22 +10,10 @@ import SwiftUI
 struct TasksInProcessView: View {
     @EnvironmentObject var taskManager: TaskManager
     @Binding var selectedTab: Int
-    var onTaskTapped: (Task) -> Void
     
     var body: some View {
         List(taskManager.sortedTasks) { task in
-            Button(action: {
-                switch taskManager.priority(for: task) {
-                case .importantAndUrgent:
-                    selectedTab = 1
-                case .importantButNotUrgent:
-                    selectedTab = 1
-                case .urgentButNotImportant:
-                    selectedTab = 1
-                case .notImportantNotUrgent:
-                    selectedTab = 1 
-                }
-            }) {
+            NavigationLink(destination: taskManager.destinationView(for: task)) {
                 HStack(alignment: .center) {
                     Text(task.name)
                         .foregroundColor(.white)
@@ -37,6 +25,9 @@ struct TasksInProcessView: View {
                 .cornerRadius(8)
             }
             .listRowInsets(EdgeInsets())
+            .onAppear {
+                selectedTab = 2
+            }
         }
         .scrollContentBackground(.hidden)
         .navigationTitle("Tasks In Process")

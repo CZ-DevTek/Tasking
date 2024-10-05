@@ -15,44 +15,49 @@ struct TasksInProcessView: View {
     var body: some View {
         NavigationStack {
             List(taskManager.sortedTasks) { task in
-                NavigationLink(destination: taskManager.destinationView(for: task)) {
-                    HStack(alignment: .center) {
-                        Text(task.name)
-                            .font(CustomFont.body.font)
-                            .foregroundColor(.white)
-                            .padding()
-                            .padding(.vertical, 3)
+                VStack(spacing: 0) {
+                    HStack {
+                        NavigationLink(destination: taskManager.destinationView(for: task)) {
+                            HStack(alignment: .center) {
+                                Text(task.name)
+                                    .font(CustomFont.body.font)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 8)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .cornerRadius(8)
+                        }
+                        .background(taskManager.color(for: task).opacity(0.85))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(taskManager.color(for: task))
-                    .cornerRadius(8)
-                    .padding(.vertical, 3)
+                    
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.blue.opacity(0.4))
+                        .padding(.horizontal, 8)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.gray.opacity(0.2))
-                .contentShape(Rectangle())
+                .padding(.vertical, 3)
                 .listRowInsets(EdgeInsets())
+                .background(Color.clear)
                 .onAppear {
                     selectedTab = 2
-                    
-                }
-                .scrollContentBackground(.hidden)
-                .navigationTitle("Tasks In Process")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("Tasks In Process")
-                            .font(CustomFont.title.font)
-                            .foregroundColor(CustomFont.title.color)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
                 }
             }
-            
             .scrollContentBackground(.hidden)
-            .background(.gray.opacity(0.2))
+            .navigationTitle("Tasks In Process")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Tasks In Process")
+                        .font(CustomFont.title.font)
+                        .foregroundColor(CustomFont.title.color)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
+            .background(Color.white)
             .cornerRadius(20)
             .padding()
         }
     }
 }
+

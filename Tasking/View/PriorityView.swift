@@ -29,6 +29,7 @@ struct PriorityView: View {
                         taskManager.moveTasks(fromOffsets: indices, toOffset: newOffset)
                     }
                 )
+                
                 .frame(maxHeight: .infinity)
                 
                 // Lower half: Priority matrix
@@ -80,7 +81,16 @@ struct PriorityView: View {
                 }
                 .frame(maxHeight: .infinity)
             }
-            .padding()
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Priority Matrix")
+                        .font(CustomFont.title.font)
+                        .foregroundColor(CustomFont.title.color)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
     }
 }

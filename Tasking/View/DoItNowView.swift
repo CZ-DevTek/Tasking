@@ -52,7 +52,7 @@ struct DoItNowView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Do It Now")
-                        .font(.custom("Noteworthy Bold", size: 34))
+                        .font(CustomFont.title.font)
                         .foregroundColor(.green)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
@@ -86,6 +86,8 @@ struct TapToCompleteTask: View {
             Text(task.name)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .opacity(isCompleted ? 0.5 : 1)
+                .font(CustomFont.body.font)
+                .foregroundColor(Color.gray)
         }
         .contentShape(Rectangle())
     }

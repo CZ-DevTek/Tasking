@@ -20,12 +20,24 @@ struct CompletedTasksView: View {
                 } else {
                     List {
                         ForEach(taskManager.completedTasks) { task in
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
-                                Text(task.name)
+                            VStack(spacing: 0) {
+                                HStack {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.green)
+                                    Text(task.name)
+                                        .font(CustomFont.body.font)
+                                        .foregroundColor(.gray)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.vertical, 2)
+                                
+                                // Blue underline with opacity 0.4
+                                Rectangle()
+                                    .frame(height: 1)
+                                    .foregroundColor(Color.blue.opacity(0.4))
+                                    .padding(.horizontal, 8)
                             }
-                            
                         }
                         .onDelete { indexSet in
                             for index in indexSet {
@@ -33,15 +45,10 @@ struct CompletedTasksView: View {
                             }
                         }
                         .listRowSeparator(.hidden)
-                        .listRowBackground(
-                                    Capsule()
-                                        .fill(.white)
-                                        .padding(2)
-                                )
+                        .listRowBackground(Color.clear)
                     }
                     .cornerRadius(20)
                     .padding(.top)
-                   
                     
                     HStack {
                         Button(action: {
@@ -67,8 +74,8 @@ struct CompletedTasksView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Completed Tasks")
-                        .font(.custom("Noteworthy-Bold", size: 34))
-                        .foregroundColor(.black)
+                        .font(CustomFont.title.font)
+                        .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }

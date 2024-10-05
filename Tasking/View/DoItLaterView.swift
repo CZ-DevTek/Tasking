@@ -18,6 +18,8 @@ struct DoItLaterView: View {
                     HStack {
                         Text(task.name)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(CustomFont.body.font)
+                            .foregroundColor(Color.gray)
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
@@ -74,7 +76,7 @@ struct DoItLaterView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Do It Later")
-                        .font(.custom("Noteworthy Bold", size: 34))
+                        .font(CustomFont.title.font)
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }

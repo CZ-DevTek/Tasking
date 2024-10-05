@@ -23,10 +23,10 @@ struct PriorityMatrixView: View {
                 return AnyView(DoItNowView().environmentObject(taskManager))
             case .importantButNotUrgent:
                 return AnyView(ScheduleItView().environmentObject(taskManager))
-            case .notImportantNotUrgent:
-                return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
             case .urgentButNotImportant:
                 return AnyView(DelegateItView().environmentObject(taskManager))
+            case .notImportantNotUrgent:
+                return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
         }
     }
     
@@ -37,11 +37,11 @@ struct PriorityMatrixView: View {
                         priority == .importantButNotUrgent ? "SCHEDULE" :
                         priority == .urgentButNotImportant ? "DELEGATE" :
                         "DO IT LATER")
-                .font(.custom("Noteworthy-Bold", size: 20))
-                .foregroundColor(.white)
+                .font(CustomFont.subtitle.font)
+                .foregroundColor(CustomFont.subtitle.color)
                 Text(priority.rawValue)
-                    .font(.custom("Noteworthy-Bold", size: 12))
-                    .foregroundColor(.white)
+                    .font(CustomFont.footnote.font)
+                    .foregroundColor(CustomFont.footnote.color)
                 
                 ZStack(alignment: .center) {
                     Circle()

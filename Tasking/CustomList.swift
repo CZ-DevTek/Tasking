@@ -20,40 +20,43 @@ struct CustomList<Item: Identifiable & Equatable>: View {
     var body: some View {
         List {
             ForEach(items, id: \.id) { item in
-                HStack {
-                    if editingItemID == item.id {
-                        TextField("Edit item", text: $updatedText, onCommit: {
-                            updateAction(item, updatedText)
-                            editingItemID = nil
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onAppear {
-                            updatedText = labelForItem(item)
+                VStack(spacing: 0) {
+                    HStack {
+                        if editingItemID == item.id {
+                            TextField("Edit item", text: $updatedText, onCommit: {
+                                updateAction(item, updatedText)
+                                editingItemID = nil
+                            })
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .onAppear {
+                                updatedText = labelForItem(item)
+                            }
+                        } else {
+                            Text(labelForItem(item))
+                                .font(CustomFont.body.font)
+                                .foregroundColor(.gray)
                         }
-                    } else {
-                        Text(labelForItem(item))
+                        
+                        Spacer()
                     }
-                    
-                    Spacer()
+                    .padding(.vertical, 2)
+
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(Color.blue.opacity(0.3))
+                        .padding(.horizontal, 8)
                 }
                 .onDrag {
                     NSItemProvider(object: labelForItem(item) as NSString)
                 }
                 .listRowSeparator(.hidden)
-                .listRowBackground(
-                    Capsule()
-                        .fill(.white)
-                        .padding(2)
-                )
+                .listRowBackground(Color.clear)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    // Delete button triggers on full swipe
                     Button(role: .destructive) {
                         deleteAction(item)
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
-                    
-                    // Edit button is shown but not triggered on full swipe
                     Button {
                         editingItemID = item.id
                     } label: {
@@ -65,7 +68,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
             .onMove(perform: moveAction)
         }
         .scrollContentBackground(.hidden)
-        .background(.gray.opacity(0.2))
+        .background(Color.clear)
         .cornerRadius(20)
         .padding()
     }

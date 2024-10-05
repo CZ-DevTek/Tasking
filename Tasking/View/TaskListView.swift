@@ -57,8 +57,8 @@ struct TaskListView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Tasks List")
-                        .font(.custom("Noteworthy Bold", size: 34))
-                        .foregroundColor(.black)
+                        .font(CustomFont.title.font)
+                        .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }

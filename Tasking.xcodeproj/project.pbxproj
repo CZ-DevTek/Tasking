@@ -15,7 +15,7 @@
 		4F66B7042C19974800378124 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F66B7032C19974800378124 /* Preview Assets.xcassets */; };
 		4F66B70D2C19984000378124 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B70C2C19984000378124 /* PriorityView.swift */; };
 		4F66B7112C199A2C00378124 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7102C199A2C00378124 /* HomeView.swift */; };
-		4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */; };
+		4F66B7132C19A4D000378124 /* PriorityMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7122C19A4D000378124 /* PriorityMatrixView.swift */; };
 		4F66B7162C19A67700378124 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7152C19A67700378124 /* TaskModel.swift */; };
 		4F66B7192C19AE3400378124 /* ScheduleItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7182C19AE3400378124 /* ScheduleItView.swift */; };
 		4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B71A2C19AE5200378124 /* DoItNowView.swift */; };
@@ -39,7 +39,7 @@
 		4F66B7032C19974800378124 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F66B70C2C19984000378124 /* PriorityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
 		4F66B7102C199A2C00378124 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PriorityView + PriorityButton.swift"; sourceTree = "<group>"; };
+		4F66B7122C19A4D000378124 /* PriorityMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityMatrixView.swift; sourceTree = "<group>"; };
 		4F66B7152C19A67700378124 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		4F66B7182C19AE3400378124 /* ScheduleItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleItView.swift; sourceTree = "<group>"; };
 		4F66B71A2C19AE5200378124 /* DoItNowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoItNowView.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				4FC6B35A2CA9C8D700677B1C /* InfoView.swift */,
 				4F66B6FE2C19974600378124 /* TaskListView.swift */,
 				4F66B70C2C19984000378124 /* PriorityView.swift */,
-				4F66B7122C19A4D000378124 /* PriorityView + PriorityButton.swift */,
+				4F66B7122C19A4D000378124 /* PriorityMatrixView.swift */,
 				4F66B71A2C19AE5200378124 /* DoItNowView.swift */,
 				4F66B7182C19AE3400378124 /* ScheduleItView.swift */,
 				4F66B71E2C19AE8800378124 /* DelegateItView.swift */,
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
-				4F66B7132C19A4D000378124 /* PriorityView + PriorityButton.swift in Sources */,
+				4F66B7132C19A4D000378124 /* PriorityMatrixView.swift in Sources */,
 				4FC6B35D2CAB575000677B1C /* CustomList.swift in Sources */,
 				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,
 				4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */,

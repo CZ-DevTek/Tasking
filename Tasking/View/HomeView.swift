@@ -10,7 +10,7 @@ struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
     @State var isShowingInfo = false
     @State private var selectedTab: Int = 0
-
+    
     var body: some View {
         NavigationView {
             TabView(selection: $selectedTab) {
@@ -21,7 +21,7 @@ struct HomeView: View {
                     }
                     .tag(0)
                     .environmentObject(taskManager)
-
+                
                 PriorityView()
                     .tabItem {
                         Image(systemName: "square.and.pencil")
@@ -29,7 +29,7 @@ struct HomeView: View {
                     }
                     .tag(1)
                     .environmentObject(taskManager)
-
+                
                 TasksInProcessView(selectedTab: $selectedTab)
                     .tabItem {
                         Image(systemName: "list.bullet.clipboard")
@@ -37,7 +37,7 @@ struct HomeView: View {
                     }
                     .tag(2)
                     .environmentObject(taskManager)
-
+                
                 CompletedTasksView()
                     .tabItem {
                         Image(systemName: "checkmark.circle")
@@ -62,10 +62,6 @@ struct HomeView: View {
                     .presentationDetents([.medium, .large])
             }
         }
-    }
-
-    func handleTaskTap(_ task: Task) {
-        selectedTab = 1
     }
 }
 

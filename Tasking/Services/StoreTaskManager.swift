@@ -224,17 +224,21 @@ class TaskManager: ObservableObject {
     
     func destinationView(for task: Task) -> AnyView {
         switch priority(for: task) {
-        case .importantAndUrgent:
-            return AnyView(DoItNowView())
-        case .importantButNotUrgent:
-            return AnyView(ScheduleItView())
-        case .urgentButNotImportant:
-            return AnyView(DelegateItView())
-        case .notImportantNotUrgent:
-            return AnyView(DoItLaterView(tasks: .constant(self.doItLaterTasks)))
+            case .importantAndUrgent:
+                return AnyView(DoItNowView())
+            case .importantButNotUrgent:
+                return AnyView(ScheduleItView())
+            case .urgentButNotImportant:
+                return AnyView(DelegateItView())
+            case .notImportantNotUrgent:
+                return AnyView(DoItLaterView(tasks: .constant(self.doItLaterTasks)))
         }
     }
+    func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
+        selectedTab.wrappedValue = 2
+    }
 }
+
 
 extension TaskManager {
     var allPriorityTasks: [Task] {

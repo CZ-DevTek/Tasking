@@ -12,7 +12,6 @@ struct HomeView: View {
     @State private var selectedTab: Int = 0
     
     var body: some View {
-        NavigationView {
             TabView(selection: $selectedTab) {
                 TaskListView()
                     .tabItem {
@@ -63,5 +62,4 @@ struct HomeView: View {
             }
         }
     }
-}
 

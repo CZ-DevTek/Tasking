@@ -34,7 +34,7 @@ struct PriorityView: View {
                 // Lower half: Priority matrix
                 VStack {
                     HStack {
-                        PriorityButton(priority: .importantAndUrgent,
+                        PriorityMatrixView(priority: .importantAndUrgent,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.importantAndUrgent] ?? [] },
                                         set: { newValue in
@@ -44,7 +44,7 @@ struct PriorityView: View {
                                        allTasks: $taskManager.tasks,
                                        color: .green,
                                        taskManager: taskManager)
-                        PriorityButton(priority: .importantButNotUrgent,
+                        PriorityMatrixView(priority: .importantButNotUrgent,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
                                         set: { newValue in
@@ -56,7 +56,7 @@ struct PriorityView: View {
                                        taskManager: taskManager)
                     }
                     HStack {
-                        PriorityButton(priority: .urgentButNotImportant,
+                        PriorityMatrixView(priority: .urgentButNotImportant,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.urgentButNotImportant] ?? [] },
                                         set: { newValue in
@@ -66,7 +66,7 @@ struct PriorityView: View {
                                        allTasks: $taskManager.tasks,
                                        color: .blue,
                                        taskManager: taskManager)
-                        PriorityButton(priority: .notImportantNotUrgent,
+                        PriorityMatrixView(priority: .notImportantNotUrgent,
                                        tasks: Binding(
                                         get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
                                         set: { newValue in

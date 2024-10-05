@@ -8,7 +8,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct PriorityMatrixView: View {
+struct PriorityButtonView: View {
     let priority: Priority
     @Binding var tasks: [Task]
     @Binding var allTasks: [Task]

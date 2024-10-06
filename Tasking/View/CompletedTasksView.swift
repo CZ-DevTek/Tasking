@@ -32,7 +32,6 @@ struct CompletedTasksView: View {
                                 }
                                 .padding(.vertical, 2)
                                 
-                                // Blue underline with opacity 0.4
                                 Rectangle()
                                     .frame(height: 1)
                                     .foregroundColor(Color.blue.opacity(0.4))
@@ -45,10 +44,11 @@ struct CompletedTasksView: View {
                             }
                         }
                         .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
+                        .listRowBackground(Color.white)
                     }
                     .cornerRadius(20)
                     .padding(.top)
+                    .scrollContentBackground(.hidden)
                     
                     HStack {
                         Button(action: {
@@ -68,6 +68,7 @@ struct CompletedTasksView: View {
                     .padding(.bottom)
                 }
             }
+            .background(Color.white)
             .cornerRadius(20)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)

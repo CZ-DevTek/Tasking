@@ -22,6 +22,7 @@ struct LandingView: View {
                     .rotationEffect(.degrees(tickRotation))
                     .animation(.easeInOut(duration: 2), value: tickRotation)
                 
+                
                 Text("S")
                     .foregroundColor(.yellow)
                 
@@ -35,13 +36,27 @@ struct LandingView: View {
             .background(Color.white)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
-                withAnimation {
-                    tickRotation = 180
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    withAnimation(.easeInOut(duration: 0.8)) {
+                        tickRotation = 215
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            tickRotation = 160
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation(.easeInOut(duration: 0.1)) {
+                                tickRotation = 180
+                            }
+                        }
+                    }
                 }
+                
             }
         }
     }
 }
+
 #Preview {
     LandingView()
 }

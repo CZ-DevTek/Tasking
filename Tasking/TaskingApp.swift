@@ -11,7 +11,6 @@ import SwiftUI
 struct MyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var taskManager = TaskManager()
-    
     @State private var showLandingView = true
     
     var body: some Scene {

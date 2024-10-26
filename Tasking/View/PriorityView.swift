@@ -89,6 +89,7 @@ struct PriorityView: View {
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 8)
                 }
             }
         }

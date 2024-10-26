@@ -10,6 +10,7 @@ import SwiftUI
 struct DoItLaterView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @Binding var tasks: [Task]
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -84,6 +85,9 @@ struct DoItLaterView: View {
         }
         .padding()
         .background(.red.opacity(0.2))
+        .onDisappear {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 

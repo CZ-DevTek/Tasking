@@ -16,8 +16,8 @@ struct InfoView: View {
                     .padding()
                 
                 Text("""
-                This task manager app helps you organize your tasks based on priority and completion. You can manage tasks, set priorities, and view completed tasks.
-                On the first button called Tasks you can write all your tasks. After the next steps is to go to the button called priorities where you drag the tasks by their priority and completion in a very easy method, then go to every color list to check them, and the end in the last button called completed you may see a list with the completed taks.
+                This task manager app helps you organize your tasks based on priority and completion. You can do a list of tasks, set priorities, check the list of task in accordance with your priorities and view completed tasks.
+                On the first button called Tasks you can write all your tasks. After the next step is to go to the button called priorities where you drag the tasks by their priority and completion in a very easy method, then go to every color list to check them and complete them, and the end in the last button called completed you may see a list with the completed taks.
 """)
                 .padding()
                 Text("About This Method")
@@ -27,11 +27,11 @@ struct InfoView: View {
                 Text("""
                                 Focus on Important Tasks: Use the Eisenhower Matrix (urgent/important) to prioritize tasks based on their impact and deadlines. That allows you to organize, to achieve your goals, and down your stress.
                                 -Important & Urgent: 
-                                Do these tasks immediately. Are the activities that you can do fast and remove from your head.
+                                Do these tasks immediately. Are the activities that you can do fast and remove from your head. Are high priority tasks, nobody else can do them. 
                                 -Important but Not Urgent: 
                                 Schedule them to ensure they get done. As soon as you schedule them, as soon they are out of your head.
                                 -Urgent but Not Important: 
-                                Delegate these tasks. If they are not so important but htye need to be done, ask somebody to do them.
+                                Delegate these tasks. If they are not so important but they need to be done, ask somebody to do them.
                                 -Not Important & Not Urgent: 
                                 Write, avoid, or eliminate these tasks. This is a great place for ideas. Some might turn into real tasks, while others go to the trash.
                                 """)
@@ -42,5 +42,5 @@ struct InfoView: View {
     }
 }
 #Preview {
-    HomeView()
+    InfoView()
 }

@@ -11,6 +11,7 @@ struct ScheduleItView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -83,6 +84,9 @@ struct ScheduleItView: View {
         }
         .padding()
         .background(.yellow.opacity(0.2))
+        .onDisappear {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
     
 }

@@ -11,6 +11,7 @@ struct DelegateItView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -66,6 +67,7 @@ struct DelegateItView: View {
                         .font(CustomFont.title.font)
                         .foregroundColor(.blue)
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 8)
                 }
             }
             .alert(isPresented: $showPriorityAlert) {
@@ -83,6 +85,9 @@ struct DelegateItView: View {
         }
         .padding()
         .background(.blue.opacity(0.2))
+        .onDisappear {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 

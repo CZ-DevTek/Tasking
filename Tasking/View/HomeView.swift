@@ -10,8 +10,10 @@ struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
     @State var isShowingInfo = false
     @State private var selectedTab: Int = 0
+    @State private var presentedViews: [Int: Binding<PresentationMode>] = [:]
     
     var body: some View {
+        NavigationView {
             TabView(selection: $selectedTab) {
                 TaskListView()
                     .tabItem {
@@ -60,6 +62,21 @@ struct HomeView: View {
                 InfoView()
                     .presentationDetents([.medium, .large])
             }
+            .onChange(of: selectedTab) { newValue, _ in
+                dismissCurrentView()
+            }
         }
     }
-
+    private func dismissCurrentView() {
+        if let binding = presentedViews[selectedTab] {
+            binding.wrappedValue.dismiss()
+        }
+    }
+    
+    private func storePresentationMode(for index: Int, mode: Binding<PresentationMode>) {
+        presentedViews[index] = mode
+    }
+}
+#Preview {
+    HomeView()
+}

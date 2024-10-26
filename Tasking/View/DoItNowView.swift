@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DoItNowView: View {
     @EnvironmentObject private var taskManager: TaskManager
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         VStack {
@@ -42,9 +43,15 @@ struct DoItNowView: View {
                             }
                         }
                     }
+                    .onMove { source, destination in
+                                            taskManager.doItNowTasks.move(fromOffsets: source, toOffset: destination)
+                                        }
                 }
                 .scrollContentBackground(.hidden)
                 .background(.green.opacity(0.2))
+                .onDisappear {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
             .cornerRadius(20)
             .navigationTitle("")
@@ -60,6 +67,8 @@ struct DoItNowView: View {
         }
         .padding()
         .background(.green.opacity(0.2))
+        .onAppear {
+        }
     }
 }
 struct TapToCompleteTask: View {

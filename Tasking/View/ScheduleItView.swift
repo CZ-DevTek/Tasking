@@ -59,7 +59,6 @@ struct ScheduleItView: View {
             .scrollContentBackground(.hidden)
             .background(.yellow.opacity(0.3))
             .cornerRadius(20)
-            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskListView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var newTaskName = ""
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -29,30 +29,24 @@ struct TaskListView: View {
                         taskManager.moveTasks(fromOffsets: indices, toOffset: newOffset)
                     }
                 )
-
+                
                 HStack {
                     TextField("Enter task name", text: $newTaskName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(10)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .font(.headline)
+                        .foregroundColor(.primary)
                         .onSubmit {
                             addTask()
                         }
                 }
                 .padding()
-                Spacer()
-
-                VStack {
-                    Text("After you write the tasks, take some minutes to establish priorities")
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
-
-                    Image(systemName: "arrow.down")
-                        .foregroundColor(.gray)
-                        .font(.title2)
-                }
                 .padding(.bottom, 20)
+                
             }
-            .navigationTitle("")
+            .customizeBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -65,7 +59,7 @@ struct TaskListView: View {
             }
         }
     }
-
+    
     private func addTask() {
         if !newTaskName.isEmpty {
             taskManager.addTask(Task(name: newTaskName))
@@ -78,3 +72,4 @@ struct TaskListView: View {
     TaskListView()
         .environmentObject(TaskManager())
 }
+

@@ -56,6 +56,7 @@ struct PriorityMatrixView: View {
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(color)
+            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
             .cornerRadius(10)
             .padding(4)
             .onDrop(of: [UTType.text], isTargeted: nil) { providers in

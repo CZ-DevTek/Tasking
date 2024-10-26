@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */; };
-		4F5ECA492CB1D53D0097A663 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ECA482CB1D53C0097A663 /* Fonts.swift */; };
 		4F60C6DF2CAC882A00C880AD /* TasksInProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
@@ -32,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksView.swift; sourceTree = "<group>"; };
-		4F5ECA482CB1D53C0097A663 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksInProcessView.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
@@ -54,6 +52,10 @@
 		4FC6B35C2CAB575000677B1C /* CustomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomList.swift; sourceTree = "<group>"; };
 		4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4F7C76F42CCD3694006D426A /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4F66B6F62C19974600378124 /* Frameworks */ = {
@@ -90,11 +92,11 @@
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
 				4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */,
 				4F66B7142C19A63F00378124 /* View */,
+				4F7C76F42CCD3694006D426A /* Styles */,
 				4F66B7172C19A68100378124 /* Models */,
 				4F66B7222C19B3E000378124 /* Services */,
 				4F66B7002C19974800378124 /* Assets.xcassets */,
 				4FC6B35C2CAB575000677B1C /* CustomList.swift */,
-				4F5ECA482CB1D53C0097A663 /* Fonts.swift */,
 				4F66B7022C19974800378124 /* Preview Content */,
 			);
 			path = Tasking;
@@ -165,6 +167,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4F7C76F42CCD3694006D426A /* Styles */,
 			);
 			name = Tasking;
 			productName = Tasking;
@@ -237,7 +242,6 @@
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,
 				4F66B7162C19A67700378124 /* TaskModel.swift in Sources */,
 				4FC6B35B2CA9C8D700677B1C /* InfoView.swift in Sources */,
-				4F5ECA492CB1D53D0097A663 /* Fonts.swift in Sources */,
 				4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

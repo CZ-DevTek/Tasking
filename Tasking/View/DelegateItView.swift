@@ -59,7 +59,6 @@ struct DelegateItView: View {
             .scrollContentBackground(.hidden)
             .background(.blue.opacity(0.3))
             .cornerRadius(20)
-            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

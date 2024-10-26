@@ -54,7 +54,6 @@ struct DoItNowView: View {
                 }
             }
             .cornerRadius(20)
-            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

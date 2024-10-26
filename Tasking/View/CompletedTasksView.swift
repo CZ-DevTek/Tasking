@@ -15,27 +15,19 @@ struct CompletedTasksView: View {
             VStack {
                 if taskManager.completedTasks.isEmpty {
                     Text("The list of completed tasks is clean.")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .padding()
                 } else {
                     List {
                         ForEach(taskManager.completedTasks) { task in
-                            VStack(spacing: 0) {
+                            VStack {
                                 HStack {
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundColor(.green)
                                     Text(task.name)
                                         .font(CustomFont.body.font)
-                                        .foregroundColor(.gray)
-                                    
-                                    Spacer()
+                                        .foregroundColor(.black)
                                 }
-                                .padding(.vertical, 2)
-                                
-                                Rectangle()
-                                    .frame(height: 1)
-                                    .foregroundColor(Color.blue.opacity(0.4))
-                                    .padding(.horizontal, 8)
                             }
                         }
                         .onDelete { indexSet in
@@ -44,10 +36,8 @@ struct CompletedTasksView: View {
                             }
                         }
                         .listRowSeparator(.hidden)
-                        .listRowBackground(Color.white)
+                        .listRowBackground(Color.clear)
                     }
-                    .cornerRadius(20)
-                    .padding(.top)
                     .scrollContentBackground(.hidden)
                     
                     HStack {
@@ -58,19 +48,20 @@ struct CompletedTasksView: View {
                         }) {
                             HStack {
                                 Image(systemName: "trash")
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.white)
                                 Text("Clear List")
                                     .font(.headline)
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.white)
                             }
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(20)
                         }
                     }
                     .padding(.bottom)
                 }
             }
-            .background(Color.white)
-            .cornerRadius(20)
-            .navigationTitle("")
+            .customizeBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -83,6 +74,7 @@ struct CompletedTasksView: View {
         }
     }
 }
+
 
 struct CompletedTasksView_Previews: PreviewProvider {
     static var previews: some View {

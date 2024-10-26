@@ -44,7 +44,7 @@ struct TasksInProcessView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .navigationTitle("Tasks In Process")
+            .customizeBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -52,12 +52,24 @@ struct TasksInProcessView: View {
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .toolbarBackground(.clear, for: .navigationBar)
                 }
             }
-            .background(Color.white)
-            .cornerRadius(20)
-            .padding()
         }
     }
 }
 
+struct TasksInProcessView_Previews: PreviewProvider {
+    static var previews: some View {
+        StateWrapper(selectedTab: .constant(2))
+            .environmentObject(TaskManager())
+    }
+}
+
+struct StateWrapper: View {
+    @Binding var selectedTab: Int
+
+    var body: some View {
+        TasksInProcessView(selectedTab: $selectedTab)
+    }
+}

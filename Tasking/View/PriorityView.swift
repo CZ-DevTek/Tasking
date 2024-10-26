@@ -81,7 +81,7 @@ struct PriorityView: View {
                 }
                 .frame(maxHeight: .infinity)
             }
-            .navigationTitle("")
+            .customizeBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

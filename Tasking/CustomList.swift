@@ -34,7 +34,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                         } else {
                             Text(labelForItem(item))
                                 .font(CustomFont.body.font)
-                                .foregroundColor(.gray)
+                                .foregroundColor(CustomFont.body.color)
                         }
                         
                         Spacer()

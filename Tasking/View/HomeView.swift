@@ -12,6 +12,10 @@ struct HomeView: View {
     @State private var selectedTab: Int = 0
     @State private var presentedViews: [Int: Binding<PresentationMode>] = [:]
     
+    init() {
+        CustomTabBarAppearance.configure()
+    }
+    
     var body: some View {
         NavigationView {
             TabView(selection: $selectedTab) {
@@ -43,6 +47,7 @@ struct HomeView: View {
                     .tabItem {
                         Image(systemName: "checkmark.circle")
                         Text("Completed")
+                        
                     }
                     .tag(3)
                     .environmentObject(taskManager)

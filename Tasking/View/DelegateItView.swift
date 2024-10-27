@@ -57,7 +57,7 @@ struct DelegateItView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(.blue.opacity(0.3))
+            .background(.clear)
             .cornerRadius(20)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -83,7 +83,7 @@ struct DelegateItView: View {
             }
         }
         .padding()
-        .background(.blue.opacity(0.2))
+        .customizeSubviewsBackground(for: .blue)
         .onDisappear {
             presentationMode.wrappedValue.dismiss()
         }

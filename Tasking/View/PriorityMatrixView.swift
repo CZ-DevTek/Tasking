@@ -14,24 +14,10 @@ struct PriorityMatrixView: View {
     @Binding var allTasks: [Task]
     let color: Color
     let taskManager: TaskManager
-    
     @State private var draggedTaskCount: Int = 0
     
-    var destinationView: some View {
-        switch priority {
-            case .importantAndUrgent:
-                return AnyView(DoItNowView().environmentObject(taskManager))
-            case .importantButNotUrgent:
-                return AnyView(ScheduleItView().environmentObject(taskManager))
-            case .urgentButNotImportant:
-                return AnyView(DelegateItView().environmentObject(taskManager))
-            case .notImportantNotUrgent:
-                return AnyView(DoItLaterView(tasks: $tasks).environmentObject(taskManager))
-        }
-    }
-    
     var body: some View {
-        NavigationLink(destination: destinationView) {
+        NavigationLink(destination: taskManager.linkTo(for: priority)) {
             VStack(spacing: 4) {
                 Text(priority == .importantAndUrgent ? "DO" :
                         priority == .importantButNotUrgent ? "SCHEDULE" :
@@ -54,7 +40,7 @@ struct PriorityMatrixView: View {
                 }
             }
             .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .background(color)
             .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
             .cornerRadius(10)

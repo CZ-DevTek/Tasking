@@ -70,7 +70,7 @@ struct DoItLaterView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(.red.opacity(0.3))
+            .background(.clear)
             .cornerRadius(20)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -83,7 +83,7 @@ struct DoItLaterView: View {
             }
         }
         .padding()
-        .background(.red.opacity(0.2))
+        .customizeSubviewsBackground(for: .red)
         .onDisappear {
             presentationMode.wrappedValue.dismiss()
         }

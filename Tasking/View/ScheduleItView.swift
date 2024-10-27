@@ -57,7 +57,7 @@ struct ScheduleItView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(.yellow.opacity(0.3))
+            .background(.clear)
             .cornerRadius(20)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -82,7 +82,7 @@ struct ScheduleItView: View {
             }
         }
         .padding()
-        .background(.yellow.opacity(0.2))
+        .customizeSubviewsBackground(for: .yellow)
         .onDisappear {
             presentationMode.wrappedValue.dismiss()
         }

@@ -10,11 +10,11 @@ import SwiftUI
 struct DoItNowView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @Environment(\.presentationMode) var presentationMode
-
+    @State private var isExpanded: Bool = false
+    
     var body: some View {
         VStack {
             ZStack {
-                Color.green.opacity(0.3)
                 List {
                     ForEach(taskManager.doItNowTasks) { task in
                         TapToCompleteTask(task: task) {
@@ -44,11 +44,11 @@ struct DoItNowView: View {
                         }
                     }
                     .onMove { source, destination in
-                                            taskManager.doItNowTasks.move(fromOffsets: source, toOffset: destination)
-                                        }
+                        taskManager.doItNowTasks.move(fromOffsets: source, toOffset: destination)
+                    }
                 }
                 .scrollContentBackground(.hidden)
-                .background(.green.opacity(0.2))
+                .background(.clear)
                 .onDisappear {
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -63,11 +63,13 @@ struct DoItNowView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
+            FoldingButtonBar(isExpanded: $isExpanded) { priority in
+                                AnyView(taskManager.linkTo(for: priority))
+                        }
+            .padding(.bottom, 8)
         }
         .padding()
-        .background(.green.opacity(0.2))
-        .onAppear {
-        }
+        .customizeSubviewsBackground(for: .green)
     }
 }
 struct TapToCompleteTask: View {

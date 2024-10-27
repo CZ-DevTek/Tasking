@@ -36,48 +36,59 @@ struct PriorityView: View {
                 VStack {
                     HStack {
                         PriorityMatrixView(priority: .importantAndUrgent,
-                                       tasks: Binding(
-                                        get: { taskManager.priorityTasks[.importantAndUrgent] ?? [] },
-                                        set: { newValue in
-                                            taskManager.priorityTasks[.importantAndUrgent] = newValue
-                                        }
-                                       ),
-                                       allTasks: $taskManager.tasks,
-                                       color: .green,
-                                       taskManager: taskManager)
+                                           tasks: Binding(
+                                            get: { taskManager.priorityTasks[.importantAndUrgent] ?? [] },
+                                            set: { newValue in
+                                                taskManager.priorityTasks[.importantAndUrgent] = newValue
+                                            }
+                                           ),
+                                           allTasks: $taskManager.tasks,
+                                           color: .clear,
+                                           taskManager: taskManager)
+                        .gradientBackground(for: .green)
+                        .padding(.bottom)
+                        
                         PriorityMatrixView(priority: .importantButNotUrgent,
-                                       tasks: Binding(
-                                        get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
-                                        set: { newValue in
-                                            taskManager.priorityTasks[.importantButNotUrgent] = newValue
-                                        }
-                                       ),
-                                       allTasks: $taskManager.tasks,
-                                       color: .yellow,
-                                       taskManager: taskManager)
+                                           tasks: Binding(
+                                            get: { taskManager.priorityTasks[.importantButNotUrgent] ?? [] },
+                                            set: { newValue in
+                                                taskManager.priorityTasks[.importantButNotUrgent] = newValue
+                                            }
+                                           ),
+                                           allTasks: $taskManager.tasks,
+                                           color: .clear,
+                                           taskManager: taskManager)
+                        .gradientBackground(for: .yellow)
+                        .padding(.bottom)
                     }
+                    Spacer()
+                    
                     HStack {
                         PriorityMatrixView(priority: .urgentButNotImportant,
-                                       tasks: Binding(
-                                        get: { taskManager.priorityTasks[.urgentButNotImportant] ?? [] },
-                                        set: { newValue in
-                                            taskManager.priorityTasks[.urgentButNotImportant] = newValue
-                                        }
-                                       ),
-                                       allTasks: $taskManager.tasks,
-                                       color: .blue,
-                                       taskManager: taskManager)
+                                           tasks: Binding(
+                                            get: { taskManager.priorityTasks[.urgentButNotImportant] ?? [] },
+                                            set: { newValue in
+                                                taskManager.priorityTasks[.urgentButNotImportant] = newValue
+                                            }
+                                           ),
+                                           allTasks: $taskManager.tasks,
+                                           color: .clear,
+                                           taskManager: taskManager)
+                        .gradientBackground(for: .blue)
+                        
                         PriorityMatrixView(priority: .notImportantNotUrgent,
-                                       tasks: Binding(
-                                        get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
-                                        set: { newValue in
-                                            taskManager.priorityTasks[.notImportantNotUrgent] = newValue
-                                        }
-                                       ),
-                                       allTasks: $taskManager.tasks,
-                                       color: .red,
-                                       taskManager: taskManager)
+                                           tasks: Binding(
+                                            get: { taskManager.priorityTasks[.notImportantNotUrgent] ?? [] },
+                                            set: { newValue in
+                                                taskManager.priorityTasks[.notImportantNotUrgent] = newValue
+                                            }
+                                           ),
+                                           allTasks: $taskManager.tasks,
+                                           color: .clear,
+                                           taskManager: taskManager)
+                        .gradientBackground(for: .red)
                     }
+                    Spacer()
                 }
                 .frame(maxHeight: .infinity)
             }

@@ -55,6 +55,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4F7C76F42CCD3694006D426A /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
+		4FF957CC2CCEE3F40082AA98 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
 				4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */,
 				4F66B7142C19A63F00378124 /* View */,
+				4FF957CC2CCEE3F40082AA98 /* Components */,
 				4F7C76F42CCD3694006D426A /* Styles */,
 				4F66B7172C19A68100378124 /* Models */,
 				4F66B7222C19B3E000378124 /* Services */,
@@ -170,6 +172,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				4F7C76F42CCD3694006D426A /* Styles */,
+				4FF957CC2CCEE3F40082AA98 /* Components */,
 			);
 			name = Tasking;
 			productName = Tasking;

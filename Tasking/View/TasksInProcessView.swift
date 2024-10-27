@@ -17,7 +17,7 @@ struct TasksInProcessView: View {
             List(taskManager.sortedTasks) { task in
                 VStack(spacing: 0) {
                     HStack {
-                        NavigationLink(destination: taskManager.destinationView(for: task)) {
+                        NavigationLink(destination: taskManager.navigateTo(for: task)) {
                             HStack(alignment: .center) {
                                 Text(task.name)
                                     .font(CustomFont.body.font)

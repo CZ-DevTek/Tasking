@@ -50,7 +50,7 @@ struct TaskListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Tasks List")
+                    Text("Task List")
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)

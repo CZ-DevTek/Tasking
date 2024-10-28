@@ -3,14 +3,14 @@
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 12/6/24.
-//
 
 import SwiftUI
 
 struct DoItNowView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @Environment(\.presentationMode) var presentationMode
-    @State private var isExpanded: Bool = false
+    @State private var isExpanded: Bool = true
+    
     
     var body: some View {
         VStack {
@@ -63,10 +63,8 @@ struct DoItNowView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            FoldingButtonBar(isExpanded: $isExpanded) { priority in
-                                AnyView(taskManager.linkTo(for: priority))
-                        }
-            .padding(.bottom, 8)
+            FoldingButtonBar(isExpanded: $isExpanded)
+                .padding(.bottom, 8)
         }
         .padding()
         .customizeSubviewsBackground(for: .green)

@@ -3,7 +3,6 @@
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 12/6/24.
-//
 
 import SwiftUI
 
@@ -12,6 +11,8 @@ struct DelegateItView: View {
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
     @Environment(\.presentationMode) var presentationMode
+    @State private var isExpanded: Bool = true
+    
     
     var body: some View {
         VStack {
@@ -81,6 +82,8 @@ struct DelegateItView: View {
                     secondaryButton: .cancel()
                 )
             }
+            FoldingButtonBar(isExpanded: $isExpanded)
+                .padding(.bottom, 8)
         }
         .padding()
         .customizeSubviewsBackground(for: .blue)

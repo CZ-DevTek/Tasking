@@ -5,7 +5,6 @@
 //  Created by Carlos Garcia Perez on 28/10/24.
 //
 
-
 import SwiftUI
 
 struct FoldingButtonBar: View {
@@ -14,20 +13,21 @@ struct FoldingButtonBar: View {
     
     var body: some View {
         VStack {
-            HStack {
-                ForEach(Priority.allCases, id: \.self) { priority in
-                    NavigationLink(destination: taskManager.linkTo(for: priority)) {
-                        Rectangle()
-                            .fill(taskManager.color(for: priority))
-                            .frame(width: 60, height: 60)
-                            .cornerRadius(10)
-                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+            if isExpanded {
+                HStack {
+                    ForEach(Priority.allCases, id: \.self) { priority in
+                        NavigationLink(destination: taskManager.linkTo(for: priority)) {
+                            Rectangle()
+                                .fill(taskManager.color(for: priority))
+                                .frame(width: 60, height: 60)
+                                .cornerRadius(10)
+                                .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
+                .padding(.bottom, 8)
             }
-            .padding(.bottom, 8)
-            
             // Fold/Unfold Button
             Button(action: {
                 withAnimation {
@@ -35,11 +35,12 @@ struct FoldingButtonBar: View {
                 }
             }) {
                 Circle()
-                    .fill(isExpanded ? Color.orange : Color.blue)
-                    .frame(width: 10, height: 10)
+                    .fill(isExpanded ? Color.orange : Color.black)
+                    .frame(width: 15, height: 15)
                     .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 2)
             }
         }
         .padding()
     }
 }
+

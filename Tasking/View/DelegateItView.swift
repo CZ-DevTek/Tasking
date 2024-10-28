@@ -22,7 +22,7 @@ struct DelegateItView: View {
                         Text(task.name)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(CustomFont.body.font)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(.customBlue)
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
@@ -43,9 +43,10 @@ struct DelegateItView: View {
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
-                        Capsule()
-                            .fill(.white)
+                        Rectangle()
+                            .fill(.blue)
                             .padding(2)
+                            .cornerRadius(15)
                     )
                 }
                 .onDelete { indexSet in
@@ -65,7 +66,7 @@ struct DelegateItView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Delegate It")
                         .font(CustomFont.title.font)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.customBlue)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.bottom, 8)
                 }

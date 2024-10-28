@@ -28,9 +28,10 @@ struct DoItNowView: View {
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(
-                            Capsule()
-                                .fill(Color.white)
+                            Rectangle()
+                                .fill(.green)
                                 .padding(2)
+                                .cornerRadius(15)
                         )
                     }
                     .onDelete { indexSet in
@@ -59,7 +60,7 @@ struct DoItNowView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Do It Now")
                         .font(CustomFont.title.font)
-                        .foregroundColor(.green)
+                        .foregroundColor(.customGreen)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
@@ -95,7 +96,7 @@ struct TapToCompleteTask: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .opacity(isCompleted ? 0.5 : 1)
                 .font(CustomFont.body.font)
-                .foregroundColor(Color.gray)
+                .foregroundColor(.customGreen)
         }
         .contentShape(Rectangle())
     }

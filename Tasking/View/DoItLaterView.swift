@@ -21,7 +21,7 @@ struct DoItLaterView: View {
                         Text(task.name)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(CustomFont.body.font)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(.customRed)
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
@@ -57,9 +57,10 @@ struct DoItLaterView: View {
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
-                        Capsule()
-                            .fill(.white)
+                        Rectangle()
+                            .fill(.red)
                             .padding(2)
+                            .cornerRadius(15)
                     )
                 }
                 .onDelete { indexSet in
@@ -78,7 +79,7 @@ struct DoItLaterView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Do It Later")
                         .font(CustomFont.title.font)
-                        .foregroundColor(.red)
+                        .foregroundColor(.customRed)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }

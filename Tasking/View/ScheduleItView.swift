@@ -22,7 +22,7 @@ struct ScheduleItView: View {
                         Text(task.name)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(CustomFont.body.font)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(.customYellow)
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
@@ -43,9 +43,10 @@ struct ScheduleItView: View {
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
-                        Capsule()
-                            .fill(Color.white)
+                        Rectangle()
+                            .fill(.yellow)
                             .padding(2)
+                            .cornerRadius(15)
                     )
                 }
                 .onDelete { indexSet in
@@ -65,7 +66,7 @@ struct ScheduleItView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Schedule It")
                         .font(CustomFont.title.font)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(.customYellow)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }

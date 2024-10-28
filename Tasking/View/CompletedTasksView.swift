@@ -22,7 +22,9 @@ struct CompletedTasksView: View {
                             VStack {
                                 HStack {
                                     Image(systemName: "checkmark.circle.fill")
+                                        .resizable()
                                         .foregroundColor(.green)
+                                        .frame(width: 25, height: 25)
                                     Text(task.name)
                                         .font(CustomFont.body.font)
                                         .foregroundColor(.black)

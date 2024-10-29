@@ -21,13 +21,13 @@ enum PriorityGradient {
             ]), startPoint: .top, endPoint: .bottom)
         case .red:
             return LinearGradient(gradient: Gradient(colors: [
-                Color(red: 0.9, green: 0.3, blue: 0.4), // orange
-                Color(red: 0.5, green: 0.1, blue: 0.1)  // Red
+                Color(red: 0.9, green: 0.3, blue: 0.4), // Red
+                Color(red: 0.5, green: 0.1, blue: 0.1)  // Granate
             ]), startPoint: .top, endPoint: .bottom)
         case .yellow:
             return LinearGradient(gradient: Gradient(colors: [
                 Color(red: 1.0, green: 0.9, blue: 0.6), // Light yellow
-                Color(red: 1.0, green: 0.87, blue: 0.0) // Yellow
+                Color(red: 1.0, green: 0.9, blue: 0.0) // Yellow
  
             ]), startPoint: .top, endPoint: .bottom)
         case .green:

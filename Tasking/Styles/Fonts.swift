@@ -18,7 +18,7 @@ struct CustomFont {
 
 extension Color {
     static let customGreen = Color(red: 0.0, green: 0.5, blue: 0.2)
-    static let customYellow = Color(red: 1.0, green: 0.7, blue: 0.0)
+    static let customYellow = Color(red: 1.0, green: 0.6, blue: 0.2)
     static let customBlue = Color(red: 0.1, green: 0.2, blue: 0.5)
-    static let customRed = Color(red: 0.9, green: 0.1, blue: 0.1)
+    static let customRed = Color(red: 0.5, green: 0.1, blue: 0.1)
 }

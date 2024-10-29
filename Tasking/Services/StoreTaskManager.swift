@@ -221,7 +221,7 @@ class TaskManager: ObservableObject {
         }
     }
     func color(for priority: Priority) -> Color {
-            switch priority {
+        switch priority {
             case .importantAndUrgent:
                 return Color.green
             case .importantButNotUrgent:
@@ -230,9 +230,8 @@ class TaskManager: ObservableObject {
                 return Color.blue
             case .notImportantNotUrgent:
                 return Color.red
-            }
         }
-    
+    }
     func navigateTo(for task: Task) -> AnyView {
         switch priority(for: task) {
             case .importantAndUrgent:
@@ -246,22 +245,21 @@ class TaskManager: ObservableObject {
         }
     }
     func linkTo(for priority: Priority) -> some View {
-         switch priority {
-         case .importantAndUrgent:
-             return AnyView(DoItNowView().environmentObject(self))
-         case .importantButNotUrgent:
-             return AnyView(ScheduleItView().environmentObject(self))
-         case .urgentButNotImportant:
-             return AnyView(DelegateItView().environmentObject(self))
-         case .notImportantNotUrgent:
-             return AnyView(DoItLaterView(tasks: .constant([])).environmentObject(self))
-         }
-     }
+        switch priority {
+            case .importantAndUrgent:
+                return AnyView(DoItNowView().environmentObject(self))
+            case .importantButNotUrgent:
+                return AnyView(ScheduleItView().environmentObject(self))
+            case .urgentButNotImportant:
+                return AnyView(DelegateItView().environmentObject(self))
+            case .notImportantNotUrgent:
+                return AnyView(DoItLaterView(tasks: .constant([])).environmentObject(self))
+        }
+    }
     func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
         selectedTab.wrappedValue = 2
     }
 }
-
 
 extension TaskManager {
     var allPriorityTasks: [Task] {

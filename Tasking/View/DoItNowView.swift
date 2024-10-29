@@ -20,9 +20,11 @@ struct DoItNowView: View {
                         TapToCompleteTask(task: task) {
                             withAnimation {
                                 taskManager.completeTask(for: task)
-                                if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
-                                    taskManager.doItNowTasks.remove(at: index)
-                                    taskManager.addCompletedTask(task)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
+                                        taskManager.doItNowTasks.remove(at: index)
+                                        taskManager.addCompletedTask(task)
+                                    }
                                 }
                             }
                         }
@@ -39,8 +41,10 @@ struct DoItNowView: View {
                             indexSet.forEach { index in
                                 let task = taskManager.doItNowTasks[index]
                                 taskManager.completeTask(for: task)
-                                taskManager.doItNowTasks.remove(at: index)
-                                taskManager.addCompletedTask(task)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    taskManager.doItNowTasks.remove(at: index)
+                                    taskManager.addCompletedTask(task)
+                                }
                             }
                         }
                     }
@@ -86,8 +90,8 @@ struct TapToCompleteTask: View {
                     }
                 }
             }) {
-                Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(isCompleted ? .green : .gray)
+                Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle.fill")
+                    .foregroundColor(isCompleted ? .white : .customGreen)
                     .font(.title)
             }
             .padding(.trailing, 8)

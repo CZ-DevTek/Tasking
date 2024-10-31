@@ -32,9 +32,9 @@ struct TaskListView: View {
                 HStack {
                     TextField("Enter task name", text: $newTaskName)
                         .padding(10)
-                        .background(Color.white)
+                        .background(.white)
                         .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
                         .font(.headline)
                         .foregroundColor(.primary)
                         .onSubmit {

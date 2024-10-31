@@ -34,13 +34,13 @@ public enum Priority: String, CaseIterable, Hashable, Codable {
     var color: Color {
         switch self {
             case .importantAndUrgent:
-                return .green
+                return .customGreen
             case .importantButNotUrgent:
-                return .yellow
+                return .customYellow
             case .urgentButNotImportant:
-                return .blue
+                return .customBlue
             case .notImportantNotUrgent:
-                return .red
+                return .customRed
                 
         }
     }

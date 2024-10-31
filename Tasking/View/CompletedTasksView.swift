@@ -27,7 +27,7 @@ struct CompletedTasksView: View {
                                         .frame(width: 25, height: 25)
                                     Text(task.name)
                                         .font(CustomFont.body.font)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(CustomFont.body.color)
                                 }
                             }
                         }
@@ -55,7 +55,7 @@ struct CompletedTasksView: View {
                                     .foregroundColor(.white)
                             }
                             .padding()
-                            .background(Color.red)
+                            .background(.red)
                             .cornerRadius(20)
                         }
                     }
@@ -75,7 +75,6 @@ struct CompletedTasksView: View {
         }
     }
 }
-
 
 struct CompletedTasksView_Previews: PreviewProvider {
     static var previews: some View {

@@ -21,28 +21,26 @@ struct TasksInProcessView: View {
                                 Text(task.name)
                                     .font(CustomFont.body.font)
                                     .foregroundColor(.white)
-                                    .padding(.vertical, 4)
+                                    .padding(.vertical, 8)
                                     .padding(.horizontal, 8)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .cornerRadius(8)
                         }
-                        .background(taskManager.color(for: task).opacity(0.85))
+                        .background(taskManager.color(for: task))
                     }
-                    
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.blue.opacity(0.4))
-                        .padding(.horizontal, 8)
                 }
-                .padding(.vertical, 3)
+                .padding(.vertical, 1)
                 .listRowInsets(EdgeInsets())
-                .background(Color.clear)
+                .foregroundColor(.clear)
+                .background(.clear)
+                .listRowBackground(Color.clear)
                 .onAppear {
                     selectedTab = 2
                 }
             }
             .scrollContentBackground(.hidden)
+            .background(.clear)
             .customizeBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

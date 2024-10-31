@@ -21,17 +21,22 @@ struct PriorityMatrixView: View {
 
     var body: some View {
         NavigationLink(destination: taskManager.linkTo(for: priority)) {
-            VStack(spacing: 4) {
+            VStack(spacing: 8) {
                 Text(priority == .importantAndUrgent ? "DO" :
                         priority == .importantButNotUrgent ? "SCHEDULE" :
                         priority == .urgentButNotImportant ? "DELEGATE" :
                         "DO IT LATER")
                 .font(CustomFont.subtitle.font)
                 .foregroundColor(CustomFont.subtitle.color)
+                .minimumScaleFactor(0.95)
 
                 Text(priority.rawValue)
                     .font(CustomFont.footnote.font)
                     .foregroundColor(CustomFont.footnote.color)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .minimumScaleFactor(0.75)
+                    
 
                 ZStack(alignment: .center) {
                     Circle()
@@ -43,12 +48,13 @@ struct PriorityMatrixView: View {
                         .font(.headline)
                 }
             }
-            .padding()
+            .padding(.vertical, 22)
+            .padding(.horizontal, 6)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .background(isTargeted ? .gray.opacity(0.2) : color)
             .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
             .cornerRadius(10)
-            .padding(4)
+            
             .onDrop(of: [UTType.text], isTargeted: $isTargeted) { providers in
                 handleTaskDrop(providers: providers)
                 return true

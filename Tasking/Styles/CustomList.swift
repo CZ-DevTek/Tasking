@@ -35,14 +35,13 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                                 .font(CustomFont.body.font)
                                 .foregroundColor(CustomFont.body.color)
                         }
-                        
                         Spacer()
                     }
                     .padding(.vertical, 2)
 
                     Rectangle()
                         .frame(height: 1)
-                        .foregroundColor(Color.blue.opacity(0.3))
+                        .foregroundColor(.blue.opacity(0.3))
                         .padding(.horizontal, 8)
                 }
                 .onDrag {
@@ -59,7 +58,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                     Button {
                         editingItemID = item.id
                     } label: {
-                        Label("Edit", systemImage: "pencil")
+                        Label("Edit", systemImage: "highlighter")
                     }
                     .tint(.blue)
                 }
@@ -67,7 +66,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
             .onMove(perform: moveAction)
         }
         .scrollContentBackground(.hidden)
-        .background(Color.clear)
+        .background(.clear)
         .cornerRadius(20)
         .padding()
     }

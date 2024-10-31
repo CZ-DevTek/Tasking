@@ -28,7 +28,7 @@ struct DragGestureHandler: View {
                     .font(.headline)
             }
             .padding()
-            .frame(width: currentRowWidth, height: 100) // Specify height if needed
+            .frame(width: currentRowWidth, height: 100) 
             .background(isDragging ? .gray.opacity(0.2) : color)
             .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
             .cornerRadius(10)

@@ -3,7 +3,6 @@
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 29/10/24.
-//
 
 import SwiftUI
 import UniformTypeIdentifiers

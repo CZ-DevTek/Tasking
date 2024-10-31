@@ -266,11 +266,12 @@ extension TaskManager {
         return  doItNowTasks + scheduleItTasks + delegateItTasks + doItLaterTasks
     }
     var sortedTasks: [Task] {
-        return allPriorityTasks.sorted { (task1, task2) -> Bool in
+        let tasks = allPriorityTasks.sorted { (task1, task2) -> Bool in
             let priority1 = priority(for: task1)
             let priority2 = priority(for: task2)
             return priority1.rawValue < priority2.rawValue
         }
+        return tasks
     }
     func priority(for task: Task) -> Priority {
         if doItNowTasks.contains(where: { $0.id == task.id }) {

@@ -10,8 +10,8 @@ struct CompletedTasksView: View {
     @EnvironmentObject private var taskManager: TaskManager
     
     var body: some View {
-        NavigationView {
-            VStack {
+        NavigationStack {
+            VStack(spacing: 0) {
                 if taskManager.completedTasks.isEmpty {
                     Text("The list of completed tasks is clean.")
                         .foregroundColor(.white)
@@ -40,6 +40,8 @@ struct CompletedTasksView: View {
                         .listRowBackground(Color.clear)
                     }
                     .scrollContentBackground(.hidden)
+                    
+                    Spacer()
                     
                     HStack {
                         Button(action: {

@@ -49,7 +49,6 @@ struct TasksInProcessView: View {
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .toolbarBackground(.clear, for: .navigationBar)
                 }
             }
         }

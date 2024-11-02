@@ -31,7 +31,7 @@ struct LandingView: View {
                 Text("S")
                     .foregroundColor(.black)
             }
-            .font(.custom("Noteworthy Bold", size: 80))
+            .font(.custom("Avenir Next Bold", size: 80))
             .background(Color.white)
             .edgesIgnoringSafeArea(.all)
             .onAppear {

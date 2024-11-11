@@ -35,6 +35,7 @@ struct DoItNowView: View {
                                 .padding(2)
                                 .cornerRadius(15)
                         )
+                        .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                     }
                     .onDelete { indexSet in
                         withAnimation {
@@ -52,6 +53,7 @@ struct DoItNowView: View {
                         taskManager.doItNowTasks.move(fromOffsets: source, toOffset: destination)
                     }
                 }
+                .listStyle(PlainListStyle())
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .onDisappear {

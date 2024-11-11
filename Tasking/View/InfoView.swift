@@ -15,24 +15,37 @@ struct InfoView: View {
                     .padding()
                 
                 Text("""
-                This task manager app helps you organize your tasks based on priority and completion. You can do a list of tasks, set priorities, check the list of task in accordance with your priorities and view completed tasks.
-                On the first button called Tasks you can write all your tasks. After the next step is to go to the button called priorities where you drag the tasks by their priority and completion in a very easy method, then go to every color list to check them and complete them, and the end in the last button called completed you may see a list with the completed taks.
+                This task manager app helps you organize your tasks based on their priority and completion. The Eisenhower Matrix, also known as the Urgent-Important Matrix, is a powerful time management tool that helps prioritize tasks based on their urgency and importance.
+- Improved Decision-Making by categorizing tasks into four quadrants, this clarity helps focus on what truly matters.
+- Enhanced Productivity focusing on important tasks (both urgent and non-urgent), the matrix ensures that time and energy are spent on activities that align with long-term goals, rather than being consumed by distractions.
+- Reduce Stress categorizing tasks helps you stay organized and avoid the overwhelming feeling of having too much to do. Addressing urgent and important tasks first reduces last-minute pressures.
+- Better Time Allocation encourages scheduling time for important but not urgent tasks (Quadrant II), which often include activities like planning, learning, and building relationships. These are crucial for personal and professional growth.
+- Focus on Priorities discourages wasting time on tasks that are neither urgent nor important. It minimizes procrastination and distractions, helping you stay on track with your goals.
+- Improve Delegation in the "Urgent but Not Important" category, allowing you to focus on higher-priority responsibilities.
+
 """)
                 .padding()
-                Text("About This Method")
+                Text("How it works?")
                     .font(.headline)
                     .padding()
                 
                 Text("""
-                                Focus on Important Tasks: Use the Eisenhower Matrix (urgent/important) to prioritize tasks based on their impact and deadlines. That allows you to organize, to achieve your goals, and down your stress.
-                                -Important & Urgent: 
-                                Do these tasks immediately. Are the activities that you can do fast and remove from your head. Are high priority tasks, nobody else can do them. 
-                                -Important but Not Urgent: 
-                                Schedule them to ensure they get done. As soon as you schedule them, as soon they are out of your head.
-                                -Urgent but Not Important: 
-                                Delegate these tasks. If they are not so important but they need to be done, ask somebody to do them.
-                                -Not Important & Not Urgent: 
-                                Write, avoid, or eliminate these tasks. This is a great place for ideas. Some might turn into real tasks, while others go to the trash.
+                                
+                                1. Write Down Tasks Immediately:
+                                As soon as a task comes up, add it to your list so you don’t forget it.
+                                2. Drag the Tasks into the Matrix:
+                                Spend a few minutes sorting your tasks into the Eisenhower Matrix based on their priority:
+                                "Do" (Urgent & Important)
+                                "Schedule" (Important but Not Urgent)
+                                "Delegate" (Urgent but Not Important)
+                                "Eliminate" (Not Urgent & Not Important)
+                                3. Act on Green Tasks ("Do") Right Away:
+                                Start working on the "Do" tasks immediately because they are both urgent and critical.
+                                4. Review "Delegate" and "Schedule" Regularly:
+                                Delegate Tasks: Assign these to someone else and follow up to ensure they’re completed.
+                                Schedule Tasks: Block time in your calendar to handle these tasks later.
+                                5. Occasionally Check Red Tasks ("Eliminate"):
+                                Even though they aren’t important now, review them periodically. Circumstances can change, and they may become relevant in the future.
                                 """)
                 .padding()
                 .font(.body)

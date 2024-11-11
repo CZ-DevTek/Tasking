@@ -60,6 +60,7 @@ struct HomeView: View {
                         isShowingInfo.toggle()
                     }) {
                         Image(systemName: "info.circle")
+                            .foregroundColor(.white)
                     }
                 }
             }

@@ -71,6 +71,7 @@ struct DoItLaterView: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
             .scrollContentBackground(.hidden)
             .background(.clear)
             .cornerRadius(20)

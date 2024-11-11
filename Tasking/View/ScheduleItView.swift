@@ -10,11 +10,10 @@ struct ScheduleItView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
-    @State private var showScheduledConfirmation = false
-    @State private var taskToConfirm: Task?
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
-
+    
+    
     var body: some View {
         VStack {
             List {
@@ -29,10 +28,7 @@ struct ScheduleItView: View {
                     .contextMenu {
                         Button(action: {
                             taskManager.shareTask(task)
-                            taskToConfirm = task
-                            
-                            
-                            showScheduledConfirmation = true
+                            taskManager.moveTaskToCompleted(task)
                         }) {
                             Text("Schedule it in calendar")
                             Image(systemName: "calendar")
@@ -87,20 +83,6 @@ struct ScheduleItView: View {
                     secondaryButton: .cancel()
                 )
             }
-            .alert(isPresented: $showScheduledConfirmation) {
-                Alert(
-                    title: Text("Task Scheduled?"),
-                    message: Text("Was this task successfully scheduled in your calendar?"),
-                    primaryButton: .default(Text("✅ Yes")) {
-                        if let task = taskToConfirm {
-                            taskManager.moveTaskToCompleted(task)
-                        }
-                    },
-                    secondaryButton: .destructive(Text("❌ No")) {
-                        taskToConfirm = nil
-                    }
-                )
-            }
             FoldingButtonBar(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
         }
@@ -110,8 +92,8 @@ struct ScheduleItView: View {
             presentationMode.wrappedValue.dismiss()
         }
     }
+    
 }
-
 
 #Preview {
     ScheduleItView()

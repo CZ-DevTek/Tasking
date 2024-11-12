@@ -18,10 +18,10 @@ struct DoItNowView: View {
                 List {
                     ForEach(taskManager.doItNowTasks) { task in
                         TapToCompleteTask(
-                                                    task: task,
-                                                    color: .customGreen,
-                                                    font: CustomFont.body.font
-                                                ) {
+                            task: task,
+                            color: .customGreen,
+                            font: CustomFont.body.font
+                        ) {
                             withAnimation {
                                 taskManager.completeTask(for: task)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

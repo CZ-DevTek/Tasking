@@ -10,30 +10,31 @@ struct ScheduleItView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
-    @State private var showCompletionAlert = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
-    
     
     var body: some View {
         VStack {
             List {
                 ForEach(taskManager.scheduleItTasks) { task in
                     HStack {
-                        Text(task.name)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(CustomFont.body.font)
-                            .foregroundColor(.customYellow)
+                        TapToCompleteTask(
+                            task: task,
+                            color: .customYellow,
+                            font: CustomFont.body.font
+                        ){
+                            withAnimation {
+                                taskManager.completeTask(for: task)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    taskManager.moveTaskToCompleted(task)
+                                }
+                            }
+                        }
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
                         Button(action: {
-                            selectedTask = task
                             taskManager.shareTask(task)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                showCompletionAlert = true
-                            }
-                            
                         }) {
                             Text("Schedule it in calendar")
                             Image(systemName: "calendar")
@@ -97,7 +98,6 @@ struct ScheduleItView: View {
             presentationMode.wrappedValue.dismiss()
         }
     }
-    
 }
 
 #Preview {

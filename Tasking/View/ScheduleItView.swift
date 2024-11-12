@@ -10,6 +10,7 @@ struct ScheduleItView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @State private var selectedTask: Task?
     @State private var showPriorityAlert = false
+    @State private var showCompletionAlert = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
     
@@ -27,8 +28,12 @@ struct ScheduleItView: View {
                     .contentShape(Rectangle())
                     .contextMenu {
                         Button(action: {
+                            selectedTask = task
                             taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                showCompletionAlert = true
+                            }
+                            
                         }) {
                             Text("Schedule it in calendar")
                             Image(systemName: "calendar")

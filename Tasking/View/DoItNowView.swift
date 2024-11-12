@@ -17,7 +17,11 @@ struct DoItNowView: View {
             ZStack {
                 List {
                     ForEach(taskManager.doItNowTasks) { task in
-                        TapToCompleteTask(task: task) {
+                        TapToCompleteTask(
+                                                    task: task,
+                                                    color: .customGreen,
+                                                    font: CustomFont.body.font
+                                                ) {
                             withAnimation {
                                 taskManager.completeTask(for: task)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -75,36 +79,6 @@ struct DoItNowView: View {
         }
         .padding()
         .customizeSubviewsBackground(for: .green)
-    }
-}
-struct TapToCompleteTask: View {
-    @State private var isCompleted: Bool = false
-    let task: Task
-    let action: () -> Void
-    
-    var body: some View {
-        HStack {
-            Button(action: {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    isCompleted.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        action()
-                    }
-                }
-            }) {
-                Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle.fill")
-                    .foregroundColor(isCompleted ? .white : .customGreen)
-                    .font(.title)
-            }
-            .padding(.trailing, 8)
-            
-            Text(task.name)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .opacity(isCompleted ? 0.5 : 1)
-                .font(CustomFont.body.font)
-                .foregroundColor(.customGreen)
-        }
-        .contentShape(Rectangle())
     }
 }
 struct DoItNowView_Previews: PreviewProvider {

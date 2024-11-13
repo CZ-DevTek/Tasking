@@ -24,8 +24,7 @@ struct AboutThisAppView: View {
 - Improve Delegation in the "Urgent but Not Important" category, allowing you to focus on higher-priority responsibilities.
 
 """)
-                .padding()
-                
+
                 .padding()
                 .font(.body)
             }

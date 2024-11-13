@@ -18,16 +18,16 @@ struct StatisticsView: View {
                 .bold()
                 .padding(.bottom, 5)
             
-            Text("Completed Tasks")
+            Text("Completed Tasks by Priority")
                 .font(.title2)
                 .foregroundColor(.gray)
 
             Divider()
 
             VStack(alignment: .leading, spacing: 10) {
-                StatisticRow(title: "Do It Now Tasks", count: taskManager.completedTaskCount(for: .importantAndUrgent))
-                StatisticRow(title: "Scheduled Tasks", count: taskManager.completedTaskCount(for: .importantButNotUrgent))
-                StatisticRow(title: "Delegated Tasks", count: taskManager.completedTaskCount(for: .urgentButNotImportant))
+                StatisticRow(title: "Do It Now Tasks", count: taskManager.totalCompletedTaskCount(for: .importantAndUrgent))
+                StatisticRow(title: "Scheduled Tasks", count: taskManager.totalCompletedTaskCount(for: .importantButNotUrgent))
+                StatisticRow(title: "Delegated Tasks", count: taskManager.totalCompletedTaskCount(for: .urgentButNotImportant))
             }
             .padding(.vertical)
 
@@ -45,9 +45,9 @@ struct StatisticsView: View {
 
     private func taskCompletionData() -> [TaskCompletionData] {
         [
-            TaskCompletionData(priority: "Do It Now", count: taskManager.completedTaskCount(for: .importantAndUrgent)),
-            TaskCompletionData(priority: "Schedule It", count: taskManager.completedTaskCount(for: .importantButNotUrgent)),
-            TaskCompletionData(priority: "Delegate It", count: taskManager.completedTaskCount(for: .urgentButNotImportant))
+            TaskCompletionData(priority: "Do It Now", count: taskManager.totalCompletedTaskCount(for: .importantAndUrgent)),
+            TaskCompletionData(priority: "Schedule It", count: taskManager.totalCompletedTaskCount(for: .importantButNotUrgent)),
+            TaskCompletionData(priority: "Delegate It", count: taskManager.totalCompletedTaskCount(for: .urgentButNotImportant))
         ]
     }
 }
@@ -111,13 +111,4 @@ struct TaskCompletionBarChart: View {
 struct TaskCompletionData {
     let priority: String
     let count: Int
-}
-
-struct StatisticsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let manager = TaskManager()
-        manager.tasks = [Task(name: "Test Task", priority: .importantAndUrgent, completed: true)]
-        manager.completedTasks = manager.tasks.filter { $0.completed }
-        return StatisticsView().environmentObject(manager)
-    }
 }

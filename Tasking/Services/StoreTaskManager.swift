@@ -30,6 +30,7 @@ class TaskManager: ObservableObject {
     @Published var doItLaterTasks: [Task] = []
     
     @Published var completedTasks: [Task] = []
+    @Published var completedTaskHistory: [Task] = []
     
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
@@ -119,6 +120,12 @@ class TaskManager: ObservableObject {
         if let savedPriorityTasks = UserDefaults.standard.data(forKey: priorityTasksKey),
            let decodedPriorityTasks = try? decoder.decode([Priority: [Task]].self, from: savedPriorityTasks) {
             priorityTasks = decodedPriorityTasks
+        }
+    }
+    func loadCompletedTasks() {
+        if let completedTasksData = UserDefaults.standard.data(forKey: "completedTasksKey"),
+           let loadedCompletedTasks = try? JSONDecoder().decode([Task].self, from: completedTasksData) {
+            completedTasks = loadedCompletedTasks
         }
     }
     
@@ -259,11 +266,25 @@ class TaskManager: ObservableObject {
     func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
         selectedTab.wrappedValue = 2
     }
+    func markTaskAsCompleted(_ task: Task) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index].completed = true
+            completedTasks.append(tasks[index])
+            completedTaskHistory.append(tasks[index])
+        }
+    }
     func completedTaskCount(for priority: Priority) -> Int {
-        return completedTasks.filter { $0.priority == priority }.count
+        return completedTaskHistory.filter { $0.priority == priority }.count
+    }
+    
+    func totalCompletedTaskCount(for priority: Priority? = nil) -> Int {
+        if let priority = priority {
+            return completedTaskHistory.filter { $0.priority == priority }.count
+        } else {
+            return completedTaskHistory.count
+        }
     }
 }
-
 extension TaskManager {
     var allPriorityTasks: [Task] {
         return  doItNowTasks + scheduleItTasks + delegateItTasks + doItLaterTasks

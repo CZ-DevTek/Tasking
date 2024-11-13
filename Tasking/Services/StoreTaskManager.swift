@@ -259,6 +259,9 @@ class TaskManager: ObservableObject {
     func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
         selectedTab.wrappedValue = 2
     }
+    func completedTaskCount(for priority: Priority) -> Int {
+        return completedTasks.filter { $0.priority == priority }.count
+    }
 }
 
 extension TaskManager {

@@ -12,23 +12,29 @@ struct DelegateItView: View {
     @State private var showPriorityAlert = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
-    
-    
+
     var body: some View {
         VStack {
             List {
                 ForEach(taskManager.delegateItTasks) { task in
                     HStack {
-                        Text(task.name)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(CustomFont.body.font)
-                            .foregroundColor(.customBlue)
+                        TapToCompleteTask(
+                            task: task,
+                            color: .customBlue,
+                            font: CustomFont.body.font
+                        ) {
+                            withAnimation {
+                                taskManager.completeTask(for: task)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    taskManager.moveTaskToCompleted(task)
+                                }
+                            }
+                        }
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
                         Button(action: {
                             taskManager.shareTask(task)
-                            taskManager.moveTaskToCompleted(task)
                         }) {
                             Text("Ask to")
                             Image(systemName: "square.and.arrow.up")
@@ -44,7 +50,7 @@ struct DelegateItView: View {
                     .listRowSeparator(.hidden)
                     .listRowBackground(
                         Rectangle()
-                            .fill(.blue)
+                            .fill(.blue.opacity(0.2))
                             .padding(2)
                             .cornerRadius(15)
                     )

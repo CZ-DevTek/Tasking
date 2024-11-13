@@ -8,9 +8,12 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
-    @State var isShowingInfo = false
     @State private var selectedTab: Int = 0
     @State private var presentedViews: [Int: Binding<PresentationMode>] = [:]
+    @State private var isShowingAbout = false
+    @State private var isShowingHowItWorks = false
+    @State private var isShowingStatistics = false
+    @State private var isShowingFeedback = false
     
     init() {
         CustomTabBarAppearance.configure()
@@ -47,7 +50,6 @@ struct HomeView: View {
                     .tabItem {
                         Image(systemName: "checkmark.circle")
                         Text("Completed")
-                        
                     }
                     .tag(3)
                     .environmentObject(taskManager)
@@ -56,23 +58,47 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isShowingInfo.toggle()
-                    }) {
-                        Image(systemName: "info.circle")
+                    Menu {
+                        Button("About this App") {
+                            isShowingAbout.toggle()
+                        }
+                        Button("How it works?") {
+                            isShowingHowItWorks.toggle()
+                        }
+                        Button("Statistics") {
+                            isShowingStatistics.toggle()
+                        }
+                        Button("Feedback") {
+                            isShowingFeedback.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
                             .foregroundColor(.white)
                     }
                 }
             }
-            .sheet(isPresented: $isShowingInfo) {
-                InfoView()
+            .sheet(isPresented: $isShowingAbout) {
+                AboutThisAppView()
                     .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $isShowingHowItWorks) {
+                HowItWorksView()
+                    .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $isShowingStatistics) {
+                StatisticsView()
+                    .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $isShowingFeedback) {
+                Text("Feedback form goes here.")
+                    .padding()
             }
             .onChange(of: selectedTab) { newValue, _ in
                 dismissCurrentView()
             }
         }
     }
+    
     private func dismissCurrentView() {
         if let binding = presentedViews[selectedTab] {
             binding.wrappedValue.dismiss()
@@ -83,6 +109,7 @@ struct HomeView: View {
         presentedViews[index] = mode
     }
 }
+
 #Preview {
     HomeView()
 }

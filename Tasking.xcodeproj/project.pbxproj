@@ -24,7 +24,9 @@
 		4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7202C19B23200378124 /* StoreTaskManager.swift */; };
 		4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7A26EF2CA85E80008581AF /* LandingView.swift */; };
 		4F7A26F32CA887FB008581AF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7A26F22CA887FB008581AF /* Combine.framework */; };
-		4FC6B35B2CA9C8D700677B1C /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6B35A2CA9C8D700677B1C /* InfoView.swift */; };
+		4FB3C22F2CE5492100D17B00 /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */; };
+		4FB3C2312CE54A4D00D17B00 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */; };
+		4FC6B35B2CA9C8D700677B1C /* AboutThisAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */; };
 		4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +49,9 @@
 		4F66B7202C19B23200378124 /* StoreTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTaskManager.swift; sourceTree = "<group>"; };
 		4F7A26EF2CA85E80008581AF /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		4F7A26F22CA887FB008581AF /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
-		4FC6B35A2CA9C8D700677B1C /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
+		4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutThisAppView.swift; sourceTree = "<group>"; };
 		4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +118,9 @@
 			children = (
 				4F7A26EF2CA85E80008581AF /* LandingView.swift */,
 				4F66B7102C199A2C00378124 /* HomeView.swift */,
-				4FC6B35A2CA9C8D700677B1C /* InfoView.swift */,
+				4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */,
+				4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */,
+				4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */,
 				4F66B6FE2C19974600378124 /* TaskListView.swift */,
 				4F66B70C2C19984000378124 /* PriorityView.swift */,
 				4F66B7122C19A4D000378124 /* PriorityMatrixView.swift */,
@@ -226,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FB3C22F2CE5492100D17B00 /* HowItWorksView.swift in Sources */,
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
 				4F66B7132C19A4D000378124 /* PriorityMatrixView.swift in Sources */,
 				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,
@@ -240,7 +247,8 @@
 				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,
 				4F66B7162C19A67700378124 /* TaskModel.swift in Sources */,
-				4FC6B35B2CA9C8D700677B1C /* InfoView.swift in Sources */,
+				4FC6B35B2CA9C8D700677B1C /* AboutThisAppView.swift in Sources */,
+				4FB3C2312CE54A4D00D17B00 /* StatisticsView.swift in Sources */,
 				4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

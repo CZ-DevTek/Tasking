@@ -30,7 +30,7 @@ class TaskManager: ObservableObject {
     @Published var doItLaterTasks: [Task] = []
     
     @Published var completedTasks: [Task] = []
-    @Published var completedTaskHistory: [Task] = []
+
     
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
@@ -39,6 +39,7 @@ class TaskManager: ObservableObject {
     init() {
         loadTasks()
         loadPriorityTasks()
+        loadCompletedTasks()
         sortTasksByPriority()
     }
     
@@ -69,6 +70,7 @@ class TaskManager: ObservableObject {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].completed.toggle()
         }
+        saveCompletedTasks()
     }
     
     func clearCompletedTasks() {
@@ -152,7 +154,6 @@ class TaskManager: ObservableObject {
             case .notImportantNotUrgent:
                 doItLaterTasks.append(task)
         }
-        
         saveTasks()
         savePriorityTasks()
     }
@@ -176,6 +177,9 @@ class TaskManager: ObservableObject {
             case .notImportantNotUrgent:
                 return doItLaterTasks
         }
+    }
+    func getCompletedTasks(for priority: Priority) -> [Task] {
+        return completedTasks.filter { $0.priority == priority }
     }
     
     func moveTaskToTaskList(_ task: Task, from sourceList: Binding<[Task]>) {
@@ -203,6 +207,8 @@ class TaskManager: ObservableObject {
             }
         }
         addCompletedTask(updatedTask)
+        saveCompletedTasks()
+        objectWillChange.send()
     }
     func shareTask(_ task: Task) {
         let taskName = task.name
@@ -265,24 +271,6 @@ class TaskManager: ObservableObject {
     }
     func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
         selectedTab.wrappedValue = 2
-    }
-    func markTaskAsCompleted(_ task: Task) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].completed = true
-            completedTasks.append(tasks[index])
-            completedTaskHistory.append(tasks[index])
-        }
-    }
-    func completedTaskCount(for priority: Priority) -> Int {
-        return completedTaskHistory.filter { $0.priority == priority }.count
-    }
-    
-    func totalCompletedTaskCount(for priority: Priority? = nil) -> Int {
-        if let priority = priority {
-            return completedTaskHistory.filter { $0.priority == priority }.count
-        } else {
-            return completedTaskHistory.count
-        }
     }
 }
 extension TaskManager {

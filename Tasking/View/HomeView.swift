@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var isShowingHowItWorks = false
     @State private var isShowingStatistics = false
     @State private var isShowingFeedback = false
+    @State private var selectedPriority: Priority = .importantAndUrgent
     
     init() {
         CustomTabBarAppearance.configure()
@@ -66,6 +67,7 @@ struct HomeView: View {
                             isShowingHowItWorks.toggle()
                         }
                         Button("Statistics") {
+                            selectedPriority = .importantAndUrgent
                             isShowingStatistics.toggle()
                         }
                         Button("Feedback") {
@@ -86,7 +88,8 @@ struct HomeView: View {
                     .presentationDetents([.medium, .large])
             }
             .sheet(isPresented: $isShowingStatistics) {
-                StatisticsView()
+                StatisticsView(priority: selectedPriority)
+                    .environmentObject(taskManager)
                     .presentationDetents([.medium, .large])
             }
             .sheet(isPresented: $isShowingFeedback) {

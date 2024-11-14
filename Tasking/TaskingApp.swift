@@ -27,6 +27,7 @@ struct MyApp: App {
                     .onAppear {
                         taskManager.loadTasks()
                         taskManager.loadPriorityTasks()
+                        taskManager.loadCompletedTasks()
                     }
             }
         }

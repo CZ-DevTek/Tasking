@@ -10,8 +10,7 @@ struct DoItNowView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
-    
-    
+
     var body: some View {
         VStack {
             ZStack {
@@ -23,13 +22,7 @@ struct DoItNowView: View {
                             font: CustomFont.body.font
                         ) {
                             withAnimation {
-                                taskManager.completeTask(for: task)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    if let index = taskManager.doItNowTasks.firstIndex(where: { $0.id == task.id }) {
-                                        taskManager.doItNowTasks.remove(at: index)
-                                        taskManager.addCompletedTask(task)
-                                    }
-                                }
+                                taskManager.moveTaskToCompleted(task)
                             }
                         }
                         .listRowSeparator(.hidden)
@@ -45,11 +38,7 @@ struct DoItNowView: View {
                         withAnimation {
                             indexSet.forEach { index in
                                 let task = taskManager.doItNowTasks[index]
-                                taskManager.completeTask(for: task)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    taskManager.doItNowTasks.remove(at: index)
-                                    taskManager.addCompletedTask(task)
-                                }
+                                taskManager.moveTaskToCompleted(task)
                             }
                         }
                     }
@@ -81,6 +70,7 @@ struct DoItNowView: View {
         .customizeSubviewsBackground(for: .green)
     }
 }
+
 struct DoItNowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

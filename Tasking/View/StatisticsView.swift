@@ -8,52 +8,52 @@
 import SwiftUI
 
 struct StatisticsView: View {
-    @State private var completedTaskCount: Int = 0
     @EnvironmentObject private var taskManager: TaskManager
+    @State private var updateCounter: Int = 0
     let priority: Priority
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Statistics")
-                .font(.largeTitle)
-                .bold()
-                .padding(.bottom, 5)
-            
-            Text("Completed Tasks by Priority")
-                .font(.title2)
-                .foregroundColor(.gray)
-            
-            Divider()
-            
-            VStack {
-                Text("Completed Tasks: \(taskManager.completedTasks.count)")
-                Text("Do It Now: \(taskManager.completedTasks.filter { $0.priority == .importantAndUrgent }.count)")
-                Text("Schedule It: \(taskManager.completedTasks.filter { $0.priority == .importantButNotUrgent }.count)")
-                Text("Delegate It: \(taskManager.completedTasks.filter { $0.priority == .urgentButNotImportant }.count)")
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Statistics")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 5)
+
+                Text("Completed Tasks by Priority")
+                    .font(.title2)
+                    .foregroundColor(.gray)
+
+                Divider()
+
+                VStack(alignment: .leading, spacing: 10) {
+                    StatisticRow(title: "Total Completed Tasks", count: taskManager.allCompletedTasks.count)
+                    StatisticRow(title: "Do It Now", count: taskManager.completedDoTasks.count)
+                    StatisticRow(title: "Schedule It", count: taskManager.completedScheduleTasks.count)
+                    StatisticRow(title: "Delegate It", count: taskManager.completedDelegateTasks.count)
+                }
+                .padding(.vertical)
+
+                Button("Force Update") {
+                    updateCounter += 1
+                }
             }
-            .padding(.vertical)
-        }
-        .onChange(of: priority) { _, _ in
-            updateCompletedTaskCount()
+            .padding()
         }
     }
-    struct StatisticRow: View {
-        let title: String
-        let count: Int
-        
-        var body: some View {
-            HStack {
-                Text(title)
-                    .font(.headline)
-                Spacer()
-                Text("\(count)")
-                    .font(.subheadline)
-                    .foregroundColor(.blue)
-            }
+
+
+struct StatisticRow: View {
+    let title: String
+    let count: Int
+
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.headline)
+            Spacer()
+            Text("\(count)")
+                .font(.subheadline)
+                .foregroundColor(.blue)
         }
-    }
-    private func updateCompletedTaskCount() {
-        completedTaskCount = taskManager.getCompletedTasks(for: priority).count
     }
 }
-

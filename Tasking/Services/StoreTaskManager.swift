@@ -30,17 +30,35 @@ class TaskManager: ObservableObject {
     @Published var doItLaterTasks: [Task] = []
     
     @Published var completedTasks: [Task] = []
+   
+    @Published var allCompletedTasks: [Task] = []
+    @Published var completedDoTasks: [Task] = []
+    @Published var completedScheduleTasks: [Task] = []
+    @Published var completedDelegateTasks: [Task] = []
 
     
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
     private let completedTasksKey = "completedTasksKey"
     
+    var importantAndUrgentTasksCount: Int {
+        allCompletedTasks.filter { priority(for: $0) == .importantAndUrgent }.count
+    }
+
+    var importantButNotUrgentTasksCount: Int {
+        allCompletedTasks.filter { priority(for: $0) == .importantButNotUrgent }.count
+    }
+
+    var urgentButNotImportantTasksCount: Int {
+        allCompletedTasks.filter { priority(for: $0) == .urgentButNotImportant }.count
+    }
+    
     init() {
         loadTasks()
         loadPriorityTasks()
         loadCompletedTasks()
         sortTasksByPriority()
+        allCompletedTasks = completedDoTasks + completedScheduleTasks + completedDelegateTasks
     }
     
     func addTask(_ task: Task) {
@@ -48,7 +66,7 @@ class TaskManager: ObservableObject {
         saveTasks()
     }
     
-    func removeTask(at index: Int) {
+    func removeTask(at index: Int) { // only in use for the matrix
         tasks.remove(at: index)
         saveTasks()
         savePriorityTasks()
@@ -77,10 +95,6 @@ class TaskManager: ObservableObject {
         completedTasks.removeAll()
         saveCompletedTasks()
     }
-    func addCompletedTask(_ task: Task) {
-        completedTasks.append(task)
-        saveCompletedTasks()
-    }
     
     func removeCompletedTask(at index: Int) {
         guard index >= 0 && index < completedTasks.count else { return }
@@ -104,8 +118,25 @@ class TaskManager: ObservableObject {
     
     func saveCompletedTasks() {
         let encoder = JSONEncoder()
+        
         if let encodedCompletedTasks = try? encoder.encode(completedTasks) {
-            UserDefaults.standard.set(encodedCompletedTasks, forKey: completedTasksKey)
+            UserDefaults.standard.set(encodedCompletedTasks, forKey: "completedTasksKey")
+        }
+        if let encodedDoTasks = try? encoder.encode(completedDoTasks) {
+            UserDefaults.standard.set(encodedDoTasks, forKey: "completedDoTasksKey")
+        }
+        if let encodedScheduleTasks = try? encoder.encode(completedScheduleTasks) {
+            UserDefaults.standard.set(encodedScheduleTasks, forKey: "completedScheduleTasksKey")
+        }
+        if let encodedDelegateTasks = try? encoder.encode(completedDelegateTasks) {
+            UserDefaults.standard.set(encodedDelegateTasks, forKey: "completedDelegateTasksKey")
+        }
+    }
+    
+    func saveAllCompletedTasks() {
+        let encoder = JSONEncoder()
+        if let encodedAllCompletedTasks = try? encoder.encode(allCompletedTasks) {
+            UserDefaults.standard.set(encodedAllCompletedTasks, forKey: "allCompletedTasksKey")
         }
     }
     
@@ -125,9 +156,23 @@ class TaskManager: ObservableObject {
         }
     }
     func loadCompletedTasks() {
+        let decoder = JSONDecoder()
+        
         if let completedTasksData = UserDefaults.standard.data(forKey: "completedTasksKey"),
-           let loadedCompletedTasks = try? JSONDecoder().decode([Task].self, from: completedTasksData) {
+           let loadedCompletedTasks = try? decoder.decode([Task].self, from: completedTasksData) {
             completedTasks = loadedCompletedTasks
+        }
+        if let completedDoTasksData = UserDefaults.standard.data(forKey: "completedDoTasksKey"),
+           let loadedCompletedDoTasks = try? decoder.decode([Task].self, from: completedDoTasksData) {
+            completedDoTasks = loadedCompletedDoTasks
+        }
+        if let completedScheduleTasksData = UserDefaults.standard.data(forKey: "completedScheduleTasksKey"),
+           let loadedCompletedScheduleTasks = try? decoder.decode([Task].self, from: completedScheduleTasksData) {
+            completedScheduleTasks = loadedCompletedScheduleTasks
+        }
+        if let completedDelegateTasksData = UserDefaults.standard.data(forKey: "completedDelegateTasksKey"),
+           let loadedCompletedDelegateTasks = try? decoder.decode([Task].self, from: completedDelegateTasksData) {
+            completedDelegateTasks = loadedCompletedDelegateTasks
         }
     }
     
@@ -142,17 +187,21 @@ class TaskManager: ObservableObject {
     }
     
     func moveTaskToPriorityList(_ task: Task, priority: Priority) {
-        removeTaskFromCurrentList(task)
+        
+        tasks.removeAll { $0.id == task.id }
+        
+        var updatedTask = task
+            updatedTask.priority = priority
         
         switch priority {
             case .importantAndUrgent:
-                doItNowTasks.append(task)
+                doItNowTasks.append(updatedTask)
             case .importantButNotUrgent:
-                scheduleItTasks.append(task)
+                scheduleItTasks.append(updatedTask)
             case .urgentButNotImportant:
-                delegateItTasks.append(task)
+                delegateItTasks.append(updatedTask)
             case .notImportantNotUrgent:
-                doItLaterTasks.append(task)
+                doItLaterTasks.append(updatedTask)
         }
         saveTasks()
         savePriorityTasks()
@@ -189,27 +238,65 @@ class TaskManager: ObservableObject {
         savePriorityTasks()
     }
     
-    
     func moveTaskToCompleted(_ task: Task) {
+     
         var updatedTask = task
+            updatedTask.completed = true
         
-        if delegateItTasks.contains(where: { $0.id == task.id }) {
-            updatedTask.name = "Delegated: \(task.name)"
-            if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
-                delegateItTasks.remove(at: index)
-                savePriorityTasks()
-            }
-        } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
-            updatedTask.name = "Scheduled: \(task.name)"
-            if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
-                scheduleItTasks.remove(at: index)
-                savePriorityTasks()
-            }
-        }
-        addCompletedTask(updatedTask)
+        if let index = doItNowTasks.firstIndex(where: { $0.id == task.id }) {
+               updatedTask.name = "Done: \(task.name)"
+               updatedTask.priority = .importantAndUrgent
+               doItNowTasks.remove(at: index)
+               savePriorityTasks()
+           } else if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
+               updatedTask.name = "Delegated: \(task.name)"
+               updatedTask.priority = .urgentButNotImportant
+               delegateItTasks.remove(at: index)
+               savePriorityTasks()
+           } else if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
+               updatedTask.name = "Scheduled: \(task.name)"
+               updatedTask.priority = .importantButNotUrgent
+               scheduleItTasks.remove(at: index)
+               savePriorityTasks()
+           }
+        addTaskToCompletedArrays(updatedTask)
         saveCompletedTasks()
-        objectWillChange.send()
+        saveAllCompletedTasks()
     }
+    private func prefix(for priority: Priority) -> String {
+        switch priority {
+        case .importantAndUrgent:
+            return "Done"
+        case .importantButNotUrgent:
+            return "Scheduled"
+        case .urgentButNotImportant:
+            return "Delegated"
+        case .notImportantNotUrgent:
+            return "Later"
+        }
+    }
+    
+    private func addTaskToCompletedArrays(_ task: Task) {
+        var updatedTask = task
+        updatedTask.completed = true
+        
+        print("Task being added: \(updatedTask.name), Priority: \(priority(for: task))")
+        
+        allCompletedTasks.append(updatedTask)
+        completedTasks.append(task)
+        
+        switch priority(for: task) {
+        case .importantAndUrgent:
+            completedDoTasks.append(task)
+        case .importantButNotUrgent:
+            completedScheduleTasks.append(task)
+        case .urgentButNotImportant:
+            completedDelegateTasks.append(task)
+        default:
+            break
+        }
+    }
+    
     func shareTask(_ task: Task) {
         let taskName = task.name
         let activityVC = UIActivityViewController(activityItems: [taskName], applicationActivities: nil)
@@ -286,7 +373,9 @@ extension TaskManager {
         return tasks
     }
     func priority(for task: Task) -> Priority {
+        
         if doItNowTasks.contains(where: { $0.id == task.id }) {
+
             return .importantAndUrgent
         } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
             return .importantButNotUrgent
@@ -298,6 +387,7 @@ extension TaskManager {
             return .notImportantNotUrgent
         }
     }
+
 }
 
 

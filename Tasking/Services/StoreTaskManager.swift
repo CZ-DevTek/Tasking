@@ -188,7 +188,7 @@ class TaskManager: ObservableObject {
     
     func moveTaskToPriorityList(_ task: Task, priority: Priority) {
         
-        tasks.removeAll { $0.id == task.id }
+        removeTaskFromCurrentList(task)
         
         var updatedTask = task
             updatedTask.priority = priority
@@ -203,6 +203,7 @@ class TaskManager: ObservableObject {
             case .notImportantNotUrgent:
                 doItLaterTasks.append(updatedTask)
         }
+        priorityTasks[priority]?.append(task)
         saveTasks()
         savePriorityTasks()
     }

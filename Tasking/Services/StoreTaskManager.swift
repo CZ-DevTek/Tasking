@@ -281,8 +281,6 @@ class TaskManager: ObservableObject {
         var updatedTask = task
         updatedTask.completed = true
         
-        print("Task being added: \(updatedTask.name), Priority: \(priority(for: task))")
-        
         allCompletedTasks.append(updatedTask)
         completedTasks.append(task)
         

@@ -59,7 +59,7 @@ struct ScheduleItView: View {
                     withAnimation {
                         indexSet.forEach { index in
                             let task = taskManager.scheduleItTasks[index]
-                            taskManager.moveTaskToTaskList(task, from: $taskManager.scheduleItTasks)
+                            taskManager.removeTaskFromCurrentList(task)
                         }
                     }
                 }

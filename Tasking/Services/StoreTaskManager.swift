@@ -66,7 +66,7 @@ class TaskManager: ObservableObject {
         saveTasks()
     }
     
-    func removeTask(at index: Int) { // only in use for the matrix
+    func removeTask(at index: Int) {
         tasks.remove(at: index)
         saveTasks()
         savePriorityTasks()
@@ -355,9 +355,6 @@ class TaskManager: ObservableObject {
                 return AnyView(DoItLaterView(tasks: .constant([])).environmentObject(self))
         }
     }
-    func handleTaskTap(task: Task, selectedTab: Binding<Int>) {
-        selectedTab.wrappedValue = 2
-    }
 }
 extension TaskManager {
     var allPriorityTasks: [Task] {
@@ -386,7 +383,6 @@ extension TaskManager {
             return .notImportantNotUrgent
         }
     }
-
 }
 
 

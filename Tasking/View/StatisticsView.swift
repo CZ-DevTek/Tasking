@@ -25,7 +25,6 @@ struct StatisticsView: View {
 
             Divider()
 
-            // Pie Chart Representation
             PieChartView(
                 data: [
                     Double(taskManager.completedDoTasks.count),
@@ -79,8 +78,7 @@ struct PieChartView: View {
         GeometryReader { geometry in
             let total = data.reduce(0, +)
             let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            let radius = min(geometry.size.width, geometry.size.height) / 2
-
+            
             ZStack {
                 ForEach(data.indices, id: \.self) { index in
                     PieSliceView(

@@ -59,7 +59,7 @@ struct DelegateItView: View {
                     withAnimation {
                         indexSet.forEach { index in
                             let task = taskManager.delegateItTasks[index]
-                            taskManager.moveTaskToTaskList(task, from: $taskManager.delegateItTasks)
+                            taskManager.removeTaskFromCurrentList(task)
                         }
                     }
                 }

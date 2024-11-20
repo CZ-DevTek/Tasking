@@ -50,7 +50,6 @@ struct LandingView: View {
                         }
                     }
                 }
-                
             }
         }
     }

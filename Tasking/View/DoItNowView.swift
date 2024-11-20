@@ -38,7 +38,7 @@ struct DoItNowView: View {
                         withAnimation {
                             indexSet.forEach { index in
                                 let task = taskManager.doItNowTasks[index]
-                                taskManager.moveTaskToCompleted(task)
+                                taskManager.removeTaskFromCurrentList(task)
                             }
                         }
                     }

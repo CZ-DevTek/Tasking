@@ -25,9 +25,7 @@ struct ScheduleItView: View {
                         ){
                             withAnimation {
                                 taskManager.completeTask(for: task)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    taskManager.moveTaskToCompleted(task)
-                                }
+                                taskManager.moveTaskToCompleted(task)
                             }
                         }
                     }

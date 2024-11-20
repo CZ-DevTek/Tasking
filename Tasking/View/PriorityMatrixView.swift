@@ -99,8 +99,8 @@ struct PriorityMatrixView: View {
                 DispatchQueue.main.async {
                     if let taskIndex = allTasks.firstIndex(where: { $0.name == taskName }) {
                         let task = allTasks.remove(at: taskIndex)
-                        taskManager.moveTaskToPriorityList(task, priority: priority)
                         self.tasks = taskManager.getTasks(for: priority)
+                        taskManager.moveTaskToPriorityList(task, priority: priority)
                         updateDraggedTaskCount()
                     }
                 }

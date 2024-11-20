@@ -22,6 +22,7 @@ struct DoItNowView: View {
                             font: CustomFont.body.font
                         ) {
                             withAnimation {
+                                taskManager.completeTask(for: task)
                                 taskManager.moveTaskToCompleted(task)
                             }
                         }

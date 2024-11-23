@@ -6,13 +6,13 @@
 
 import SwiftUI
 
-struct BackgroundModifier: ViewModifier {
+struct MenuBackgroundModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 0.0, green: 0.7, blue: 0.8),  // Cyan
-                    Color(red: 0.0, green: 0.0, blue: 0.4)   // Dark Blue
+                    Color(red: 0.88, green: 1.0, blue: 1.0),   // whiteblue
+                    Color(red: 0.68, green: 0.85, blue: 0.9)  // Blue
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -25,8 +25,8 @@ struct BackgroundModifier: ViewModifier {
 }
 
 extension View {
-    func customizeBackground() -> some View {
-        self.modifier(BackgroundModifier())
+    func customizeMenuBackground() -> some View {
+        self.modifier(MenuBackgroundModifier())
     }
 }
 

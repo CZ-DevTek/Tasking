@@ -31,7 +31,7 @@ struct StatisticsView: View {
                     Double(taskManager.completedScheduleTasks.count),
                     Double(taskManager.completedDelegateTasks.count)
                 ],
-                colors: [.green, .yellow, .blue],
+                colors: [.customGreen, .customYellow, .customBlue],
                 labels: ["Do It Now", "Schedule It", "Delegate It"]
             )
             .frame(height: 300)
@@ -39,7 +39,6 @@ struct StatisticsView: View {
 
             Divider()
 
-            // Statistics Summary
             VStack(alignment: .leading, spacing: 10) {
                 StatisticRow(title: "Total Completed Tasks", count: taskManager.allCompletedTasks.count)
                 StatisticRow(title: "Do It Now", count: taskManager.completedDoTasks.count)
@@ -50,6 +49,7 @@ struct StatisticsView: View {
             .padding(.top)
         }
         .padding()
+        .modifier(MenuBackgroundModifier())
     }
 }
 
@@ -91,10 +91,11 @@ struct PieChartView: View {
                 VStack {
                     Text("Completed Tasks")
                         .font(.headline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                     Text("\(Int(total))")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundColor(.white)
                 }
                 .position(center)
             }

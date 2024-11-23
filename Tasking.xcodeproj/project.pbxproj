@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */; };
+		4F3D66FD2CF2168300D9A124 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */; };
+		4F3D66FF2CF2190100D9A124 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D66FE2CF2190100D9A124 /* UserProfileModel.swift */; };
+		4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */; };
+		4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67042CF253DC00D9A124 /* ToastView.swift */; };
+		4F3D670A2CF27D3400D9A124 /* SlideUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67092CF27D3400D9A124 /* SlideUpMenu.swift */; };
 		4F60C6DF2CAC882A00C880AD /* TasksInProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
@@ -24,6 +29,8 @@
 		4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B7202C19B23200378124 /* StoreTaskManager.swift */; };
 		4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7A26EF2CA85E80008581AF /* LandingView.swift */; };
 		4F7A26F32CA887FB008581AF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7A26F22CA887FB008581AF /* Combine.framework */; };
+		4F959A272CF20CAF0048E3E2 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F959A262CF20CAF0048E3E2 /* FeedbackView.swift */; };
+		4F959A292CF20D110048E3E2 /* FeedBackMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F959A282CF20D110048E3E2 /* FeedBackMailView.swift */; };
 		4FB3C22F2CE5492100D17B00 /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */; };
 		4FB3C2312CE54A4D00D17B00 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */; };
 		4FC6B35B2CA9C8D700677B1C /* AboutThisAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */; };
@@ -32,6 +39,11 @@
 
 /* Begin PBXFileReference section */
 		4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksView.swift; sourceTree = "<group>"; };
+		4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		4F3D66FE2CF2190100D9A124 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
+		4F3D67042CF253DC00D9A124 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		4F3D67092CF27D3400D9A124 /* SlideUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpMenu.swift; sourceTree = "<group>"; };
 		4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksInProcessView.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
@@ -49,6 +61,8 @@
 		4F66B7202C19B23200378124 /* StoreTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTaskManager.swift; sourceTree = "<group>"; };
 		4F7A26EF2CA85E80008581AF /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		4F7A26F22CA887FB008581AF /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
+		4F959A262CF20CAF0048E3E2 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		4F959A282CF20D110048E3E2 /* FeedBackMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackMailView.swift; sourceTree = "<group>"; };
 		4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
 		4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutThisAppView.swift; sourceTree = "<group>"; };
@@ -72,6 +86,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F3D67082CF27CAF00D9A124 /* TopMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				4F3D67092CF27D3400D9A124 /* SlideUpMenu.swift */,
+				4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */,
+				4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */,
+				4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */,
+				4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */,
+				4F959A262CF20CAF0048E3E2 /* FeedbackView.swift */,
+				4F959A282CF20D110048E3E2 /* FeedBackMailView.swift */,
+				4F3D67042CF253DC00D9A124 /* ToastView.swift */,
+			);
+			path = TopMenuView;
+			sourceTree = "<group>";
+		};
 		4F66B6F02C19974600378124 = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +147,6 @@
 			children = (
 				4F7A26EF2CA85E80008581AF /* LandingView.swift */,
 				4F66B7102C199A2C00378124 /* HomeView.swift */,
-				4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */,
-				4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */,
-				4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */,
 				4F66B6FE2C19974600378124 /* TaskListView.swift */,
 				4F66B70C2C19984000378124 /* PriorityView.swift */,
 				4F66B7122C19A4D000378124 /* PriorityMatrixView.swift */,
@@ -130,6 +156,7 @@
 				4F66B71C2C19AE7200378124 /* DoItLaterView.swift */,
 				4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */,
 				4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */,
+				4F3D67082CF27CAF00D9A124 /* TopMenuView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,6 +164,7 @@
 		4F66B7172C19A68100378124 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4F3D66FE2CF2190100D9A124 /* UserProfileModel.swift */,
 				4F66B7152C19A67700378124 /* TaskModel.swift */,
 			);
 			path = Models;
@@ -145,6 +173,7 @@
 		4F66B7222C19B3E000378124 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */,
 				4F66B7202C19B23200378124 /* StoreTaskManager.swift */,
 			);
 			path = Services;
@@ -234,21 +263,28 @@
 			files = (
 				4FB3C22F2CE5492100D17B00 /* HowItWorksView.swift in Sources */,
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
+				4F3D670A2CF27D3400D9A124 /* SlideUpMenu.swift in Sources */,
 				4F66B7132C19A4D000378124 /* PriorityMatrixView.swift in Sources */,
 				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,
 				4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */,
+				4F3D66FF2CF2190100D9A124 /* UserProfileModel.swift in Sources */,
 				4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */,
 				4F66B7112C199A2C00378124 /* HomeView.swift in Sources */,
 				4F66B7212C19B23200378124 /* StoreTaskManager.swift in Sources */,
+				4F959A292CF20D110048E3E2 /* FeedBackMailView.swift in Sources */,
 				4F66B7192C19AE3400378124 /* ScheduleItView.swift in Sources */,
 				4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */,
 				4FCCA86A2C19E83C00FCA57C /* AppDelegate.swift in Sources */,
 				4F60C6DF2CAC882A00C880AD /* TasksInProcessView.swift in Sources */,
+				4F959A272CF20CAF0048E3E2 /* FeedbackView.swift in Sources */,
 				4F66B70D2C19984000378124 /* PriorityView.swift in Sources */,
 				4F66B71D2C19AE7200378124 /* DoItLaterView.swift in Sources */,
 				4F66B7162C19A67700378124 /* TaskModel.swift in Sources */,
 				4FC6B35B2CA9C8D700677B1C /* AboutThisAppView.swift in Sources */,
 				4FB3C2312CE54A4D00D17B00 /* StatisticsView.swift in Sources */,
+				4F3D66FD2CF2168300D9A124 /* UserProfileView.swift in Sources */,
+				4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */,
+				4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */,
 				4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

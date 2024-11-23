@@ -8,12 +8,14 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
+    @StateObject private var userProfileManager = UserProfileManager()
     @State private var selectedTab: Int = 0
     @State private var presentedViews: [Int: Binding<PresentationMode>] = [:]
     @State private var isShowingAbout = false
     @State private var isShowingHowItWorks = false
     @State private var isShowingStatistics = false
     @State private var isShowingFeedback = false
+    @State private var isShowingProfile = false
     @State private var selectedPriority: Priority = .importantAndUrgent
     
     init() {
@@ -60,6 +62,9 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
+                        Button("Profile") {
+                            isShowingProfile.toggle()
+                        }
                         Button("About this App") {
                             isShowingAbout.toggle()
                         }
@@ -71,13 +76,21 @@ struct HomeView: View {
                             isShowingStatistics.toggle()
                         }
                         Button("Feedback") {
-                            isShowingFeedback.toggle()
+                            if userProfileManager.getUserProfile() == nil {
+                                isShowingProfile.toggle()
+                            } else {
+                                isShowingFeedback.toggle()
+                            }
                         }
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        Image(systemName: "line.3.horizontal")
                             .foregroundColor(.white)
                     }
                 }
+            }
+            .sheet(isPresented: $isShowingProfile) {
+                UserProfileView()
+                    .presentationDetents([.medium, .large])
             }
             .sheet(isPresented: $isShowingAbout) {
                 AboutThisAppView()
@@ -92,9 +105,14 @@ struct HomeView: View {
                     .environmentObject(taskManager)
                     .presentationDetents([.medium, .large])
             }
+            .sheet(isPresented: $isShowingStatistics) {
+                StatisticsView(priority: selectedPriority)
+                    .environmentObject(taskManager)
+                    .presentationDetents([.medium, .large])
+            }
             .sheet(isPresented: $isShowingFeedback) {
-                Text("Feedback form goes here.")
-                    .padding()
+                FeedbackView()
+                    .presentationDetents([.medium, .large])
             }
             .onChange(of: selectedTab) { newValue, _ in
                 dismissCurrentView()

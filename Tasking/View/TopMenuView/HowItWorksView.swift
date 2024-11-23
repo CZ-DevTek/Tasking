@@ -38,6 +38,8 @@ struct HowItWorksView: View {
                 .font(.body)
             }
         }
+        .ignoresSafeArea(edges: .all) 
+        .modifier(MenuBackgroundModifier())
     }
 }
 

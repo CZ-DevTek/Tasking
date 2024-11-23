@@ -27,21 +27,21 @@ struct DoItLaterView: View {
                     .contextMenu {
                         
                         Button(action: {
-                            taskManager.moveTaskToPriorityList(task, priority: .importantAndUrgent)
+                            taskManager.moveTaskToPriorityLists(task, priority: .importantAndUrgent)
                         }) {
                             Text("Move to Do It Now")
                             Image(systemName: "arrow.right.circle")
                         }
                         
                         Button(action: {
-                            taskManager.moveTaskToPriorityList(task, priority: .importantButNotUrgent)
+                            taskManager.moveTaskToPriorityLists(task, priority: .importantButNotUrgent)
                         }) {
                             Text("Move to Schedule It")
                             Image(systemName: "calendar")
                         }
                         
                         Button(action: {
-                            taskManager.moveTaskToPriorityList(task, priority: .urgentButNotImportant)
+                            taskManager.moveTaskToPriorityLists(task, priority: .urgentButNotImportant)
                         }) {
                             Text("Move to Delegate It")
                             Image(systemName: "person.crop.circle.badge.checkmark")

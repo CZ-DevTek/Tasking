@@ -99,8 +99,8 @@ struct PriorityMatrixView: View {
                 DispatchQueue.main.async {
                     if let taskIndex = allTasks.firstIndex(where: { $0.name == taskName }) {
                         let task = allTasks.remove(at: taskIndex)
-                        self.tasks = taskManager.getTasks(for: priority)
-                        taskManager.moveTaskToPriorityList(task, priority: priority)
+                        self.tasks = taskManager.updateTasksForPriority(for: priority)
+                        taskManager.moveTaskToPriorityLists(task, priority: priority)
                         updateDraggedTaskCount()
                     }
                 }
@@ -109,6 +109,6 @@ struct PriorityMatrixView: View {
     }
 
     private func updateDraggedTaskCount() {
-        draggedTaskCount = taskManager.getTasks(for: priority).count
+        draggedTaskCount = taskManager.updateTasksForPriority(for: priority).count
     }
 }

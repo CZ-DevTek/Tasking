@@ -75,7 +75,7 @@ class TaskManager: ObservableObject {
         tasks.removeAll { $0.id == id }
     }
     
-    func updateTask(id: UUID, newName: String) {
+    func editTask(id: UUID, newName: String) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
             tasks[index].name = newName
         }
@@ -84,7 +84,7 @@ class TaskManager: ObservableObject {
         tasks.move(fromOffsets: indices, toOffset: newOffset)
     }
     
-    func completeTask(for task: Task) {
+    func markTaskAsCompleted(for task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].completed.toggle()
         }
@@ -186,7 +186,7 @@ class TaskManager: ObservableObject {
         }
     }
     
-    func moveTaskToPriorityList(_ task: Task, priority: Priority) {
+    func moveTaskToPriorityLists(_ task: Task, priority: Priority) {
         
         removeTaskFromCurrentList(task)
         
@@ -216,7 +216,7 @@ class TaskManager: ObservableObject {
         doItLaterTasks.removeAll { $0.id == task.id }
     }
     
-    func getTasks(for priority: Priority) -> [Task] {
+    func updateTasksForPriority(for priority: Priority) -> [Task] {
         switch priority {
             case .importantAndUrgent:
                 return doItNowTasks
@@ -264,7 +264,7 @@ class TaskManager: ObservableObject {
         saveCompletedTasks()
         saveAllCompletedTasks()
     }
-    private func prefix(for priority: Priority) -> String {
+    private func addPrefix(for priority: Priority) -> String {
         switch priority {
         case .importantAndUrgent:
             return "Done"
@@ -284,15 +284,17 @@ class TaskManager: ObservableObject {
         allCompletedTasks.append(updatedTask)
         completedTasks.append(task)
         
-        switch priority(for: task) {
-        case .importantAndUrgent:
-            completedDoTasks.append(task)
-        case .importantButNotUrgent:
-            completedScheduleTasks.append(task)
-        case .urgentButNotImportant:
-            completedDelegateTasks.append(task)
-        default:
-            break
+        switch updatedTask.priority {
+            case .importantAndUrgent:
+                completedDoTasks.append(task)
+            case .importantButNotUrgent:
+                completedScheduleTasks.append(task)
+            case .urgentButNotImportant:
+                completedDelegateTasks.append(task)
+            case .notImportantNotUrgent:
+                break
+            case .none:
+                print("Task \(task.name) has no priority and was not added to a specific completed list.")
         }
     }
     
@@ -306,7 +308,7 @@ class TaskManager: ObservableObject {
             rootVC.present(activityVC, animated: true, completion: nil)
         }
     }
-    func color(for task: Task) -> Color {
+    func assignColor(for task: Task) -> Color {
         if doItNowTasks.contains(where: { $0.id == task.id }) {
             return .green
         } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
@@ -319,7 +321,7 @@ class TaskManager: ObservableObject {
             return .white
         }
     }
-    func color(for priority: Priority) -> Color {
+    func assingColor(for priority: Priority) -> Color {
         switch priority {
             case .importantAndUrgent:
                 return Color.green
@@ -371,7 +373,6 @@ extension TaskManager {
     func priority(for task: Task) -> Priority {
         
         if doItNowTasks.contains(where: { $0.id == task.id }) {
-
             return .importantAndUrgent
         } else if scheduleItTasks.contains(where: { $0.id == task.id }) {
             return .importantButNotUrgent
@@ -379,9 +380,8 @@ extension TaskManager {
             return .urgentButNotImportant
         } else if doItLaterTasks.contains(where: { $0.id == task.id }) {
             return .notImportantNotUrgent
-        } else {
-            return .notImportantNotUrgent
         }
+        fatalError("Task not found in any of the priority lists.")
     }
 }
 

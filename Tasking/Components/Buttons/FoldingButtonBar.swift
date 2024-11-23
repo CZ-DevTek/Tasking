@@ -18,7 +18,7 @@ struct FoldingButtonBar: View {
                     ForEach(Priority.allCases, id: \.self) { priority in
                         NavigationLink(destination: taskManager.linkTo(for: priority)) {
                             Rectangle()
-                                .fill(taskManager.color(for: priority))
+                                .fill(taskManager.assingColor(for: priority))
                                 .frame(width: 60, height: 60)
                                 .cornerRadius(10)
                                 .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)

@@ -19,7 +19,7 @@ struct PriorityView: View {
                         taskManager.removeTask(with: task.id)
                     },
                     updateAction: { task, newName in
-                        taskManager.updateTask(id: task.id, newName: newName)
+                        taskManager.editTask(id: task.id, newName: newName)
                     },
                     labelForItem: { task in
                         task.name

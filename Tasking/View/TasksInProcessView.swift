@@ -27,7 +27,7 @@ struct TasksInProcessView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .cornerRadius(8)
                         }
-                        .background(taskManager.color(for: task))
+                        .background(taskManager.assignColor(for: task))
                     }
                 }
                 .padding(.vertical, 1)

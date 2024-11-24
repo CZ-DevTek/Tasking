@@ -11,8 +11,8 @@ struct MenuBackgroundModifier: ViewModifier {
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 0.88, green: 1.0, blue: 1.0),   // whiteblue
-                    Color(red: 0.68, green: 0.85, blue: 0.9)  // Blue
+                    Color(red: 0.0, green: 0.0, blue: 0.0), // Black
+                    Color(red: 0.0, green: 0.0, blue: 0.4)   // e-Blue
                 ]),
                 startPoint: .top,
                 endPoint: .bottom

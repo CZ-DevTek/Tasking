@@ -18,31 +18,30 @@ struct HomeView: View {
     @State private var isShowingProfile = false
     @State private var selectedPriority: Priority = .importantAndUrgent
     
+    
     init() {
         CustomTabBarAppearance.configure()
     }
     
     var body: some View {
-        SideBarMenuStack(sidebarWidth: 200, showSidebar: $showSidebar) {
+        SidebarMenu(sidebarWidth: 200, showSidebar: $showSidebar) {
             VStack(alignment: .leading, spacing: 20) {
-                
                 if let userProfile = userProfileManager.getUserProfile() {
-                    Text(userProfile.userName)
-                        .font(.subheadline)
-                        .padding(.top, 20)
-                    Text(userProfile.userEmail)
-                        .font(.subheadline)
-                    
-                    Divider()
-                        .background(.white)
-                } else {
-                    if let userProfile = userProfileManager.getUserProfile(){
-                        Text(userProfile.id)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        Text("No email available")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(userProfile.userName)
                             .font(.subheadline)
-                            .foregroundColor(.white)
+                            .padding(.top, 20)
+                        Text(userProfile.userEmail)
+                            .font(.subheadline)
+                        
+                        Divider()
+                            .background(Color.white)
+                    }
+                } else {
+                    if let userProfile = userProfileManager.getUserProfile() {
+                        Text(userProfile.id)
+                            .font(.subheadline)
+                            .padding(.top, 20)
                     }
                 }
                 
@@ -70,13 +69,13 @@ struct HomeView: View {
                 }) {
                     Label("Feedback", systemImage: "pencil.and.outline")
                 }
-                
+            .navigationTitle("Info")
+            .navigationBarTitleDisplayMode(.inline)
                 Spacer()
             }
             .padding()
             .foregroundColor(.white)
             .background(.black)
-            
         } content: {
             NavigationView {
                 TabView(selection: $selectedTab) {
@@ -124,32 +123,26 @@ struct HomeView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $isShowingProfile) {
+                .fullScreenCover(isPresented: $isShowingProfile) {
                     UserProfileView()
-                        .presentationDetents([.medium, .large])
                 }
-                .sheet(isPresented: $isShowingAbout) {
+                .fullScreenCover(isPresented: $isShowingAbout) {
                     AboutThisAppView()
-                        .presentationDetents([.medium, .large])
                 }
-                .sheet(isPresented: $isShowingHowItWorks) {
+                .fullScreenCover(isPresented: $isShowingHowItWorks) {
                     HowItWorksView()
-                        .presentationDetents([.medium, .large])
                 }
-                .sheet(isPresented: $isShowingStatistics) {
+                .fullScreenCover(isPresented: $isShowingStatistics) {
                     StatisticsView(priority: selectedPriority)
                         .environmentObject(taskManager)
-                        .presentationDetents([.medium, .large])
                 }
-                .sheet(isPresented: $isShowingFeedback) {
+                .fullScreenCover(isPresented: $isShowingFeedback) {
                     FeedbackView()
-                        .presentationDetents([.medium, .large])
                 }
             }
         }
     }
 }
-
 
 #Preview {
     HomeView()

@@ -8,10 +8,9 @@ import SwiftUI
 import MessageUI
 
 struct FeedbackMailView: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
     let subject: String
     let body: String
-    
-    @Environment(\.presentationMode) var presentationMode
     
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
         let mailComposer = MFMailComposeViewController()

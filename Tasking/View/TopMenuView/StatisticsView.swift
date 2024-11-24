@@ -9,47 +9,60 @@ import SwiftUI
 
 struct StatisticsView: View {
     @EnvironmentObject private var taskManager: TaskManager
+    @Environment(\.presentationMode) var presentationMode
     @State private var updateCounter: Int = 0
     let priority: Priority
+    
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Statistics")
-                .font(.largeTitle)
-                .bold()
-                .padding(.bottom, 5)
+        NavigationView {
+            ZStack {
+                Color.clear
+                    .customizeMenuBackground()
+                    .ignoresSafeArea()
 
-            Text("Completed Tasks")
-                .font(.title2)
-                .foregroundColor(.gray)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Completed Tasks")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
 
-            Divider()
+                        Divider()
 
-            PieChartView(
-                data: [
-                    Double(taskManager.completedDoTasks.count),
-                    Double(taskManager.completedScheduleTasks.count),
-                    Double(taskManager.completedDelegateTasks.count)
-                ],
-                colors: [.customGreen, .customYellow, .customBlue],
-                labels: ["Do It Now", "Schedule It", "Delegate It"]
-            )
-            .frame(height: 300)
-            .padding(.vertical)
+                        PieChartView(
+                            data: [
+                                Double(taskManager.completedDoTasks.count),
+                                Double(taskManager.completedScheduleTasks.count),
+                                Double(taskManager.completedDelegateTasks.count)
+                            ],
+                            colors: [.customGreen, .customYellow, .customBlue],
+                            labels: ["Do It Now", "Schedule It", "Delegate It"]
+                        )
+                        .frame(height: 300)
+                        .padding(.vertical)
 
-            Divider()
+                        Divider()
 
-            VStack(alignment: .leading, spacing: 10) {
-                StatisticRow(title: "Total Completed Tasks", count: taskManager.allCompletedTasks.count)
-                StatisticRow(title: "Do It Now", count: taskManager.completedDoTasks.count)
-                StatisticRow(title: "Schedule It", count: taskManager.completedScheduleTasks.count)
-                StatisticRow(title: "Delegate It", count: taskManager.completedDelegateTasks.count)
+                        VStack(alignment: .leading, spacing: 10) {
+                            StatisticRow(title: "Total Completed Tasks", count: taskManager.allCompletedTasks.count)
+                            StatisticRow(title: "Do It Now", count: taskManager.completedDoTasks.count)
+                            StatisticRow(title: "Schedule It", count: taskManager.completedScheduleTasks.count)
+                            StatisticRow(title: "Delegate It", count: taskManager.completedDelegateTasks.count)
+                        }
+                        .padding(.vertical)
+                    }
+                    .padding()
+                }
             }
-            .padding(.vertical)
-            .padding(.top)
+            .navigationBarTitle("Statistics", displayMode: .inline)
+            .navigationBarItems(leading: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            })
         }
-        .padding()
-        .modifier(MenuBackgroundModifier())
     }
 }
 
@@ -130,3 +143,5 @@ struct PieSliceView: View {
         }
     }
 }
+
+

@@ -10,7 +10,7 @@ struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
     @StateObject private var userProfileManager = UserProfileManager()
     @State private var selectedTab: Int = 0
-    @State private var presentedViews: [Int: Binding<PresentationMode>] = [:]
+    @State private var showSidebar = false
     @State private var isShowingAbout = false
     @State private var isShowingHowItWorks = false
     @State private var isShowingStatistics = false
@@ -23,113 +23,133 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            TabView(selection: $selectedTab) {
-                TaskListView()
-                    .tabItem {
-                        Image(systemName: "pencil.and.list.clipboard")
-                        Text("Tasks")
-                    }
-                    .tag(0)
-                    .environmentObject(taskManager)
+        SideBarMenuStack(sidebarWidth: 200, showSidebar: $showSidebar) {
+            VStack(alignment: .leading, spacing: 20) {
                 
-                PriorityView()
-                    .tabItem {
-                        Image(systemName: "square.and.pencil")
-                        Text("Priorities")
-                    }
-                    .tag(1)
-                    .environmentObject(taskManager)
-                
-                TasksInProcessView(selectedTab: $selectedTab)
-                    .tabItem {
-                        Image(systemName: "list.bullet.clipboard")
-                        Text("On Going")
-                    }
-                    .tag(2)
-                    .environmentObject(taskManager)
-                
-                CompletedTasksView()
-                    .tabItem {
-                        Image(systemName: "checkmark.circle")
-                        Text("Completed")
-                    }
-                    .tag(3)
-                    .environmentObject(taskManager)
-            }
-            .navigationTitle("Task Manager")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        Button("Profile") {
-                            isShowingProfile.toggle()
-                        }
-                        Button("About this App") {
-                            isShowingAbout.toggle()
-                        }
-                        Button("How it works?") {
-                            isShowingHowItWorks.toggle()
-                        }
-                        Button("Statistics") {
-                            selectedPriority = .importantAndUrgent
-                            isShowingStatistics.toggle()
-                        }
-                        Button("Feedback") {
-                            if userProfileManager.getUserProfile() == nil {
-                                isShowingProfile.toggle()
-                            } else {
-                                isShowingFeedback.toggle()
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
+                if let userProfile = userProfileManager.getUserProfile() {
+                    Text(userProfile.userName)
+                        .font(.subheadline)
+                        .padding(.top, 20)
+                    Text(userProfile.userEmail)
+                        .font(.subheadline)
+                    
+                    Divider()
+                        .background(.white)
+                } else {
+                    if let userProfile = userProfileManager.getUserProfile(){
+                        Text(userProfile.id)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        Text("No email available")
+                            .font(.subheadline)
                             .foregroundColor(.white)
                     }
                 }
+                
+                Button(action: { isShowingProfile.toggle() }) {
+                    Label("Profile", systemImage: "person")
+                }
+                Button(action: { isShowingAbout.toggle() }) {
+                    Label("About this App", systemImage: "info.circle")
+                }
+                Button(action: { isShowingHowItWorks.toggle() }) {
+                    Label("How it works?", systemImage: "brain.head.profile")
+                }
+                Button(action: {
+                    selectedPriority = .importantAndUrgent
+                    isShowingStatistics.toggle()
+                }) {
+                    Label("Statistics", systemImage: "chart.bar.xaxis")
+                }
+                Button(action: {
+                    if userProfileManager.getUserProfile() == nil {
+                        isShowingProfile.toggle()
+                    } else {
+                        isShowingFeedback.toggle()
+                    }
+                }) {
+                    Label("Feedback", systemImage: "pencil.and.outline")
+                }
+                
+                Spacer()
             }
-            .sheet(isPresented: $isShowingProfile) {
-                UserProfileView()
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(isPresented: $isShowingAbout) {
-                AboutThisAppView()
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(isPresented: $isShowingHowItWorks) {
-                HowItWorksView()
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(isPresented: $isShowingStatistics) {
-                StatisticsView(priority: selectedPriority)
-                    .environmentObject(taskManager)
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(isPresented: $isShowingStatistics) {
-                StatisticsView(priority: selectedPriority)
-                    .environmentObject(taskManager)
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(isPresented: $isShowingFeedback) {
-                FeedbackView()
-                    .presentationDetents([.medium, .large])
-            }
-            .onChange(of: selectedTab) { newValue, _ in
-                dismissCurrentView()
+            .padding()
+            .foregroundColor(.white)
+            .background(.black)
+            
+        } content: {
+            NavigationView {
+                TabView(selection: $selectedTab) {
+                    TaskListView()
+                        .tabItem {
+                            Image(systemName: "pencil.and.list.clipboard")
+                            Text("Tasks")
+                        }
+                        .tag(0)
+                        .environmentObject(taskManager)
+                    
+                    PriorityView()
+                        .tabItem {
+                            Image(systemName: "square.and.pencil")
+                            Text("Priorities")
+                        }
+                        .tag(1)
+                        .environmentObject(taskManager)
+                    
+                    TasksInProcessView(selectedTab: $selectedTab)
+                        .tabItem {
+                            Image(systemName: "list.bullet.clipboard")
+                            Text("On Going")
+                        }
+                        .tag(2)
+                        .environmentObject(taskManager)
+                    
+                    CompletedTasksView()
+                        .tabItem {
+                            Image(systemName: "checkmark.circle")
+                            Text("Completed")
+                        }
+                        .tag(3)
+                        .environmentObject(taskManager)
+                }
+                .navigationTitle("Task Manager")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            showSidebar.toggle()
+                        }) {
+                            Image(systemName: "line.3.horizontal")
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+                .sheet(isPresented: $isShowingProfile) {
+                    UserProfileView()
+                        .presentationDetents([.medium, .large])
+                }
+                .sheet(isPresented: $isShowingAbout) {
+                    AboutThisAppView()
+                        .presentationDetents([.medium, .large])
+                }
+                .sheet(isPresented: $isShowingHowItWorks) {
+                    HowItWorksView()
+                        .presentationDetents([.medium, .large])
+                }
+                .sheet(isPresented: $isShowingStatistics) {
+                    StatisticsView(priority: selectedPriority)
+                        .environmentObject(taskManager)
+                        .presentationDetents([.medium, .large])
+                }
+                .sheet(isPresented: $isShowingFeedback) {
+                    FeedbackView()
+                        .presentationDetents([.medium, .large])
+                }
             }
         }
-    }
-    
-    private func dismissCurrentView() {
-        if let binding = presentedViews[selectedTab] {
-            binding.wrappedValue.dismiss()
-        }
-    }
-    
-    private func storePresentationMode(for index: Int, mode: Binding<PresentationMode>) {
-        presentedViews[index] = mode
     }
 }
+
 
 #Preview {
     HomeView()

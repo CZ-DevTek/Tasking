@@ -9,6 +9,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
     @StateObject private var userProfileManager = UserProfileManager()
+    @StateObject private var appSettings = AppSettings()
     @State private var selectedTab: Int = 0
     @State private var showSidebar = false
     @State private var isShowingAbout = false
@@ -17,6 +18,7 @@ struct HomeView: View {
     @State private var isShowingFeedback = false
     @State private var isShowingProfile = false
     @State private var selectedPriority: Priority = .importantAndUrgent
+    @State private var isShowingLanguageSelection = false
     
     
     init() {
@@ -53,6 +55,9 @@ struct HomeView: View {
                 }
                 Button(action: { isShowingHowItWorks.toggle() }) {
                     Label("How it works?", systemImage: "brain.head.profile")
+                }
+                Button(action: { isShowingLanguageSelection.toggle() }) {
+                    Label("Languages", systemImage: "globe")
                 }
                 Button(action: {
                     selectedPriority = .importantAndUrgent
@@ -131,6 +136,11 @@ struct HomeView: View {
                 }
                 .fullScreenCover(isPresented: $isShowingHowItWorks) {
                     HowItWorksView()
+                }
+                .fullScreenCover(isPresented: $isShowingLanguageSelection) {
+                    LanguageSelectionView()
+                        .environmentObject(taskManager)
+                        .environmentObject(appSettings)
                 }
                 .fullScreenCover(isPresented: $isShowingStatistics) {
                     StatisticsView(priority: selectedPriority)

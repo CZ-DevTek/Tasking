@@ -13,8 +13,8 @@
 		4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */; };
 		4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67042CF253DC00D9A124 /* ToastView.swift */; };
 		4F3D673E2CF332D600D9A124 /* SidebarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */; };
-		4F3D67442CF3D1EE00D9A124 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3D67422CF3D1EE00D9A124 /* Localizable.strings */; };
 		4F3D67462CF3D30C00D9A124 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67452CF3D30C00D9A124 /* LanguageView.swift */; };
+		4F3D674D2CF3DAC600D9A124 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */; };
 		4F60C6DF2CAC882A00C880AD /* TasksInProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
@@ -47,8 +47,8 @@
 		4F3D67042CF253DC00D9A124 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenuView.swift; sourceTree = "<group>"; };
 		4F3D67412CF3CFB900D9A124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		4F3D67432CF3D1EE00D9A124 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4F3D67452CF3D30C00D9A124 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksInProcessView.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
@@ -75,6 +75,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4F3D67492CF3D7A900D9A124 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
 		4F7C76F42CCD3694006D426A /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 		4FF957CC2CCEE3F40082AA98 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -94,6 +95,7 @@
 		4F3D67082CF27CAF00D9A124 /* TopMenuView */ = {
 			isa = PBXGroup;
 			children = (
+				4F3D67452CF3D30C00D9A124 /* LanguageView.swift */,
 				4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */,
 				4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */,
 				4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */,
@@ -109,9 +111,8 @@
 		4F66B6F02C19974600378124 = {
 			isa = PBXGroup;
 			children = (
-				4F3D67422CF3D1EE00D9A124 /* Localizable.strings */,
-				4F3D67452CF3D30C00D9A124 /* LanguageView.swift */,
 				4F66B6FB2C19974600378124 /* Tasking */,
+				4F3D67492CF3D7A900D9A124 /* Resources */,
 				4F7A26F12CA887FB008581AF /* Frameworks */,
 				4F66B6FA2C19974600378124 /* Products */,
 			);
@@ -131,6 +132,7 @@
 				4F3D67412CF3CFB900D9A124 /* Info.plist */,
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
 				4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */,
+				4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */,
 				4F66B7142C19A63F00378124 /* View */,
 				4FF957CC2CCEE3F40082AA98 /* Components */,
 				4F7C76F42CCD3694006D426A /* Styles */,
@@ -211,6 +213,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				4F3D67492CF3D7A900D9A124 /* Resources */,
 				4F7C76F42CCD3694006D426A /* Styles */,
 				4FF957CC2CCEE3F40082AA98 /* Components */,
 			);
@@ -241,6 +244,9 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
+				ru,
 			);
 			mainGroup = 4F66B6F02C19974600378124;
 			productRefGroup = 4F66B6FA2C19974600378124 /* Products */;
@@ -258,7 +264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F66B7042C19974800378124 /* Preview Assets.xcassets in Resources */,
-				4F3D67442CF3D1EE00D9A124 /* Localizable.strings in Resources */,
 				4F66B7012C19974800378124 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,22 +300,12 @@
 				4F3D66FD2CF2168300D9A124 /* UserProfileView.swift in Sources */,
 				4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */,
 				4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */,
+				4F3D674D2CF3DAC600D9A124 /* AppSettings.swift in Sources */,
 				4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4F3D67422CF3D1EE00D9A124 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F3D67432CF3D1EE00D9A124 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4F66B7052C19974800378124 /* Debug */ = {
@@ -372,6 +367,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -428,6 +424,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

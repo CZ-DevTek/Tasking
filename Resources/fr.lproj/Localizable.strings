@@ -5,8 +5,10 @@
 "Profile Details" = "Détails du profil";
 "Save Profile" = "Enregistrer le profil";
 "Edit Profile" = "Modifier le profil";
-"About this App" = "À propos de cette application";
+"About this App" = "À propos de cette App";
+"About This App" = "À Propos De Cette App";
 "How it works?" = "Comment ça fonctionne ?";
+"How It Works?" = "Comment ça Fonctionne ?";
 "Languages" = "Langue";
 "Statistics" = "Statistiques";
 "Total Completed Tasks" = "Total des tâches terminées";
@@ -45,4 +47,3 @@
 "Delete" = "Supprimer";
 "about_this_app_description" = "Cette application de gestion des tâches vous aide à organiser vos tâches en fonction de leur priorité et de leur achèvement. La matrice d'Eisenhower, également connue sous le nom de matrice Urgente-Importante, est un outil puissant de gestion du temps qui permet de prioriser les tâches en fonction de leur urgence et de leur importance.\n\n- **Amélioration de la prise de décision** : Catégoriser les tâches en quatre quadrants permet de se concentrer sur ce qui est vraiment important.\n- **Productivité accrue** : Assure que le temps et l'énergie sont consacrés aux tâches importantes, pas aux distractions.\n- **Réduction du stress** : Rester organisé permet d'éviter de se sentir dépassé par trop de tâches.\n- **Meilleure allocation du temps** : Encourage à planifier du temps pour des activités de croissance à long terme.\n- **Se concentrer sur les priorités** : Minimise la procrastination et les distractions.\n- **Amélioration de la délégation** : Encourage à déléguer les tâches urgentes mais non importantes.";
 "task_manager_instructions" = "1. Écrivez les tâches immédiatement :\nAjoutez les tâches à votre liste dès qu'elles apparaissent.\n\n2. Faites glisser les tâches dans la matrice :\nPrenez le temps de trier les tâches dans la matrice Eisenhower :\n   -\"Faire\" (Urgent et Important)\n   -\"Planifier\" (Important mais non Urgent)\n   -\"Déléguer\" (Urgent mais non Important)\n   -\"Éliminer\" (Non Urgent et Non Important)\n\n3. Agissez immédiatement sur les tâches vertes :\nCommencez à travailler sur les tâches urgentes et critiques immédiatement.\n\n4. Revoyez régulièrement les tâches \"Déléguer\" et \"Planifier\" :\nDéléguez les tâches aux autres et bloquez du temps pour les importantes.\n\n5. Vérifiez occasionnellement les tâches rouges :\nRevoyez périodiquement les tâches non urgentes et non importantes, car les circonstances peuvent changer.\n\n";
-

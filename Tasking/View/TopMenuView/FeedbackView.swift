@@ -75,7 +75,7 @@ struct FeedbackView: View {
                     .foregroundColor(.white)
             })
             .overlay(
-                ToastView(show: $showToast, message: "Feedback sent successfully")
+                ToastView(show: $showToast, message: "Profile Saved Successfully", duration: 2)
                     .padding(.bottom, 40),
                 alignment: .bottom
             )

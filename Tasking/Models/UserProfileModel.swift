@@ -10,4 +10,5 @@ struct UserProfile: Codable, Identifiable {
     var id: String
     var userName: String
     var userEmail: String
+    var language: String
 }

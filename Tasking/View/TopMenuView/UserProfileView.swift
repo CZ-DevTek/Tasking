@@ -13,103 +13,153 @@ struct UserProfileView: View {
     @State private var showToast: Bool = false
     @ObservedObject private var userProfileManager = UserProfileManager()
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         NavigationView {
             ZStack {
                 Color.clear
                     .customizeMenuBackground()
                     .ignoresSafeArea()
-                
-                Form {
-                    Section(header: Text("Profile Details")) {
-                        if let profile = userProfileManager.getUserProfile() {
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("Name: \(profile.userName)")
-                                    .font(.subheadline)
-                                Text("Email: \(profile.userEmail)")
-                                    .font(.subheadline)
-                            }
-                            .padding(.bottom, 10)
-                        }
-        
-                        VStack(alignment: .leading, spacing: 15) {
-                            TextField("Enter your name", text: $userName)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .padding(10)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                            
-                            TextField("Enter your email", text: $userEmail)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(.none)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .padding(10)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                        }
+                VStack {
+                    Spacer()
+                    if let profile = userProfileManager.getUserProfile() {
+                        ProfileSummaryView(profile: profile)
+                            .padding(.bottom, 20)
                     }
-                    Button(action: saveProfile) {
-                        Text(profileSaved ? "Edit Profile" : "Save Profile")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(userEmail.isEmpty || userName.isEmpty ? Color.gray : Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    .disabled(userEmail.isEmpty || userName.isEmpty)
-                }
-                .scrollContentBackground(.hidden)
-                .background(Color.clear)
-                
-                if showToast {
+                    Spacer()
                     VStack {
-                        Spacer()
-                        Text("Profile Saved Successfully")
-                            .font(.subheadline)
-                            .padding()
-                            .background(Color.black.opacity(0.8))
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding()
-                            .transition(.opacity)
-                            .animation(.easeInOut(duration: 0.3), value: showToast)
+                        ProfileInputFields(userName: $userName, userEmail: $userEmail)
+                        
+                        SaveProfileButton(
+                            userName: userName,
+                            userEmail: userEmail,
+                            profileSaved: profileSaved,
+                            saveAction: saveProfile
+                        )
                     }
+                    Spacer()
+                }
+                .padding()
+                if showToast {
+                    ToastView(show: $showToast, message: "Profile Saved Successfully", duration: 2)
+                        .transition(.opacity)
                 }
             }
             .navigationBarTitle("User Profile", displayMode: .inline)
-            .navigationBarItems(leading: Button(action: {
+            .navigationBarItems(leading: BackButton(action: {
                 presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "chevron.backward")
-                    .font(.headline)
-                    .foregroundColor(.white)
-            })
-            .onAppear {
-                if let profile = userProfileManager.getUserProfile() {
-                    userName = profile.userName
-                    userEmail = profile.userEmail
-                    profileSaved = true
-                }
-            }
+            }))
+            .onAppear(perform: loadUserProfile)
         }
     }
-    
+
+    // MARK: - Helper Methods
     private func saveProfile() {
-        guard !userEmail.isEmpty && !userName.isEmpty else { return }
+        guard !userEmail.isEmpty, !userName.isEmpty, isValidEmail(userEmail) else { return }
+
+        let shortUserID = String(UUID().uuidString.prefix(8))
         
-        let profile = UserProfile(id: UUID().uuidString, userName: userName, userEmail: userEmail)
+        let profile = UserProfile(id: shortUserID, userName: userName, userEmail: userEmail, language: "en")
         userProfileManager.saveUserProfile(userProfile: profile)
         profileSaved = true
 
         showToast = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation {
-                showToast = false
-            }
+            withAnimation { showToast = false }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 presentationMode.wrappedValue.dismiss()
             }
+        }
+    }
+
+    private func loadUserProfile() {
+        if let profile = userProfileManager.getUserProfile() {
+            userName = profile.userName
+            userEmail = profile.userEmail
+            profileSaved = true
+        }
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+    }
+}
+
+// MARK: - Subviews
+struct ProfileSummaryView: View {
+    let profile: UserProfile
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+           
+            Text("Name: \(profile.userName)")
+                .font(.subheadline)
+            Text("Email: \(profile.userEmail)")
+                .font(.subheadline)
+            Text("Language: \(profile.language)")
+                .font(.subheadline)
+            Text("User ID: \(profile.id)")
+                .font(.subheadline)
+        }
+        .padding(.bottom, 10)
+    }
+}
+
+struct ProfileInputFields: View {
+    @Binding var userName: String
+    @Binding var userEmail: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            TextField("Enter your name", text: $userName)
+                .textFieldStyle(PlainTextFieldStyle())
+                .padding(10)
+                .background(.gray)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+
+            TextField("Enter your email", text: $userEmail)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .textFieldStyle(PlainTextFieldStyle())
+                .padding(10)
+                .background(.gray)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+        }
+        .scrollContentBackground(.hidden)
+        .foregroundColor(.clear)
+    }
+}
+
+struct SaveProfileButton: View {
+    let userName: String
+    let userEmail: String
+    let profileSaved: Bool
+    let saveAction: () -> Void
+
+    var body: some View {
+        Button(action: saveAction) {
+            Text(profileSaved ? "Edit Profile" : "Save Profile")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(userEmail.isEmpty || userName.isEmpty ? Color.gray : Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+        }
+        .disabled(userEmail.isEmpty || userName.isEmpty)
+    }
+}
+
+struct BackButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "chevron.backward")
+                .font(.headline)
+                .foregroundColor(.white)
         }
     }
 }

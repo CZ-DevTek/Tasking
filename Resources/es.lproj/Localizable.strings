@@ -7,7 +7,7 @@
 "Edit Profile" = "Editar Perfil";
 "About this App" = "Sobre esta App";
 "How it works?" = "Comó funciona";
-"Languages" = "Idiomas";
+"Languages" = "Idioma";
 "Statistics" = "Estadísticas";
 "Total Completed Tasks" = "Total de Tareas Completadas";
 "Do It Now" = "Hecer Ahora";
@@ -43,3 +43,5 @@
 "The list of completed tasks is clean." = "La lista de tareas está vacía.";
 "Clear List" = "Borrar Lista";
 "Delete" = "Eliminar";
+"about_this_app_description" = "Esta aplicación de gestión de tareas te ayuda a organizar tus tareas según su prioridad y finalización. La matriz de Eisenhower, también conocida como la Matriz Urgente-Importante, es una poderosa herramienta de gestión del tiempo que ayuda a priorizar las tareas según su urgencia e importancia.\n\n- **Mejora la toma de decisiones**: Categorizar las tareas en cuatro cuadrantes ayuda a centrarse en lo que realmente importa.\n- **Mayor productividad**: Asegura que el tiempo y la energía se dediquen a tareas importantes, no a distracciones.\n- **Reduce el estrés**: Mantenerse organizado evita sentirse abrumado por demasiadas tareas.\n- **Mejor asignación del tiempo**: Fomenta programar tiempo para actividades de crecimiento a largo plazo.\n- **Enfoque en prioridades**: Minimiza la procrastinación y las distracciones.\n- **Mejora la delegación**: Fomenta delegar tareas urgentes pero no importantes.";
+"task_manager_instructions" = "1.  Anotar las tareas de inmediato:  Añade las tareas a tu lista tan pronto como surjan.  2.  Arrastra las tareas a la matriz:  Tómate el tiempo para ordenar las tareas en la Matriz de Eisenhower:  -  \"Hacer\" (Urgente e Importante)  -  \"Programar\" (Importante pero no Urgente)  -  \"Delegar\" (Urgente pero no Importante)  -  \"Eliminar\" (No Urgente ni Importante)  3.  Actúa de inmediato sobre las tareas verdes:  Comienza a trabajar en las tareas urgentes y críticas de inmediato.  4.  Revisa regularmente las tareas de \"Delegar\" y \"Programar\":  Delega tareas a otros y bloquea tiempo para las importantes.  5.  Revisa ocasionalmente las tareas rojas:  Revisa las tareas no urgentes y no importantes periódicamente, ya que las circunstancias pueden cambiar."

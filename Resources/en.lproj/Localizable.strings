@@ -7,7 +7,7 @@
 "Edit Profile" = "Edit Profile";
 "About this App" = "About this App";
 "How it works?" = "How it works?";
-"Languages" = "Languages";
+"Languages" = "Language";
 "Statistics" = "Statistics";
 "Total Completed Tasks" = "Total Completed Tasks";
 "Do It Now" = "Do It Now";
@@ -43,3 +43,5 @@
 "The list of completed tasks is clean." = "The list of completed tasks is clean.";
 "Clear List" = "Clear List";
 "Delete" = "Delete";
+"about_this_app_description" = "This task manager app helps you organize your tasks based on their priority and completion. The Eisenhower Matrix, also known as the Urgent-Important Matrix, is a powerful time management tool that helps prioritize tasks based on their urgency and importance.\n\n- **Improved Decision-Making**: Categorizing tasks into four quadrants helps focus on what truly matters.\n- **Enhanced Productivity**: Ensures time and energy are spent on important tasks, not distractions.\n- **Reduce Stress**: Staying organized avoids feeling overwhelmed by too many tasks.\n- **Better Time Allocation**: Encourages scheduling time for long-term growth activities.\n- **Focus on Priorities**: Minimizes procrastination and distractions.\n- **Improve Delegation**: Encourages delegating urgent but not important tasks.";
+"task_manager_instructions" = "1.  Write Down Tasks Immediately:  Add tasks to your list as soon as they come up.  2.  Drag Tasks into the Matrix:  Spend time sorting tasks into the Eisenhower Matrix:  -  \"Do\" (Urgent & Important)  -  \"Schedule\" (Important but Not Urgent)  -  \"Delegate\" (Urgent but Not Important)  -  \"Eliminate\" (Not Urgent & Not Important)  3.  Act on Green Tasks Right Away:  Start working on urgent and critical tasks immediately.  4.  Review \"Delegate\" and \"Schedule\" Tasks Regularly:  Delegate tasks to others and block time for important ones.  5.  Check Red Tasks Occasionally:  Review non-urgent, unimportant tasks periodically, as circumstances may change.";

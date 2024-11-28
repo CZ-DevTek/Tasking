@@ -43,6 +43,9 @@
 "Tasks In Process" = "Tâches en cours";
 "Completed Tasks" = "Tâches terminées";
 "The list of completed tasks is clean." = "La liste des tâches terminées est vide.";
+"Done" = "Fait";
+"Delegated" = "Délégué";
+"Scheduled" = "Programmé";
 "Clear List" = "Effacer la liste";
 "Delete" = "Supprimer";
 "about_this_app_description" = "Cette application de gestion des tâches vous aide à organiser vos tâches en fonction de leur priorité et de leur achèvement. La matrice d'Eisenhower, également connue sous le nom de matrice Urgente-Importante, est un outil puissant de gestion du temps qui permet de prioriser les tâches en fonction de leur urgence et de leur importance.\n\n- **Amélioration de la prise de décision** : Catégoriser les tâches en quatre quadrants permet de se concentrer sur ce qui est vraiment important.\n- **Productivité accrue** : Assure que le temps et l'énergie sont consacrés aux tâches importantes, pas aux distractions.\n- **Réduction du stress** : Rester organisé permet d'éviter de se sentir dépassé par trop de tâches.\n- **Meilleure allocation du temps** : Encourage à planifier du temps pour des activités de croissance à long terme.\n- **Se concentrer sur les priorités** : Minimise la procrastination et les distractions.\n- **Amélioration de la délégation** : Encourage à déléguer les tâches urgentes mais non importantes.";

@@ -41,6 +41,9 @@
 "Tasks In Process" = "Tasks In Process";
 "Completed Tasks" = "Completed Tasks";
 "The list of completed tasks is clean." = "The list of completed tasks is clean.";
+"Done" = "Done";
+"Delegated" = "Delegated";
+"Scheduled" = "Scheduled";
 "Clear List" = "Clear List";
 "Delete" = "Delete";
 "about_this_app_description" = "This task manager app helps you organize your tasks based on their priority and completion. The Eisenhower Matrix, also known as the Urgent-Important Matrix, is a powerful time management tool that helps prioritize tasks based on their urgency and importance.\n\n- **Improved Decision-Making**: Categorizing tasks into four quadrants helps focus on what truly matters.\n- **Enhanced Productivity**: Ensures time and energy are spent on important tasks, not distractions.\n- **Reduce Stress**: Staying organized avoids feeling overwhelmed by too many tasks.\n- **Better Time Allocation**: Encourages scheduling time for long-term growth activities.\n- **Focus on Priorities**: Minimizes procrastination and distractions.\n- **Improve Delegation**: Encourages delegating urgent but not important tasks.";

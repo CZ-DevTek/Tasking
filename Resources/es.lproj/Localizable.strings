@@ -43,6 +43,9 @@
 "Tasks In Process" = "Tareas en Proceso";
 "Completed Tasks" = "Tareas Completadas";
 "The list of completed tasks is clean." = "La lista de tareas está vacía.";
+"Done" = "Hecho";
+"Delegated" = "Delegado";
+"Scheduled" = "Programado";
 "Clear List" = "Borrar Lista";
 "Delete" = "Eliminar";
 "about_this_app_description" = "Esta aplicación de gestión de tareas te ayuda a organizar tus tareas según su prioridad y finalización. La matriz de Eisenhower, también conocida como la Matriz Urgente-Importante, es una poderosa herramienta de gestión del tiempo que ayuda a priorizar las tareas según su urgencia e importancia.\n\n- **Mejora la toma de decisiones**: Categorizar las tareas en cuatro cuadrantes ayuda a centrarse en lo que realmente importa.\n- **Mayor productividad**: Asegura que el tiempo y la energía se dediquen a tareas importantes, no a distracciones.\n- **Reduce el estrés**: Mantenerse organizado evita sentirse abrumado por demasiadas tareas.\n- **Mejor asignación del tiempo**: Fomenta programar tiempo para actividades de crecimiento a largo plazo.\n- **Enfoque en prioridades**: Minimiza la procrastinación y las distracciones.\n- **Mejora la delegación**: Fomenta delegar tareas urgentes pero no importantes.";

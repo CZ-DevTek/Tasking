@@ -9,7 +9,6 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var taskManager = TaskManager()
     @StateObject private var userProfileManager = UserProfileManager()
-    @StateObject private var appSettings = AppSettings()
     @State private var selectedTab: Int = 0
     @State private var showSidebar = false
     @State private var isShowingAbout = false
@@ -139,8 +138,6 @@ struct HomeView: View {
                 }
                 .fullScreenCover(isPresented: $isShowingLanguageSelection) {
                     LanguageSelectionView()
-                        .environmentObject(taskManager)
-                        .environmentObject(appSettings)
                 }
                 .fullScreenCover(isPresented: $isShowingStatistics) {
                     StatisticsView(priority: selectedPriority)

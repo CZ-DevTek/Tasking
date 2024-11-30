@@ -9,20 +9,26 @@ import SwiftUI
 
 class AppSettings: ObservableObject {
     @Published var currentLanguage: String = "en"
-    @ObservedObject private var userProfileManager = UserProfileManager()
-
+    private var userProfileManager = UserProfileManager()
+    
     init() {
         if let savedProfile = userProfileManager.getUserProfile() {
             currentLanguage = savedProfile.language
-            Bundle.setLanguage(currentLanguage)
+        } else {
+            currentLanguage = "en"
         }
+        Bundle.setLanguage(currentLanguage)
     }
-
+    
     func changeLanguage(to code: String) {
         guard currentLanguage != code else { return }
         currentLanguage = code
         Bundle.setLanguage(code)
-
         userProfileManager.updateLanguage(to: code)
+        NotificationCenter.default.post(name: .languageChanged, object: nil)
     }
 }
+    extension Notification.Name {
+        static let languageChanged = Notification.Name("languageChanged")
+    }
+

@@ -1,3 +1,4 @@
+"welcome_message" = "Добро пожаловать!";
 "app_language" = "Язык приложения";
 "select_language" = "Выберите язык";
 "Profile" = "Профиль";
@@ -5,6 +6,8 @@
 "Profile Details" = "Детали профиля";
 "Save Profile" = "Сохранить профиль";
 "Edit Profile" = "Редактировать профиль";
+"Name" = "Имя";
+"User ID" = "Идентификатор пользователя";
 "About this App" = "Об этом приложении";
 "About This App" = "Об Этом Приложении";
 "How it works?" = "Как это работает";

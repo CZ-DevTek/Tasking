@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var appSettings: AppSettings
     @StateObject private var taskManager = TaskManager()
     @StateObject private var userProfileManager = UserProfileManager()
     @State private var selectedTab: Int = 0
@@ -18,10 +19,22 @@ struct HomeView: View {
     @State private var isShowingProfile = false
     @State private var selectedPriority: Priority = .importantAndUrgent
     @State private var isShowingLanguageSelection = false
+    @State private var currentLanguage: String = "en"
     
     
     init() {
         CustomTabBarAppearance.configure()
+        NotificationCenter.default.addObserver(
+            forName: .languageChanged,
+            object: nil,
+            queue: .main
+        ) { [self] notification in
+            updateLanguage()
+        }
+    }
+
+    private func updateLanguage() {
+        self.currentLanguage = Bundle.currentLanguage
     }
     
     var body: some View {
@@ -34,7 +47,7 @@ struct HomeView: View {
                             .padding(.top, 20)
                         Text(userProfile.userEmail)
                             .font(.subheadline)
-                        
+                        Text(NSLocalizedString("welcome_message", comment: "Welcome message"))
                         Divider()
                             .background(Color.white)
                     }

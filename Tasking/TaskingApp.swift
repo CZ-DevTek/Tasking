@@ -32,6 +32,7 @@ struct MyApp: App {
                     .environmentObject(appSettings)
                     .environmentObject(taskManager)
                     .onAppear {
+                        appSettings.syncWithSelectedLanguage(selectedLanguage)
                         taskManager.loadTasks()
                         taskManager.loadPriorityTasks()
                         taskManager.loadCompletedTasks()

@@ -1,3 +1,4 @@
+"welcome_message" = "Bienvenue dans l'app!";
 "app_language" = "Langue de l'application";
 "select_language" = "Sélectionnez votre langue";
 "Profile" = "Profil";
@@ -5,6 +6,8 @@
 "Profile Details" = "Détails du profil";
 "Save Profile" = "Enregistrer le profil";
 "Edit Profile" = "Modifier le profil";
+"Name" = "Nom";
+"User ID" = "ID Utilisateur";
 "About this App" = "À propos de cette App";
 "About This App" = "À Propos De Cette App";
 "How it works?" = "Comment ça fonctionne ?";

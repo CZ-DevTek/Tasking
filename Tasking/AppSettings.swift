@@ -7,28 +7,49 @@
 
 import SwiftUI
 
+import SwiftUI
+
 class AppSettings: ObservableObject {
-    @Published var currentLanguage: String = "en"
+    @Published var currentLanguage: String = "en" {
+            didSet {
+                Bundle.setLanguage(currentLanguage)
+                NotificationCenter.default.post(name: .languageChanged, object: nil)
+            }
+        }
     private var userProfileManager = UserProfileManager()
-    
+
     init() {
         if let savedProfile = userProfileManager.getUserProfile() {
             currentLanguage = savedProfile.language
         } else {
             currentLanguage = "en"
         }
-        Bundle.setLanguage(currentLanguage)
+        let isIgnoringAppSettingsLanguage = UserDefaults.standard.bool(forKey: "isIgnoringAppSettingsLanguage")
+        
+        if !isIgnoringAppSettingsLanguage {
+            Bundle.setLanguage(currentLanguage)
+        } else {
+            if let savedLanguage = UserDefaults.standard.string(forKey: "language") {
+                currentLanguage = savedLanguage
+            }
+        }
     }
-    
+
     func changeLanguage(to code: String) {
         guard currentLanguage != code else { return }
         currentLanguage = code
+        UserDefaults.standard.set(code, forKey: "language")
         Bundle.setLanguage(code)
         userProfileManager.updateLanguage(to: code)
         NotificationCenter.default.post(name: .languageChanged, object: nil)
     }
+    func syncWithSelectedLanguage(_ selectedLanguage: String) {
+            if currentLanguage != selectedLanguage {
+                currentLanguage = selectedLanguage
+            }
+        }
 }
-    extension Notification.Name {
-        static let languageChanged = Notification.Name("languageChanged")
-    }
 
+extension Notification.Name {
+    static let languageChanged = Notification.Name("languageChanged")
+}

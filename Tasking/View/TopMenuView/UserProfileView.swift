@@ -13,6 +13,7 @@ struct UserProfileView: View {
     @State private var showToast: Bool = false
     @ObservedObject private var userProfileManager = UserProfileManager()
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appSettings: AppSettings
 
     var body: some View {
         NavigationView {
@@ -50,6 +51,9 @@ struct UserProfileView: View {
                 presentationMode.wrappedValue.dismiss()
             }))
             .onAppear(perform: loadUserProfile)
+            .onChange(of: appSettings.currentLanguage) { _, _ in
+                loadUserProfile()
+            }
         }
     }
 

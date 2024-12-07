@@ -9,30 +9,29 @@ import Foundation
 
 private var bundleKey: UInt8 = 0
 
-final class BundleEx: Bundle, @unchecked Sendable {
+private class CustomBundle: Bundle, @unchecked Sendable {
     override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
-        guard let languageBundle = objc_getAssociatedObject(self, &bundleKey) as? Bundle else {
-            return super.localizedString(forKey: key, value: value, table: tableName)
+            guard let path = Bundle.main.path(forResource: Bundle.currentLanguage, ofType: "lproj"),
+                  let languageBundle = Bundle(path: path) else {
+                return super.localizedString(forKey: key, value: value, table: tableName)
+            }
+            return languageBundle.localizedString(forKey: key, value: value, table: tableName)
         }
-        return languageBundle.localizedString(forKey: key, value: value, table: tableName)
-    }
 }
 
 extension Bundle {
-    private static var bundle: Bundle?
-
+    private static var onLanguageDispatchOnce: Void = {
+        object_setClass(Bundle.main, CustomBundle.self)
+    }()
+    
+    static var currentLanguage: String = "en"
+    
     static func setLanguage(_ language: String) {
-        guard let path = Bundle.main.path(forResource: language, ofType: "lproj"),
-              let languageBundle = Bundle(path: path) else {
-            self.bundle = nil
-            return
-        }
-        objc_setAssociatedObject(Bundle.main, &bundleKey, languageBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        self.bundle = languageBundle
+        currentLanguage = language
+        onLanguageDispatchOnce
     }
-
+    
     class func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
-        return bundle?.localizedString(forKey: key, value: value, table: tableName) ??
-               NSLocalizedString(key, tableName: tableName, value: value ?? key, comment: "")
+        return Bundle.main.localizedString(forKey: key, value: value, table: tableName)
     }
 }

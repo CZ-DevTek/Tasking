@@ -1,8 +1,11 @@
+"welcome_message" = "¡Bienvenido a la aplicación!";
 "app_language" = "Idioma de la aplicación";
 "select_language" = "Seleccione su idioma";
 "Profile" = "Perfil";
 "User Profile" = "Perfil de Usuario";
 "Profile Details" = "Detalles del Perfil";
+"Name" = "Nombre";
+"User ID" = "ID de Usuario";
 "Save Profile" = "Guardar Perfil";
 "Edit Profile" = "Editar Perfil";
 "About this App" = "Sobre esta App";

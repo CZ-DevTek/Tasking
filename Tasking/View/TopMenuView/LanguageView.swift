@@ -13,6 +13,8 @@ struct LanguageSelectionView: View {
     @State private var showRestartAlert = false
     @State private var pendingLanguage: String?
     @Environment(\.presentationMode) var presentationMode
+    @State private var isIgnoringAppSettingsLanguage: Bool = UserDefaults.standard.bool(forKey: "isIgnoringAppSettingsLanguage")
+    
 
     private let availableLanguages = [
         ("English", "en"),
@@ -33,7 +35,16 @@ struct LanguageSelectionView: View {
                         Text(NSLocalizedString("select_language", comment: "Label for selecting app language"))
                             .font(.headline)
                             .padding(.bottom, 20)
-
+                        
+                        Toggle(isOn: $isIgnoringAppSettingsLanguage) {
+                            Text("Ignore Language by Location")
+                                .font(.subheadline)
+                                .padding()
+                        }
+                        .padding(.horizontal)
+                        .onChange(of: isIgnoringAppSettingsLanguage) { _, newValue in
+                            UserDefaults.standard.set(newValue, forKey: "isIgnoringAppSettingsLanguage")
+                        }
                         ForEach(availableLanguages, id: \.1) { language in
                             Button(action: {
                                 handleLanguageChange(to: language.1)
@@ -70,7 +81,6 @@ struct LanguageSelectionView: View {
                     primaryButton: .destructive(Text(NSLocalizedString("Restart", comment: "Restart button"))) {
                         if let language = pendingLanguage {
                             appSettings.changeLanguage(to: language)
-                            exit(0)
                         }
                     },
                     secondaryButton: .cancel()
@@ -82,8 +92,12 @@ struct LanguageSelectionView: View {
     }
 
     private func handleLanguageChange(to language: String) {
-        guard appSettings.currentLanguage != language else { return }
-        pendingLanguage = language
-        showRestartAlert = true
+        if isIgnoringAppSettingsLanguage {
+            appSettings.changeLanguage(to: language)
+        } else {
+            guard appSettings.currentLanguage != language else { return }
+            pendingLanguage = language
+            showRestartAlert = true
+        }
     }
 }

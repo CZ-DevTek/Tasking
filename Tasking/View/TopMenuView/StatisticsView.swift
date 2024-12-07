@@ -12,7 +12,6 @@ struct StatisticsView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var updateCounter: Int = 0
     let priority: Priority
-    
 
     var body: some View {
         NavigationView {

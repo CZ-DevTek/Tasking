@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SidebarMenu<SidebarContent: View, Content: View>: View {
+    @Binding var showSidebar: Bool
     let sidebarContent: SidebarContent
     let mainContent: Content
     let sidebarWidth: CGFloat
-    @Binding var showSidebar: Bool
     let animation: Animation
     
     init(

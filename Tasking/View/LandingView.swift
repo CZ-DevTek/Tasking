@@ -11,6 +11,9 @@ struct LandingView: View {
     
     var body: some View {
         VStack {
+            TasksLogoView()
+                .frame(width: 50, height: 100)
+                .padding(.bottom, 20)
             HStack(spacing: 0) {
                 Text("T")
                     .foregroundColor(.blue)
@@ -20,7 +23,6 @@ struct LandingView: View {
                     .foregroundColor(.green)
                     .rotationEffect(.degrees(tickRotation))
                     .animation(.easeInOut(duration: 2), value: tickRotation)
-                
                 
                 Text("S")
                     .foregroundColor(.yellow)

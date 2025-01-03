@@ -10,7 +10,6 @@ import SwiftUI
 struct LanguageSelectionView: View {
     @EnvironmentObject var languageManager: LanguageManager
     @Environment(\.dismiss) var dismiss
-    @State private var showRestartAlert = false
     @State private var pendingLanguage: String?
     @Environment(\.presentationMode) var presentationMode
     @State private var isIgnoringAppSettingsLanguage: Bool = UserDefaults.standard.bool(forKey: "isIgnoringAppSettingsLanguage")
@@ -74,18 +73,6 @@ struct LanguageSelectionView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                 }
             }
-            .alert(isPresented: $showRestartAlert) {
-                Alert(
-                    title: Text(NSLocalizedString("Restart Required", comment: "Restart alert title")),
-                    message: Text(NSLocalizedString("To apply the language change, the app needs to restart. Do you want to restart now?", comment: "Restart alert message")),
-                    primaryButton: .destructive(Text(NSLocalizedString("Restart", comment: "Restart button"))) {
-                        if let language = pendingLanguage {
-                        languageManager.changeLanguage(to: language)
-                        }
-                    },
-                    secondaryButton: .cancel()
-                )
-            }
         }
         .ignoresSafeArea()
         .customizeMenuBackground()
@@ -97,7 +84,6 @@ struct LanguageSelectionView: View {
         } else {
             guard languageManager.currentLanguage != language else { return }
             pendingLanguage = language
-            showRestartAlert = true
         }
     }
 }

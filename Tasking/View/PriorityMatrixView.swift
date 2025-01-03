@@ -32,7 +32,7 @@ struct PriorityMatrixView: View {
                 .foregroundColor(CustomFont.subtitle.color)
                 .minimumScaleFactor(0.95)
 
-                Text(priority.rawValue)
+                Text(NSLocalizedString(priority.rawValue, comment: "Priority title"))
                     .font(CustomFont.footnote.font)
                     .foregroundColor(CustomFont.footnote.color)
                     .multilineTextAlignment(.center)

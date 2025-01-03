@@ -40,6 +40,13 @@ struct HomeView: View {
     var body: some View {
         SidebarMenu(sidebarWidth: 200, showSidebar: $showSidebar) {
             VStack(alignment: .leading, spacing: 20) {
+                HStack{
+                    Spacer()
+                    TasksLogoView()
+                        .frame(width: 20, height: 50)
+                        .padding(.bottom, 10)
+                    Spacer()
+                }
                 if let userProfile = userProfileManager.getUserProfile() {
                     VStack(alignment: .leading, spacing: 8) {
                         Text(userProfile.userName)

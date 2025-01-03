@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F2B8A3C2C84B35100433D1B /* CompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */; };
+		4F36C2C62D286DBE003391A4 /* TasksLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C2C52D286DBE003391A4 /* TasksLogo.swift */; };
 		4F3D66FD2CF2168300D9A124 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */; };
 		4F3D66FF2CF2190100D9A124 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D66FE2CF2190100D9A124 /* UserProfileModel.swift */; };
 		4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		4F2B8A3B2C84B35100433D1B /* CompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksView.swift; sourceTree = "<group>"; };
+		4F36C2C52D286DBE003391A4 /* TasksLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksLogo.swift; sourceTree = "<group>"; };
 		4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		4F3D66FE2CF2190100D9A124 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 		4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				4F7A26EF2CA85E80008581AF /* LandingView.swift */,
+				4F36C2C52D286DBE003391A4 /* TasksLogo.swift */,
 				4F66B7102C199A2C00378124 /* HomeView.swift */,
 				4F66B6FE2C19974600378124 /* TaskListView.swift */,
 				4F66B70C2C19984000378124 /* PriorityView.swift */,
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB3C22F2CE5492100D17B00 /* HowItWorksView.swift in Sources */,
+				4F36C2C62D286DBE003391A4 /* TasksLogo.swift in Sources */,
 				4F66B71F2C19AE8800378124 /* DelegateItView.swift in Sources */,
 				4F66B7132C19A4D000378124 /* PriorityMatrixView.swift in Sources */,
 				4F7A26F02CA85E80008581AF /* LandingView.swift in Sources */,

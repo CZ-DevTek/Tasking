@@ -22,10 +22,12 @@ struct PriorityMatrixView: View {
     var body: some View {
         NavigationLink(destination: taskManager.linkTo(for: priority)) {
             VStack(spacing: 8) {
-                Text(priority == .importantAndUrgent ? "DO" :
+                Text(NSLocalizedString(
+                    priority == .importantAndUrgent ? "DO" :
                         priority == .importantButNotUrgent ? "SCHEDULE" :
                         priority == .urgentButNotImportant ? "DELEGATE" :
-                        "DO IT LATER")
+                        "DO IT LATER", comment: "DO")
+                )
                 .font(CustomFont.subtitle.font)
                 .foregroundColor(CustomFont.subtitle.color)
                 .minimumScaleFactor(0.95)

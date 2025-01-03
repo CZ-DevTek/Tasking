@@ -25,7 +25,10 @@ struct HowItWorksView: View {
                     .padding(.horizontal)
                 }
             }
-            .navigationBarTitle("How It Works?", displayMode: .inline)
+            .navigationBarTitle(
+                Text(NSLocalizedString("How It Works?", comment:"How It Works?"))
+                )
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {

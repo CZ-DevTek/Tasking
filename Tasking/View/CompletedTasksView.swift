@@ -13,7 +13,7 @@ struct CompletedTasksView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 if taskManager.completedTasks.isEmpty {
-                    Text("The list of completed tasks is clean.")
+                    Text(NSLocalizedString("The list of completed tasks is clean.", comment: "The list of completed tasks is clean."))
                         .foregroundColor(.white)
                         .padding()
                 } else {
@@ -52,7 +52,7 @@ struct CompletedTasksView: View {
                             HStack {
                                 Image(systemName: "trash")
                                     .foregroundColor(.white)
-                                Text("Clear List")
+                                Text(NSLocalizedString("Clear List", comment: "Clear List"))
                                     .font(.headline)
                                     .foregroundColor(.white)
                             }
@@ -68,7 +68,7 @@ struct CompletedTasksView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Completed Tasks")
+                    Text(NSLocalizedString("Completed Tasks", comment:"Completed Tasks"))
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)

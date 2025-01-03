@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-import SwiftUI
-
-class AppSettings: ObservableObject {
+class LanguageManager: ObservableObject {
     @Published var currentLanguage: String = "en" {
             didSet {
+                saveLanguagePreference()
                 Bundle.setLanguage(currentLanguage)
                 NotificationCenter.default.post(name: .languageChanged, object: nil)
             }
@@ -34,6 +33,11 @@ class AppSettings: ObservableObject {
             }
         }
     }
+    
+    private func saveLanguagePreference() {
+            UserDefaults.standard.set(currentLanguage, forKey: "selectedLanguage")
+            UserDefaults.standard.synchronize()
+        }
 
     func changeLanguage(to code: String) {
         guard currentLanguage != code else { return }
@@ -52,4 +56,10 @@ class AppSettings: ObservableObject {
 
 extension Notification.Name {
     static let languageChanged = Notification.Name("languageChanged")
+}
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
 }

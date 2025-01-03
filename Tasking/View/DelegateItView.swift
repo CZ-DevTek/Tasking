@@ -34,14 +34,14 @@ struct DelegateItView: View {
                         Button(action: {
                             taskManager.shareTask(task)
                         }) {
-                            Text("Ask to")
+                            Text(NSLocalizedString("Ask to", comment: "Ask to"))
                             Image(systemName: "square.and.arrow.up")
                         }
                         Button(action: {
                             selectedTask = task
                             showPriorityAlert = true
                         }) {
-                            Text("Move to Task List")
+                            Text(NSLocalizedString("Move to Task List", comment: "Move to Task List"))
                             Image(systemName: "arrow.left.circle")
                         }
                     }
@@ -69,7 +69,7 @@ struct DelegateItView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Delegate It")
+                    Text(NSLocalizedString("Delegate It", comment: "Delegate It"))
                         .font(CustomFont.title.font)
                         .foregroundColor(.customBlue)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -78,9 +78,9 @@ struct DelegateItView: View {
             }
             .alert(isPresented: $showPriorityAlert) {
                 Alert(
-                    title: Text("Move Task"),
-                    message: Text("Do you want to move this task back to the Task List?"),
-                    primaryButton: .default(Text("Move")) {
+                    title: Text(NSLocalizedString("Move Task", comment: "Move Task")),
+                    message: Text(NSLocalizedString("Do you want to move this task back to the Task List?", comment: "Do you want to move this task back to the Task List?")),
+                    primaryButton: .default(Text(NSLocalizedString("Move", comment: "Move"))) {
                         if let task = selectedTask {
                             taskManager.moveTaskToTaskList(task, from: $taskManager.delegateItTasks)
                         }

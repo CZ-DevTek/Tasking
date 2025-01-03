@@ -23,7 +23,10 @@ struct FeedbackView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    TextField("Subject", text: $subject)
+                    TextField(
+                            NSLocalizedString("Subject", comment: "Subject"),
+                            text: $subject
+                        )
                         .padding()
                         .background(Color.white)
                         .cornerRadius(8)
@@ -42,7 +45,7 @@ struct FeedbackView: View {
                             mailErrorAlert = true
                         }
                     }) {
-                        Text("Send Feedback")
+                        Text(NSLocalizedString("Send Feedback", comment: "Send Feedback"))
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(subject.isEmpty || bodyText.isEmpty ? Color.gray : Color.blue)
@@ -58,15 +61,18 @@ struct FeedbackView: View {
                     }
                     .alert(isPresented: $mailErrorAlert) {
                         Alert(
-                            title: Text("Mail Not Available"),
-                            message: Text("Please configure a mail account in your device settings to send feedback."),
+                            title: Text(NSLocalizedString("Mail Not Available", comment: "Mail Not Available")),
+                            message: Text(NSLocalizedString("Please configure a mail account in your device settings to send feedback.", comment: "Please configure a mail account in your device settings to send feedback.")),
                             dismissButton: .default(Text("OK"))
                         )
                     }
                 }
                 .padding()
             }
-            .navigationBarTitle("Feedback", displayMode: .inline)
+            .navigationBarTitle(
+                Text(NSLocalizedString("Feedback", comment: "Feedback"))
+            )
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {
@@ -75,8 +81,12 @@ struct FeedbackView: View {
                     .foregroundColor(.white)
             })
             .overlay(
-                ToastView(show: $showToast, message: "Profile Saved Successfully", duration: 2)
-                    .padding(.bottom, 40),
+                ToastView(
+                    show: $showToast,
+                    message: NSLocalizedString("Profile Saved Successfully", comment: "Profile Saved Successfully"),
+                    duration: 2
+                )
+                .padding(.bottom, 40),
                 alignment: .bottom
             )
         }

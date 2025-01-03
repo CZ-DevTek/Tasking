@@ -14,7 +14,7 @@
 		4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67042CF253DC00D9A124 /* ToastView.swift */; };
 		4F3D673E2CF332D600D9A124 /* SidebarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */; };
 		4F3D67462CF3D30C00D9A124 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D67452CF3D30C00D9A124 /* LanguageView.swift */; };
-		4F3D674D2CF3DAC600D9A124 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */; };
+		4F3D674D2CF3DAC600D9A124 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D674C2CF3DAC600D9A124 /* LanguageManager.swift */; };
 		4F60C6DF2CAC882A00C880AD /* TasksInProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */; };
 		4F66B6FD2C19974600378124 /* TaskingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FC2C19974600378124 /* TaskingApp.swift */; };
 		4F66B6FF2C19974600378124 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66B6FE2C19974600378124 /* TaskListView.swift */; };
@@ -48,7 +48,7 @@
 		4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenuView.swift; sourceTree = "<group>"; };
 		4F3D67412CF3CFB900D9A124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4F3D67452CF3D30C00D9A124 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
-		4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		4F3D674C2CF3DAC600D9A124 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		4F60C6DE2CAC882A00C880AD /* TasksInProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksInProcessView.swift; sourceTree = "<group>"; };
 		4F66B6F92C19974600378124 /* Tasking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F66B6FC2C19974600378124 /* TaskingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskingApp.swift; sourceTree = "<group>"; };
@@ -96,10 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				4F3D673D2CF332D600D9A124 /* SidebarMenuView.swift */,
-				4F3D67452CF3D30C00D9A124 /* LanguageView.swift */,
 				4F3D66FC2CF2168300D9A124 /* UserProfileView.swift */,
 				4FC6B35A2CA9C8D700677B1C /* AboutThisAppView.swift */,
 				4FB3C22E2CE5492100D17B00 /* HowItWorksView.swift */,
+				4F3D67452CF3D30C00D9A124 /* LanguageView.swift */,
 				4FB3C2302CE54A4D00D17B00 /* StatisticsView.swift */,
 				4F959A262CF20CAF0048E3E2 /* FeedbackView.swift */,
 				4F959A282CF20D110048E3E2 /* FeedBackMailView.swift */,
@@ -132,7 +132,6 @@
 				4F3D67412CF3CFB900D9A124 /* Info.plist */,
 				4F66B6FC2C19974600378124 /* TaskingApp.swift */,
 				4FCCA8692C19E83C00FCA57C /* AppDelegate.swift */,
-				4F3D674C2CF3DAC600D9A124 /* AppSettings.swift */,
 				4F66B7142C19A63F00378124 /* View */,
 				4FF957CC2CCEE3F40082AA98 /* Components */,
 				4F7C76F42CCD3694006D426A /* Styles */,
@@ -183,6 +182,7 @@
 		4F66B7222C19B3E000378124 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4F3D674C2CF3DAC600D9A124 /* LanguageManager.swift */,
 				4F3D67002CF21E5100D9A124 /* UserProfileManager.swift */,
 				4F66B7202C19B23200378124 /* StoreTaskManager.swift */,
 			);
@@ -230,7 +230,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					4F66B6F82C19974600378124 = {
 						CreatedOnToolsVersion = 15.4;
@@ -300,7 +300,7 @@
 				4F3D66FD2CF2168300D9A124 /* UserProfileView.swift in Sources */,
 				4F3D67052CF253DC00D9A124 /* ToastView.swift in Sources */,
 				4F3D67012CF21E5100D9A124 /* UserProfileManager.swift in Sources */,
-				4F3D674D2CF3DAC600D9A124 /* AppSettings.swift in Sources */,
+				4F3D674D2CF3DAC600D9A124 /* LanguageManager.swift in Sources */,
 				4F66B71B2C19AE5200378124 /* DoItNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +313,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -377,6 +378,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

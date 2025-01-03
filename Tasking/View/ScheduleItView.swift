@@ -34,14 +34,14 @@ struct ScheduleItView: View {
                         Button(action: {
                             taskManager.shareTask(task)
                         }) {
-                            Text("Schedule it in calendar")
+                            Text(NSLocalizedString("Schedule it in calendar", comment: "Schedule it in calendar"))
                             Image(systemName: "calendar")
                         }
                         Button(action: {
                             selectedTask = task
                             showPriorityAlert = true
                         }) {
-                            Text("Move to Task List")
+                            Text(NSLocalizedString("Move to Task List", comment: "Move to Task List" ))
                             Image(systemName: "arrow.left.circle")
                         }
                     }
@@ -69,7 +69,7 @@ struct ScheduleItView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Schedule It")
+                    Text(NSLocalizedString("Schedule It", comment: "Schedule It"))
                         .font(CustomFont.title.font)
                         .foregroundColor(.customYellow)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -77,9 +77,9 @@ struct ScheduleItView: View {
             }
             .alert(isPresented: $showPriorityAlert) {
                 Alert(
-                    title: Text("Move Task"),
-                    message: Text("Do you want to move this task back to the Task List?"),
-                    primaryButton: .default(Text("Move")) {
+                    title: Text(NSLocalizedString("Move Task", comment: "Move Task")),
+                    message: Text(NSLocalizedString("Do you want to move this task back to the Task List?", comment: "Do you want to move this task back to the Task List?")),
+                    primaryButton: .default(Text(NSLocalizedString("Move", comment: "Move"))) {
                         if let task = selectedTask {
                             taskManager.moveTaskToTaskList(task, from: $taskManager.scheduleItTasks)
                         }

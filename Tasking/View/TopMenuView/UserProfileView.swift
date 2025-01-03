@@ -13,7 +13,7 @@ struct UserProfileView: View {
     @State private var showToast: Bool = false
     @ObservedObject private var userProfileManager = UserProfileManager()
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var appSettings: AppSettings
+    @EnvironmentObject var languageManager: LanguageManager
 
     var body: some View {
         NavigationView {
@@ -46,12 +46,15 @@ struct UserProfileView: View {
                         .transition(.opacity)
                 }
             }
-            .navigationBarTitle("User Profile", displayMode: .inline)
+            .navigationBarTitle(
+                Text(NSLocalizedString("User Profile", comment: "User Profile"))
+                )
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: BackButton(action: {
                 presentationMode.wrappedValue.dismiss()
             }))
             .onAppear(perform: loadUserProfile)
-            .onChange(of: appSettings.currentLanguage) { _, _ in
+            .onChange(of: languageManager.currentLanguage) { _, _ in
                 loadUserProfile()
             }
         }
@@ -96,14 +99,13 @@ struct ProfileSummaryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-           
-            Text("Name: \(profile.userName)")
+            Text(String(format: NSLocalizedString("Name: %@", comment: "User's name label"), profile.userName))
                 .font(.subheadline)
-            Text("Email: \(profile.userEmail)")
+            Text(String(format: NSLocalizedString("Email: %@", comment: "User's email label"), profile.userEmail))
                 .font(.subheadline)
-            Text("Language: \(profile.language)")
+            Text(String(format: NSLocalizedString("Language: %@", comment: "User's language label"), profile.language))
                 .font(.subheadline)
-            Text("User ID: \(profile.id)")
+            Text(String(format: NSLocalizedString("User ID: %@", comment: "User's ID label"), profile.id))
                 .font(.subheadline)
         }
         .padding(.bottom, 10)
@@ -113,44 +115,53 @@ struct ProfileSummaryView: View {
 struct ProfileInputFields: View {
     @Binding var userName: String
     @Binding var userEmail: String
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            TextField("Enter your name", text: $userName)
-                .textFieldStyle(PlainTextFieldStyle())
-                .padding(10)
-                .background(.gray)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-
-            TextField("Enter your email", text: $userEmail)
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
-                .textFieldStyle(PlainTextFieldStyle())
-                .padding(10)
-                .background(.gray)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+            TextField(
+                NSLocalizedString("Enter your name", comment: "Enter your name"),
+                text: $userName
+            )
+            .textFieldStyle(PlainTextFieldStyle())
+            .padding(10)
+            .background(.gray)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            
+            TextField(
+                NSLocalizedString("Enter your email", comment: "Enter your name"),
+                text: $userEmail
+            )
+            .keyboardType(.emailAddress)
+            .autocapitalization(.none)
+            .textFieldStyle(PlainTextFieldStyle())
+            .padding(10)
+            .background(.gray)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
         .scrollContentBackground(.hidden)
         .foregroundColor(.clear)
     }
 }
-
 struct SaveProfileButton: View {
     let userName: String
     let userEmail: String
     let profileSaved: Bool
     let saveAction: () -> Void
-
+    
     var body: some View {
         Button(action: saveAction) {
-            Text(profileSaved ? "Edit Profile" : "Save Profile")
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(userEmail.isEmpty || userName.isEmpty ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
+            Text(
+                profileSaved ?
+                NSLocalizedString("Edit Profile", comment: "Edit Profile") :
+                    NSLocalizedString("Save Profile", comment: "Save Profile")
+            )
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(userEmail.isEmpty || userName.isEmpty ? Color.gray : Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
         }
         .disabled(userEmail.isEmpty || userName.isEmpty)
     }

@@ -22,7 +22,7 @@ struct StatisticsView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text("Completed Tasks")
+                        Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
                             .font(.subheadline)
                             .foregroundColor(.white)
 
@@ -43,17 +43,32 @@ struct StatisticsView: View {
                         Divider()
 
                         VStack(alignment: .leading, spacing: 10) {
-                            StatisticRow(title: "Total Completed Tasks", count: taskManager.allCompletedTasks.count)
-                            StatisticRow(title: "Do It Now", count: taskManager.completedDoTasks.count)
-                            StatisticRow(title: "Schedule It", count: taskManager.completedScheduleTasks.count)
-                            StatisticRow(title: "Delegate It", count: taskManager.completedDelegateTasks.count)
+                            StatisticRow(
+                                title: NSLocalizedString("Total Completed Tasks", comment: "Total Completed Tasks"),
+                                count: taskManager.allCompletedTasks.count
+                            )
+                            StatisticRow(
+                                title: NSLocalizedString("Do It Now", comment: "Do It Now"),
+                                count: taskManager.completedDoTasks.count
+                            )
+                            StatisticRow(
+                                title: NSLocalizedString("Schedule It", comment: "Schedule It"),
+                                count: taskManager.completedScheduleTasks.count
+                            )
+                            StatisticRow(
+                                title: NSLocalizedString("Delegate It", comment: "Delegate It"),
+                                count: taskManager.completedDelegateTasks.count
+                            )
                         }
                         .padding(.vertical)
                     }
                     .padding()
                 }
             }
-            .navigationBarTitle("Statistics", displayMode: .inline)
+            .navigationBarTitle(
+                Text(NSLocalizedString("Statistics", comment: "Statistics"))
+                )
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {
@@ -101,7 +116,7 @@ struct PieChartView: View {
                 }
 
                 VStack {
-                    Text("Completed Tasks")
+                    Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
                         .font(.headline)
                         .foregroundColor(.white)
                     Text("\(Int(total))")

@@ -27,7 +27,10 @@ struct AboutThisAppView: View {
                     .padding(.horizontal)
                 }
             }
-            .navigationBarTitle("About This App", displayMode: .inline)
+            .navigationBarTitle(
+                Text(NSLocalizedString("About This App", comment: "About This App"))
+            )
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {

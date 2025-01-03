@@ -240,26 +240,26 @@ class TaskManager: ObservableObject {
     }
     
     func moveTaskToCompleted(_ task: Task) {
-     
         var updatedTask = task
-            updatedTask.completed = true
-        
+        updatedTask.completed = true
+
         if let index = doItNowTasks.firstIndex(where: { $0.id == task.id }) {
-               updatedTask.name = "Done: \(task.name)"
-               updatedTask.priority = .importantAndUrgent
-               doItNowTasks.remove(at: index)
-               savePriorityTasks()
-           } else if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
-               updatedTask.name = "Delegated: \(task.name)"
-               updatedTask.priority = .urgentButNotImportant
-               delegateItTasks.remove(at: index)
-               savePriorityTasks()
-           } else if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
-               updatedTask.name = "Scheduled: \(task.name)"
-               updatedTask.priority = .importantButNotUrgent
-               scheduleItTasks.remove(at: index)
-               savePriorityTasks()
-           }
+            updatedTask.name = "\(NSLocalizedString("Done", comment: "Done")): \(task.name)"
+            updatedTask.priority = .importantAndUrgent
+            doItNowTasks.remove(at: index)
+            savePriorityTasks()
+        } else if let index = delegateItTasks.firstIndex(where: { $0.id == task.id }) {
+            updatedTask.name = "\(NSLocalizedString("Delegated", comment: "Delegated")): \(task.name)"
+            updatedTask.priority = .urgentButNotImportant
+            delegateItTasks.remove(at: index)
+            savePriorityTasks()
+        } else if let index = scheduleItTasks.firstIndex(where: { $0.id == task.id }) {
+            updatedTask.name = "\(NSLocalizedString("Scheduled", comment: "Scheduled")): \(task.name)"
+            updatedTask.priority = .importantButNotUrgent
+            scheduleItTasks.remove(at: index)
+            savePriorityTasks()
+        }
+    
         addTaskToCompletedArrays(updatedTask)
         saveCompletedTasks()
         saveAllCompletedTasks()
@@ -267,13 +267,13 @@ class TaskManager: ObservableObject {
     private func addPrefix(for priority: Priority) -> String {
         switch priority {
         case .importantAndUrgent:
-            return "Done"
+            return NSLocalizedString("Done", comment: "Done")
         case .importantButNotUrgent:
-            return "Scheduled"
+            return NSLocalizedString("Scheduled", comment: "Scheduled")
         case .urgentButNotImportant:
-            return "Delegated"
+            return NSLocalizedString("Delegated", comment: "Delegated")
         case .notImportantNotUrgent:
-            return "Later"
+            return NSLocalizedString("Later", comment: "Later")
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LanguageSelectionView: View {
-    @EnvironmentObject var appSettings: AppSettings
+    @EnvironmentObject var languageManager: LanguageManager
     @Environment(\.dismiss) var dismiss
     @State private var showRestartAlert = false
     @State private var pendingLanguage: String?
@@ -37,7 +37,7 @@ struct LanguageSelectionView: View {
                             .padding(.bottom, 20)
                         
                         Toggle(isOn: $isIgnoringAppSettingsLanguage) {
-                            Text("Ignore Language by Location")
+                            Text(NSLocalizedString("Ignore Language by Location", comment:"Ignore Language by Location"))
                                 .font(.subheadline)
                                 .padding()
                         }
@@ -52,7 +52,7 @@ struct LanguageSelectionView: View {
                                 Text(language.0)
                                     .frame(maxWidth: .infinity)
                                     .padding()
-                                    .background(appSettings.currentLanguage == language.1 ? Color.blue : Color.gray.opacity(0.3))
+                                    .background(languageManager.currentLanguage == language.1 ? Color.blue : Color.gray.opacity(0.3))
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
                                     .padding(.horizontal)
@@ -80,7 +80,7 @@ struct LanguageSelectionView: View {
                     message: Text(NSLocalizedString("To apply the language change, the app needs to restart. Do you want to restart now?", comment: "Restart alert message")),
                     primaryButton: .destructive(Text(NSLocalizedString("Restart", comment: "Restart button"))) {
                         if let language = pendingLanguage {
-                            appSettings.changeLanguage(to: language)
+                        languageManager.changeLanguage(to: language)
                         }
                     },
                     secondaryButton: .cancel()
@@ -93,9 +93,9 @@ struct LanguageSelectionView: View {
 
     private func handleLanguageChange(to language: String) {
         if isIgnoringAppSettingsLanguage {
-            appSettings.changeLanguage(to: language)
+            languageManager.changeLanguage(to: language)
         } else {
-            guard appSettings.currentLanguage != language else { return }
+            guard languageManager.currentLanguage != language else { return }
             pendingLanguage = language
             showRestartAlert = true
         }

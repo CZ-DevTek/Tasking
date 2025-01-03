@@ -27,8 +27,8 @@ extension Bundle {
     static var currentLanguage: String = "en"
     
     static func setLanguage(_ language: String) {
-        currentLanguage = language
         onLanguageDispatchOnce
+        currentLanguage = language
     }
     
     class func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {

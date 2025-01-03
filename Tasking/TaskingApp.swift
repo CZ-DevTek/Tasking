@@ -12,7 +12,7 @@ struct MyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var taskManager = TaskManager()
     @State private var showLandingView = true
-    @StateObject private var appSettings = AppSettings()
+    @StateObject private var languageManager = LanguageManager()
     
     
     init() {
@@ -29,10 +29,10 @@ struct MyApp: App {
                     }
             } else {
                 HomeView()
-                    .environmentObject(appSettings)
+                    .environmentObject(languageManager)
                     .environmentObject(taskManager)
                     .onAppear {
-                        appSettings.syncWithSelectedLanguage(selectedLanguage)
+                        languageManager.syncWithSelectedLanguage(selectedLanguage)
                         taskManager.loadTasks()
                         taskManager.loadPriorityTasks()
                         taskManager.loadCompletedTasks()

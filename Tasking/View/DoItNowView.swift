@@ -58,7 +58,7 @@ struct DoItNowView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Do It Now")
+                    Text(NSLocalizedString("Do It Now", comment: "Do It Now"))
                         .font(CustomFont.title.font)
                         .foregroundColor(.customGreen)
                         .frame(maxWidth: .infinity, alignment: .center)

@@ -29,21 +29,21 @@ struct DoItLaterView: View {
                         Button(action: {
                             taskManager.moveTaskToPriorityLists(task, priority: .importantAndUrgent)
                         }) {
-                            Text("Move to Do It Now")
+                            Text(NSLocalizedString("Move to Do It Now", comment: "Move to Do It Now"))
                             Image(systemName: "arrow.right.circle")
                         }
                         
                         Button(action: {
                             taskManager.moveTaskToPriorityLists(task, priority: .importantButNotUrgent)
                         }) {
-                            Text("Move to Schedule It")
+                            Text(NSLocalizedString("Move to Schedule It", comment: "Move to Schedule It"))
                             Image(systemName: "calendar")
                         }
                         
                         Button(action: {
                             taskManager.moveTaskToPriorityLists(task, priority: .urgentButNotImportant)
                         }) {
-                            Text("Move to Delegate It")
+                            Text(NSLocalizedString("Move to Delegate It", comment: "Move to Delegate It"))
                             Image(systemName: "person.crop.circle.badge.checkmark")
                         }
                         
@@ -51,7 +51,7 @@ struct DoItLaterView: View {
                             taskManager.removeTaskFromCurrentList(task)
                             taskManager.saveTasks()
                         }) {
-                            Text("Delete Task")
+                            Text(NSLocalizedString("Delete Task", comment: "Delete Task"))
                             Image(systemName: "trash")
                         }
                     }
@@ -78,7 +78,7 @@ struct DoItLaterView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Do It Later")
+                    Text(NSLocalizedString("Do It Later", comment: "Do It Later"))
                         .font(CustomFont.title.font)
                         .foregroundColor(.customRed)
                         .frame(maxWidth: .infinity, alignment: .center)

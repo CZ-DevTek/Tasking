@@ -95,7 +95,7 @@ struct PriorityView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Priority Matrix")
+                    Text(NSLocalizedString("Priority Matrix", comment: "Priority Matrix"))
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)

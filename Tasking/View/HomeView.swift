@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject private var appSettings: AppSettings
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var taskManager = TaskManager()
     @StateObject private var userProfileManager = UserProfileManager()
     @State private var selectedTab: Int = 0
@@ -60,22 +60,22 @@ struct HomeView: View {
                 }
                 
                 Button(action: { isShowingProfile.toggle() }) {
-                    Label("Profile", systemImage: "person")
+                    Label(NSLocalizedString("Profile", comment: "Profile"), systemImage: "person")
                 }
                 Button(action: { isShowingAbout.toggle() }) {
-                    Label("About this App", systemImage: "info.circle")
+                    Label(NSLocalizedString("About this App", comment: "About this App"), systemImage: "info.circle")
                 }
                 Button(action: { isShowingHowItWorks.toggle() }) {
-                    Label("How it works?", systemImage: "brain.head.profile")
+                    Label(NSLocalizedString("How it works?", comment: "How it works?"), systemImage: "brain.head.profile")
                 }
                 Button(action: { isShowingLanguageSelection.toggle() }) {
-                    Label("Languages", systemImage: "globe")
+                    Label(NSLocalizedString("Languages", comment: "Languages"), systemImage: "globe")
                 }
                 Button(action: {
                     selectedPriority = .importantAndUrgent
                     isShowingStatistics.toggle()
                 }) {
-                    Label("Statistics", systemImage: "chart.bar.xaxis")
+                    Label(NSLocalizedString("Statistics", comment: "Statistics"), systemImage: "chart.bar.xaxis")
                 }
                 Button(action: {
                     if userProfileManager.getUserProfile() == nil {
@@ -84,8 +84,9 @@ struct HomeView: View {
                         isShowingFeedback.toggle()
                     }
                 }) {
-                    Label("Feedback", systemImage: "pencil.and.outline")
+                    Label(NSLocalizedString("Feedback", comment: "Feedback"), systemImage: "pencil.and.outline")
                 }
+            
             .navigationTitle("Info")
             .navigationBarTitleDisplayMode(.inline)
                 Spacer()
@@ -99,7 +100,7 @@ struct HomeView: View {
                     TaskListView()
                         .tabItem {
                             Image(systemName: "pencil.and.list.clipboard")
-                            Text("Tasks")
+                            Text(NSLocalizedString("Tasks", comment: "Tasks"))
                         }
                         .tag(0)
                         .environmentObject(taskManager)
@@ -107,7 +108,7 @@ struct HomeView: View {
                     PriorityView()
                         .tabItem {
                             Image(systemName: "square.and.pencil")
-                            Text("Priorities")
+                            Text(NSLocalizedString("Priorities", comment: "Priorities"))
                         }
                         .tag(1)
                         .environmentObject(taskManager)
@@ -115,7 +116,7 @@ struct HomeView: View {
                     TasksInProcessView(selectedTab: $selectedTab)
                         .tabItem {
                             Image(systemName: "list.bullet.clipboard")
-                            Text("On Going")
+                            Text(NSLocalizedString("On Going", comment: "On Going"))
                         }
                         .tag(2)
                         .environmentObject(taskManager)
@@ -123,7 +124,7 @@ struct HomeView: View {
                     CompletedTasksView()
                         .tabItem {
                             Image(systemName: "checkmark.circle")
-                            Text("Completed")
+                            Text(NSLocalizedString("Completed", comment: "Completed"))
                         }
                         .tag(3)
                         .environmentObject(taskManager)

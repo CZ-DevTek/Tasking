@@ -30,16 +30,17 @@ struct TaskListView: View {
                 )
                 
                 HStack {
-                    TextField("Enter task name", text: $newTaskName)
-                        .padding(10)
-                        .background(.white)
-                        .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .onSubmit {
-                            addTask()
-                        }
+                    TextField(NSLocalizedString("Enter task name", comment: "Enter task name"),
+                              text: $newTaskName)
+                    .padding(10)
+                    .background(.white)
+                    .cornerRadius(10)
+                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .onSubmit {
+                        addTask()
+                    }
                 }
                 .padding()
                 .padding(.bottom, 20)
@@ -49,7 +50,7 @@ struct TaskListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Task List")
+                    Text(NSLocalizedString("Task List", comment: "Task List"))
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)

@@ -11,9 +11,6 @@ struct LandingView: View {
     
     var body: some View {
         VStack {
-            TasksLogoView()
-                .frame(width: 50, height: 100)
-                .padding(.bottom, 20)
             HStack(spacing: 0) {
                 Text("T")
                     .foregroundColor(.blue)
@@ -34,7 +31,7 @@ struct LandingView: View {
                     .foregroundColor(.black)
             }
             .font(.custom("Avenir Next Bold", size: 80))
-            .background(Color.white)
+            .background(.clear)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -53,7 +50,12 @@ struct LandingView: View {
                     }
                 }
             }
+            TasksLogoView()
+                .frame(width: 50, height: 100)
+                .padding(.top, 20)
+            
         }
+        .customizeBackground()
     }
 }
 

@@ -19,11 +19,13 @@
 "How It Works?" = "Comó Funciona";
 "Languages" = "Idioma";
 "Ignore Language by Location" = "Desactivar el idioma automático por localizacion";
+"Restart Language and App" = "Reiniciar Idioma y App";
 "Statistics" = "Estadísticas";
 "Total Completed Tasks" = "Total de Tareas Completadas";
 "Do It Now" = "Hacer Ahora";
 "Delegate It" = "Delégalas";
 "Schedule It" = "Agéndalas";
+"Do It Later" = "Hacerla más tarde";
 "Feedback" = "Feedback";
 "Subject" = "Tema";
 "Send Feedback" = "Enviar Feedback";
@@ -38,6 +40,7 @@
 "Move to Task List" = "Mover a la Lista de Tareas";
 "Do you want to move this task back to the Task List?" = "¿Quieres mover esta tarea a la Lista de tareas de nuevo?";
 "Ask to" = "Pedir a";
+"Move" = "Mover";
 "Move to Do It Now" = "Mover a Hacer Ahora";
 "Move to Delegate It" = "Mover a Delégalas";
 "Move to Schedule It" = "Mover a Agéndalas";
@@ -60,3 +63,5 @@
 "Delete" = "Eliminar";
 "about_this_app_description" = "Esta aplicación de gestión de tareas te ayuda a organizar tus tareas según su prioridad y finalización. La matriz de Eisenhower, también conocida como la Matriz Urgente-Importante, es una poderosa herramienta de gestión del tiempo que ayuda a priorizar las tareas según su urgencia e importancia.\n\n- **Mejora la toma de decisiones**: Categorizar las tareas en cuatro cuadrantes ayuda a centrarse en lo que realmente importa.\n- **Mayor productividad**: Asegura que el tiempo y la energía se dediquen a tareas importantes, no a distracciones.\n- **Reduce el estrés**: Mantenerse organizado evita sentirse abrumado por demasiadas tareas.\n- **Mejor asignación del tiempo**: Fomenta programar tiempo para actividades de crecimiento a largo plazo.\n- **Enfoque en prioridades**: Minimiza la procrastinación y las distracciones.\n- **Mejora la delegación**: Fomenta delegar tareas urgentes pero no importantes.";
 "task_manager_instructions" = "1. Anotar las tareas de inmediato:\nAñade las tareas a tu lista tan pronto como surjan.\n\n2. Arrastra las tareas a la matriz:\nTómate el tiempo para ordenar las tareas en la Matriz de Eisenhower:\n   -\"Hacer\" (Urgente e Importante)\n   -\"Programar\" (Importante pero no Urgente)\n   -\"Delegar\" (Urgente pero no Importante)\n   -\"Eliminar\" (No Urgente ni Importante)\n\n3. Actúa de inmediato sobre las tareas verdes:\nComienza a trabajar en las tareas urgentes y críticas de inmediato.\n\n4. Revisa regularmente las tareas de \"Delegar\" y \"Programar\":\nDelega tareas a otros y bloquea tiempo para las importantes.\n\n5. Revisa ocasionalmente las tareas rojas:\nRevisa las tareas no urgentes y no importantes periódicamente, ya que las circunstancias pueden cambiar.\n\n";
+"Edit Item" = "Editar";
+"Cancel" = "Cancelar";

@@ -85,7 +85,7 @@ struct DelegateItView: View {
                             taskManager.moveTaskToTaskList(task, from: $taskManager.delegateItTasks)
                         }
                     },
-                    secondaryButton: .cancel()
+                    secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "Cancel")))
                 )
             }
             FoldingButtonBar(isExpanded: $isExpanded)

@@ -84,7 +84,7 @@ struct ScheduleItView: View {
                             taskManager.moveTaskToTaskList(task, from: $taskManager.scheduleItTasks)
                         }
                     },
-                    secondaryButton: .cancel()
+                    secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "Cancel")))
                 )
             }
             FoldingButtonBar(isExpanded: $isExpanded)

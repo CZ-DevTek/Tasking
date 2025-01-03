@@ -14,21 +14,21 @@ struct LanguageSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isIgnoringAppSettingsLanguage: Bool = UserDefaults.standard.bool(forKey: "isIgnoringAppSettingsLanguage")
     
-
+    
     private let availableLanguages = [
         ("English", "en"),
         ("Español", "es"),
         ("Français", "fr"),
         ("Русский", "ru")
     ]
-
+    
     var body: some View {
         NavigationView {
             ZStack {
                 Color.clear
                     .customizeMenuBackground()
                     .ignoresSafeArea()
-
+                
                 ScrollView {
                     VStack(spacing: 16) {
                         Text(NSLocalizedString("select_language", comment: "Label for selecting app language"))
@@ -57,6 +57,17 @@ struct LanguageSelectionView: View {
                                     .padding(.horizontal)
                             }
                         }
+                        Button(action: {
+                            restartApp()
+                        }) {
+                            Text(NSLocalizedString("Restart Language and App", comment: "Restart Language and App"))
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                        }
                     }
                     .padding()
                 }
@@ -77,7 +88,7 @@ struct LanguageSelectionView: View {
         .ignoresSafeArea()
         .customizeMenuBackground()
     }
-
+    
     private func handleLanguageChange(to language: String) {
         if isIgnoringAppSettingsLanguage {
             languageManager.changeLanguage(to: language)
@@ -85,5 +96,8 @@ struct LanguageSelectionView: View {
             guard languageManager.currentLanguage != language else { return }
             pendingLanguage = language
         }
+    }
+    private func restartApp() {
+        exit(0)
     }
 }

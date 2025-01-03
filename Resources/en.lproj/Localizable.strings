@@ -17,6 +17,7 @@
 "How it works?" = "How it works?";
 "Languages" = "Language";
 "Ignore Language by Location" = "Disable automatic language by location";
+"Restart Language and App" = "Restart Language and App";
 "Statistics" = "Statistics";
 "Total Completed Tasks" = "Total Completed Tasks";
 "Do It Now" = "Do It Now";
@@ -36,6 +37,7 @@
 "Move to Task List" = "Move to Task List";
 "Do you want to move this task back to the Task List?" = "Do you want to move this task back to the Task List?";
 "Ask to" = "Ask to";
+"Move" = "Move";
 "Move to Do It Now" = "Move to Do It Now";
 "Move to Delegate It" = "Move to Delegate It";
 "Move to Schedule It" = "Move to Schedule It";
@@ -58,3 +60,5 @@
 "Delete" = "Delete";
 "about_this_app_description" = "This task manager app helps you organize your tasks based on their priority and completion. The Eisenhower Matrix, also known as the Urgent-Important Matrix, is a powerful time management tool that helps prioritize tasks based on their urgency and importance.\n\n- **Improved Decision-Making**: Categorizing tasks into four quadrants helps focus on what truly matters.\n- **Enhanced Productivity**: Ensures time and energy are spent on important tasks, not distractions.\n- **Reduce Stress**: Staying organized avoids feeling overwhelmed by too many tasks.\n- **Better Time Allocation**: Encourages scheduling time for long-term growth activities.\n- **Focus on Priorities**: Minimizes procrastination and distractions.\n- **Improve Delegation**: Encourages delegating urgent but not important tasks.";
 "task_manager_instructions" = "1. Write Down Tasks Immediately:\nAdd tasks to your list as soon as they come up.\n\n2. Drag Tasks into the Matrix:\nSpend time sorting tasks into the Eisenhower Matrix:\n   -\"Do\" (Urgent & Important)\n   -\"Schedule\" (Important but Not Urgent)\n   -\"Delegate\" (Urgent but Not Important)\n   -\"Eliminate\" (Not Urgent & Not Important)\n\n3. Act on Green Tasks Right Away:\nStart working on urgent and critical tasks immediately.\n\n4. Review \"Delegate\" and \"Schedule\" Tasks Regularly:\nDelegate tasks to others and block time for important ones.\n\n5. Check Red Tasks Occasionally:\nReview non-urgent, unimportant tasks periodically, as circumstances may change.\n\n";
+"Edit Item" = "Edit";
+"Cancel" = "Cancel";

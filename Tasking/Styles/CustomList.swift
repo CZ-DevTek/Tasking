@@ -22,7 +22,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                 VStack(spacing: 0) {
                     HStack {
                         if editingItemID == item.id {
-                            TextField("Edit item", text: $updatedText, onCommit: {
+                            TextField(NSLocalizedString("Edit Item", comment: "Edit"), text: $updatedText, onCommit: {
                                 updateAction(item, updatedText)
                                 editingItemID = nil
                             })
@@ -53,12 +53,15 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                     Button(role: .destructive) {
                         deleteAction(item)
                     } label: {
-                        Label("Delete", systemImage: "trash")
+                        Label(NSLocalizedString("Delete", comment: "Delete"),
+                        systemImage: "trash")
                     }
                     Button {
                         editingItemID = item.id
                     } label: {
-                        Label("Edit", systemImage: "highlighter")
+                        Label(NSLocalizedString("Edit Item", comment: "Edit Item"),
+                              systemImage: "highlighter")
+                        .foregroundColor(.gray)
                     }
                     .tint(.blue)
                 }

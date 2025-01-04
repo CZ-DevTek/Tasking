@@ -76,6 +76,7 @@ struct DoItNowView: View {
             }
             FoldingButtonBarView(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
+            
         }
         .padding()
         .customizeSubviewsBackground(for: .green)

@@ -30,12 +30,12 @@ class TaskManager: ObservableObject {
     @Published var doItLaterTasks: [Task] = []
     
     @Published var completedTasks: [Task] = []
-   
+    
     @Published var allCompletedTasks: [Task] = []
     @Published var completedDoTasks: [Task] = []
     @Published var completedScheduleTasks: [Task] = []
     @Published var completedDelegateTasks: [Task] = []
-
+    
     
     private let tasksKey = "tasksKey"
     private let priorityTasksKey = "priorityTasksKey"
@@ -44,11 +44,11 @@ class TaskManager: ObservableObject {
     var importantAndUrgentTasksCount: Int {
         allCompletedTasks.filter { priority(for: $0) == .importantAndUrgent }.count
     }
-
+    
     var importantButNotUrgentTasksCount: Int {
         allCompletedTasks.filter { priority(for: $0) == .importantButNotUrgent }.count
     }
-
+    
     var urgentButNotImportantTasksCount: Int {
         allCompletedTasks.filter { priority(for: $0) == .urgentButNotImportant }.count
     }
@@ -157,29 +157,30 @@ class TaskManager: ObservableObject {
     
     func loadPriorityTasks() {
         if let savedData = UserDefaults.standard.data(forKey: "priorityTasks") {
-                do {
-                    let decodedTasks = try JSONDecoder().decode([Priority: [Task]].self, from: savedData)
-                    self.priorityTasks = decodedTasks
-
-                    for (priority, tasks) in decodedTasks {
-                        switch priority {
+            do {
+                let decodedTasks = try JSONDecoder().decode([Priority: [Task]].self, from: savedData)
+                self.priorityTasks = decodedTasks
+                
+                for (priority, tasks) in decodedTasks {
+                    switch priority {
                         case .importantAndUrgent:
                             doItNowTasks.append(contentsOf: tasks)
                         case .importantButNotUrgent:
                             scheduleItTasks.append(contentsOf: tasks)
-                            case .urgentButNotImportant:
+                        case .urgentButNotImportant:
                             delegateItTasks.append(contentsOf: tasks)
-                            case .notImportantNotUrgent:
+                        case .notImportantNotUrgent:
                             doItLaterTasks.append(contentsOf: tasks)
-                        }
                     }
-                } catch {
-                    print("Failed to load priority tasks: \(error)")
                 }
-            } else {
-                print("No saved priority tasks found in UserDefaults.")
+            } catch {
+                print("Failed to load priority tasks: \(error)")
             }
+        } else {
+            print("No saved priority tasks found in UserDefaults.")
         }
+    }
+    
     func loadCompletedTasks() {
         let decoder = JSONDecoder()
         
@@ -224,19 +225,19 @@ class TaskManager: ObservableObject {
     func sortTasksByPriority() {
         tasks.sort { task1, task2 in
             if let priority1 = task1.priority,
-                let priority2 = task2.priority {
+               let priority2 = task2.priority {
                 return priority1.rawValue < priority2.rawValue
             }
             return false
         }
     }
-
+    
     func moveTaskToPriorityLists(_ task: Task, priority: Priority) {
         
         removeTaskFromCurrentList(task)
         
         var updatedTask = task
-            updatedTask.priority = priority
+        updatedTask.priority = priority
         
         switch priority {
             case .importantAndUrgent:
@@ -288,7 +289,7 @@ class TaskManager: ObservableObject {
     func moveTaskToCompleted(_ task: Task) {
         var updatedTask = task
         updatedTask.completed = true
-
+        
         if let index = doItNowTasks.firstIndex(where: { $0.id == task.id }) {
             updatedTask.name = "\(NSLocalizedString("Done", comment: "Done")): \(task.name)"
             updatedTask.priority = .importantAndUrgent
@@ -308,21 +309,21 @@ class TaskManager: ObservableObject {
             saveTasks()
             savePriorityTasks()
         }
-    
+        
         addTaskToCompletedArrays(updatedTask)
         saveCompletedTasks()
         saveAllCompletedTasks()
     }
     private func addPrefix(for priority: Priority) -> String {
         switch priority {
-        case .importantAndUrgent:
-            return NSLocalizedString("Done", comment: "Done")
-        case .importantButNotUrgent:
-            return NSLocalizedString("Scheduled", comment: "Scheduled")
-        case .urgentButNotImportant:
-            return NSLocalizedString("Delegated", comment: "Delegated")
-        case .notImportantNotUrgent:
-            return NSLocalizedString("Later", comment: "Later")
+            case .importantAndUrgent:
+                return NSLocalizedString("Done", comment: "Done")
+            case .importantButNotUrgent:
+                return NSLocalizedString("Scheduled", comment: "Scheduled")
+            case .urgentButNotImportant:
+                return NSLocalizedString("Delegated", comment: "Delegated")
+            case .notImportantNotUrgent:
+                return NSLocalizedString("Later", comment: "Later")
         }
     }
     
@@ -414,7 +415,7 @@ extension TaskManager {
     var sortedTasks: [Task] {
         let tasks = allPriorityTasks.sorted { (task1, task2) -> Bool in
             let priority1 = task1.priority?.sort ?? Int.max
-                    let priority2 = task2.priority?.sort ?? Int.max
+            let priority2 = task2.priority?.sort ?? Int.max
             return priority1 < priority2
         }
         return tasks

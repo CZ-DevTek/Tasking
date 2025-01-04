@@ -241,16 +241,12 @@ class TaskManager: ObservableObject {
         switch priority {
             case .importantAndUrgent:
                 doItNowTasks.append(updatedTask)
-                print("Added task to importantAndUrgent: \(task)")
             case .importantButNotUrgent:
                 scheduleItTasks.append(updatedTask)
-                print("Added task to importantButNotUrgent: \(task)")
             case .urgentButNotImportant:
                 delegateItTasks.append(updatedTask)
-                print("Added task to urgentButNotImportant: \(task)")
             case .notImportantNotUrgent:
                 doItLaterTasks.append(updatedTask)
-                print("Added task to notImportantNotUrgent: \(task)")
         }
         priorityTasks[priority]?.append(task)
         saveTasks()

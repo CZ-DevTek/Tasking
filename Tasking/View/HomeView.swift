@@ -154,7 +154,7 @@ struct HomeView: View {
                     HowItWorksView()
                 }
                 .fullScreenCover(isPresented: $isShowingLanguageSelection) {
-                    LanguageSelectionView()
+                    LanguageView()
                 }
                 .fullScreenCover(isPresented: $isShowingStatistics) {
                     StatisticsView(priority: selectedPriority)

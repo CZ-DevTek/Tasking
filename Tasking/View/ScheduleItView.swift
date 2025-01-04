@@ -18,11 +18,11 @@ struct ScheduleItView: View {
             List {
                 ForEach(taskManager.scheduleItTasks) { task in
                     HStack {
-                        TapToCompleteTask(
+                        ButtonToCompleteView(
                             task: task,
                             color: .customYellow,
                             font: CustomFont.body.font
-                        ){
+                        ) {
                             withAnimation {
                                 taskManager.markTaskAsCompleted(for: task)
                                 taskManager.moveTaskToCompleted(task)
@@ -41,7 +41,7 @@ struct ScheduleItView: View {
                             selectedTask = task
                             showPriorityAlert = true
                         }) {
-                            Text(NSLocalizedString("Move to Task List", comment: "Move to Task List" ))
+                            Text(NSLocalizedString("Move to Task List", comment: "Move to Task List"))
                             Image(systemName: "arrow.left.circle")
                         }
                     }
@@ -52,6 +52,16 @@ struct ScheduleItView: View {
                             .padding(2)
                             .cornerRadius(15)
                     )
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            withAnimation {
+                                taskManager.removeTaskFromCurrentList(task)
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
                 }
                 .onDelete { indexSet in
                     withAnimation {
@@ -87,7 +97,7 @@ struct ScheduleItView: View {
                     secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "Cancel")))
                 )
             }
-            FoldingButtonBar(isExpanded: $isExpanded)
+            FoldingButtonBarView(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
         }
         .padding()

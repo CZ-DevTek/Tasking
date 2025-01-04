@@ -16,7 +16,7 @@ struct DoItNowView: View {
             ZStack {
                 List {
                     ForEach(taskManager.doItNowTasks) { task in
-                        TapToCompleteTask(
+                        ButtonToCompleteView(
                             task: task,
                             color: .customGreen,
                             font: CustomFont.body.font
@@ -34,6 +34,16 @@ struct DoItNowView: View {
                                 .cornerRadius(15)
                         )
                         .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                withAnimation {
+                                    taskManager.removeTaskFromCurrentList(task)
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                        }
                     }
                     .onDelete { indexSet in
                         withAnimation {
@@ -64,7 +74,7 @@ struct DoItNowView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            FoldingButtonBar(isExpanded: $isExpanded)
+            FoldingButtonBarView(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
         }
         .padding()

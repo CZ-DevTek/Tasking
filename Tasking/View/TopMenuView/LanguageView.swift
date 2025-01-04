@@ -3,17 +3,16 @@
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 25/11/24.
-//
 
 import SwiftUI
 
-struct LanguageSelectionView: View {
+struct LanguageView: View {
     @EnvironmentObject var languageManager: LanguageManager
     @Environment(\.dismiss) var dismiss
     @State private var pendingLanguage: String?
     @Environment(\.presentationMode) var presentationMode
     @State private var isIgnoringAppSettingsLanguage: Bool = UserDefaults.standard.bool(forKey: "isIgnoringAppSettingsLanguage")
-    
+    @State private var showRestartMessage = false
     
     private let availableLanguages = [
         ("English", "en"),
@@ -47,6 +46,7 @@ struct LanguageSelectionView: View {
                         ForEach(availableLanguages, id: \.1) { language in
                             Button(action: {
                                 handleLanguageChange(to: language.1)
+                                showRestartMessage = true
                             }) {
                                 Text(language.0)
                                     .frame(maxWidth: .infinity)
@@ -56,6 +56,13 @@ struct LanguageSelectionView: View {
                                     .cornerRadius(10)
                                     .padding(.horizontal)
                             }
+                        }
+                        if showRestartMessage {
+                            Text(NSLocalizedString("Please after select your language, press the Restart button to do it effective", comment: "Message to indicate restart needed"))
+                                .font(.subheadline)
+                                .foregroundColor(.white)
+                                .padding(.top, 16)
+                                .multilineTextAlignment(.center)
                         }
                         Button(action: {
                             restartApp()
@@ -95,6 +102,7 @@ struct LanguageSelectionView: View {
         } else {
             guard languageManager.currentLanguage != language else { return }
             pendingLanguage = language
+            showRestartMessage = true
         }
     }
     private func restartApp() {

@@ -16,7 +16,8 @@
 "About this App" = "About this App";
 "How it works?" = "How it works?";
 "Languages" = "Language";
-"Ignore Language by Location" = "Disable automatic language by location";
+"Ignore Language by Location" = "Ignore automatic language by location";
+"Please after select your language, press the Restart button to do it effective" = "Please after select your language, press the Restart button to do it effective";
 "Restart Language and App" = "Restart Language and App";
 "Statistics" = "Statistics";
 "Total Completed Tasks" = "Total Completed Tasks";

@@ -18,7 +18,7 @@ struct DelegateItView: View {
             List {
                 ForEach(taskManager.delegateItTasks) { task in
                     HStack {
-                        TapToCompleteTask(
+                        ButtonToCompleteView(
                             task: task,
                             color: .customBlue,
                             font: CustomFont.body.font
@@ -52,6 +52,16 @@ struct DelegateItView: View {
                             .padding(2)
                             .cornerRadius(15)
                     )
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            withAnimation {
+                                taskManager.removeTaskFromCurrentList(task)
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
                 }
                 .onDelete { indexSet in
                     withAnimation {
@@ -88,7 +98,7 @@ struct DelegateItView: View {
                     secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "Cancel")))
                 )
             }
-            FoldingButtonBar(isExpanded: $isExpanded)
+            FoldingButtonBarView(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
         }
         .padding()
@@ -103,3 +113,4 @@ struct DelegateItView: View {
     DelegateItView()
         .environmentObject(TaskManager())
 }
+

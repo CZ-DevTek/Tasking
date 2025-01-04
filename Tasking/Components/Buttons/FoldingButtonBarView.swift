@@ -1,13 +1,12 @@
 //
-//  FoldingButtonBar.swift
+//  FoldingButtonBarView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 28/10/24.
-//
 
 import SwiftUI
 
-struct FoldingButtonBar: View {
+struct FoldingButtonBarView: View {
     @EnvironmentObject private var taskManager: TaskManager
     @Binding var isExpanded: Bool
     
@@ -28,7 +27,6 @@ struct FoldingButtonBar: View {
                 }
                 .padding(.bottom, 8)
             }
-            // Fold/Unfold Button
             Button(action: {
                 withAnimation {
                     isExpanded.toggle()

@@ -1,9 +1,8 @@
 //
-//  BundleEx.swift
+//  Bundle.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 25/11/24.
-//
 
 import Foundation
 
@@ -27,7 +26,7 @@ extension Bundle {
     static var currentLanguage: String = "en"
     
     static func setLanguage(_ language: String) {
-        onLanguageDispatchOnce
+        _ = onLanguageDispatchOnce
         currentLanguage = language
     }
     

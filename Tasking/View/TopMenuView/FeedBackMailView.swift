@@ -1,5 +1,5 @@
 //
-//  FeedbackForm.swift
+//  FeedbackMailView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 23/11/24.

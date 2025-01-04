@@ -1,5 +1,5 @@
 //
-//  TasksDoneTodayView.swift
+//  CompletedTasksView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 1/9/24.
@@ -8,7 +8,7 @@ import SwiftUI
 
 struct CompletedTasksView: View {
     @EnvironmentObject private var taskManager: TaskManager
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -18,21 +18,30 @@ struct CompletedTasksView: View {
                         .padding()
                 } else {
                     List {
-                        ForEach(taskManager.completedTasks) { task in
-                            VStack {
-                                HStack {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .resizable()
-                                        .foregroundColor(.green)
-                                        .frame(width: 25, height: 25)
-                                    Text(task.name)
-                                        .font(CustomFont.body.font)
-                                        .foregroundColor(CustomFont.body.color)
+                        ForEach(taskManager.completedTasks.indices, id: \.self) { index in
+                            let task = taskManager.completedTasks[index]
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(.green)
+                                    .frame(width: 25, height: 25)
+                                Text(task.name)
+                                    .font(CustomFont.body.font)
+                                    .foregroundColor(CustomFont.body.color)
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        taskManager.removeCompletedTask(at: index)
+                                    }
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
                                 }
+                                .tint(.red)
                             }
                         }
                         .onDelete { indexSet in
-                            for index in indexSet {
+                            indexSet.forEach { index in
                                 taskManager.removeCompletedTask(at: index)
                             }
                         }
@@ -40,9 +49,9 @@ struct CompletedTasksView: View {
                         .listRowBackground(Color.clear)
                     }
                     .scrollContentBackground(.hidden)
-                    
+
                     Spacer()
-                    
+
                     HStack {
                         Button(action: {
                             withAnimation {
@@ -68,7 +77,7 @@ struct CompletedTasksView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(NSLocalizedString("Completed Tasks", comment:"Completed Tasks"))
+                    Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
                         .font(CustomFont.title.font)
                         .foregroundColor(CustomFont.title.color)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -84,3 +93,4 @@ struct CompletedTasksView_Previews: PreviewProvider {
             .environmentObject(TaskManager())
     }
 }
+

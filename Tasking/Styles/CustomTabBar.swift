@@ -1,5 +1,5 @@
 //
-//  TabBar.swift
+//  CustomTabBarAppearance.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 27/10/24.

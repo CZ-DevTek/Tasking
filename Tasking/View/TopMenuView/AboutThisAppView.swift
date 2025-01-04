@@ -1,5 +1,5 @@
 //
-//  InfoView.swift
+//  AboutThisAppView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 29/9/24.

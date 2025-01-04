@@ -27,6 +27,7 @@ struct CustomList<Item: Identifiable & Equatable>: View {
                                 editingItemID = nil
                             })
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .foregroundColor(.black)
                             .onAppear {
                                 updatedText = labelForItem(item)
                             }

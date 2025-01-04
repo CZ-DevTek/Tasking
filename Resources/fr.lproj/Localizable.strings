@@ -18,7 +18,8 @@
 "How it works?" = "Comment ça fonctionne ?";
 "How It Works?" = "Comment ça Fonctionne ?";
 "Languages" = "Langue";
-"Ignore Language by Location" = "Désactiver la langue automatique par localisation";
+"Ignore Language by Location" = "Ignorer la langue automatique par localisation";
+"Please after select your language, press the Restart button to do it effective" = "S'il vous plaît, après avoir sélectionné la langue, appuyez sur le bouton Redémarrer la langue et l'App pour la rendre effective";
 "Restart Language and App" = "Redémarrer la langue et l'App";
 "Statistics" = "Statistiques";
 "Total Completed Tasks" = "Total des tâches terminées";

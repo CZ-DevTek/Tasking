@@ -38,7 +38,7 @@ enum PriorityGradient {
     }
 }
 
-struct GradientBackground: ViewModifier {
+struct MatrixColors: ViewModifier {
     let gradient: PriorityGradient
     
     func body(content: Content) -> some View {
@@ -54,6 +54,6 @@ struct GradientBackground: ViewModifier {
 
 extension View {
     func gradientBackground(for priority: PriorityGradient) -> some View {
-        self.modifier(GradientBackground(gradient: priority))
+        self.modifier(MatrixColors(gradient: priority))
     }
 }

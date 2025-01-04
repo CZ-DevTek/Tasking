@@ -1,9 +1,8 @@
 //
-//  StadisticsView.swift
+//  StatisticsView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 13/11/24.
-//
 
 import SwiftUI
 

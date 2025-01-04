@@ -18,7 +18,8 @@
 "How it works?" = "Как это работает";
 "How It Works?" = "Как Это Работает";
 "Languages" = "Язык";
-"Ignore Language by Location" = "Отключить автоматический выбор языка по местоположению";
+"Ignore Language by Location" = "Игнорировать автоматический выбор языка по местоположению";
+"Please after select your language, press the Restart button to do it effective" = "Пожалуйста, после выбора языка нажмите кнопку Перезапустить язык и приложение, чтобы он вступил в силу";
 "Restart Language and App" = "Перезапустить язык и приложение";
 "Statistics" = "Статистика";
 "Total Completed Tasks" = "Всего Выполненных Задач";

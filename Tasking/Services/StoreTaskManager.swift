@@ -158,34 +158,54 @@ class TaskManager: ObservableObject {
     func loadCompletedTasks() {
         let decoder = JSONDecoder()
         
-        if let completedTasksData = UserDefaults.standard.data(forKey: "completedTasksKey"),
-           let loadedCompletedTasks = try? decoder.decode([Task].self, from: completedTasksData) {
+        if let completedTasksData = UserDefaults.standard.data(
+            forKey: "completedTasksKey"
+        ),
+           let loadedCompletedTasks = try? decoder.decode(
+            [Task].self,
+            from: completedTasksData
+           ) {
             completedTasks = loadedCompletedTasks
         }
-        if let completedDoTasksData = UserDefaults.standard.data(forKey: "completedDoTasksKey"),
-           let loadedCompletedDoTasks = try? decoder.decode([Task].self, from: completedDoTasksData) {
+        if let completedDoTasksData = UserDefaults.standard.data(
+            forKey: "completedDoTasksKey"
+        ),
+           let loadedCompletedDoTasks = try? decoder.decode(
+            [Task].self,
+            from: completedDoTasksData
+           ) {
             completedDoTasks = loadedCompletedDoTasks
         }
-        if let completedScheduleTasksData = UserDefaults.standard.data(forKey: "completedScheduleTasksKey"),
-           let loadedCompletedScheduleTasks = try? decoder.decode([Task].self, from: completedScheduleTasksData) {
+        if let completedScheduleTasksData = UserDefaults.standard.data(
+            forKey: "completedScheduleTasksKey"
+        ),
+           let loadedCompletedScheduleTasks = try? decoder.decode(
+            [Task].self,
+            from: completedScheduleTasksData
+           ) {
             completedScheduleTasks = loadedCompletedScheduleTasks
         }
-        if let completedDelegateTasksData = UserDefaults.standard.data(forKey: "completedDelegateTasksKey"),
-           let loadedCompletedDelegateTasks = try? decoder.decode([Task].self, from: completedDelegateTasksData) {
+        if let completedDelegateTasksData = UserDefaults.standard.data(
+            forKey: "completedDelegateTasksKey"
+        ),
+           let loadedCompletedDelegateTasks = try? decoder.decode(
+            [Task].self,
+            from: completedDelegateTasksData
+           ) {
             completedDelegateTasks = loadedCompletedDelegateTasks
         }
     }
     
     func sortTasksByPriority() {
         tasks.sort { task1, task2 in
-            if let priority1 = task1.priority, let priority2 = task2.priority {
+            if let priority1 = task1.priority,
+                let priority2 = task2.priority {
                 return priority1.rawValue < priority2.rawValue
-            } else {
-                return false
             }
+            return false
         }
     }
-    
+
     func moveTaskToPriorityLists(_ task: Task, priority: Priority) {
         
         removeTaskFromCurrentList(task)
@@ -324,13 +344,13 @@ class TaskManager: ObservableObject {
     func assingColor(for priority: Priority) -> Color {
         switch priority {
             case .importantAndUrgent:
-                return Color.green
+                return .green
             case .importantButNotUrgent:
-                return Color.yellow
+                return .yellow
             case .urgentButNotImportant:
-                return Color.blue
+                return .blue
             case .notImportantNotUrgent:
-                return Color.red
+                return .red
         }
     }
     func navigateTo(for task: Task) -> AnyView {

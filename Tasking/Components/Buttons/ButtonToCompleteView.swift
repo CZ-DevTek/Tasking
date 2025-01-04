@@ -1,12 +1,12 @@
 //
-//  CompleteButton.swift
+//  ButtonToCompleteView.swift
 //  Tasking
 //
 //  Created by Carlos Garcia Perez on 13/11/24.
-//
+
 import SwiftUI
 
-struct TapToCompleteTask: View {
+struct ButtonToCompleteView: View {
     @State private var isCompleted: Bool = false
     let task: Task
     let color: Color

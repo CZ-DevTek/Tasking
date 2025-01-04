@@ -12,7 +12,6 @@ struct DoItLaterView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isExpanded: Bool = true
     
-    
     var body: some View {
         VStack {
             List {
@@ -25,43 +24,93 @@ struct DoItLaterView: View {
                     }
                     .contentShape(Rectangle())
                     .contextMenu {
+                        Button(
+                            action: {
+                                taskManager
+                                    .moveTaskToPriorityLists(
+                                        task,
+                                        priority: .importantAndUrgent
+                                    )
+                            }) {
+                                Label(
+                                    NSLocalizedString(
+                                        "Move to Do It Now",
+                                        comment: "Move to Do It Now"
+                                    ),
+                                    systemImage: "arrow.right.circle"
+                                )
+                            }
                         
-                        Button(action: {
-                            taskManager.moveTaskToPriorityLists(task, priority: .importantAndUrgent)
-                        }) {
-                            Text(NSLocalizedString("Move to Do It Now", comment: "Move to Do It Now"))
-                            Image(systemName: "arrow.right.circle")
-                        }
+                        Button(
+                            action: {
+                                taskManager
+                                    .moveTaskToPriorityLists(
+                                        task,
+                                        priority: .importantButNotUrgent
+                                    )
+                            }) {
+                                Label(
+                                    NSLocalizedString(
+                                        "Move to Schedule It",
+                                        comment: "Move to Schedule It"
+                                    ),
+                                    systemImage: "calendar"
+                                )
+                            }
                         
-                        Button(action: {
-                            taskManager.moveTaskToPriorityLists(task, priority: .importantButNotUrgent)
-                        }) {
-                            Text(NSLocalizedString("Move to Schedule It", comment: "Move to Schedule It"))
-                            Image(systemName: "calendar")
-                        }
+                        Button(
+                            action: {
+                                taskManager
+                                    .moveTaskToPriorityLists(
+                                        task,
+                                        priority: .urgentButNotImportant
+                                    )
+                            }) {
+                                Label(
+                                    NSLocalizedString(
+                                        "Move to Delegate It",
+                                        comment: "Move to Delegate It"
+                                    ),
+                                    systemImage: "person.crop.circle.badge.checkmark"
+                                )
+                            }
                         
-                        Button(action: {
-                            taskManager.moveTaskToPriorityLists(task, priority: .urgentButNotImportant)
-                        }) {
-                            Text(NSLocalizedString("Move to Delegate It", comment: "Move to Delegate It"))
-                            Image(systemName: "person.crop.circle.badge.checkmark")
-                        }
-                        
-                        Button(action: {
-                            taskManager.removeTaskFromCurrentList(task)
-                            taskManager.saveTasks()
-                        }) {
-                            Text(NSLocalizedString("Delete Task", comment: "Delete Task"))
-                            Image(systemName: "trash")
+                        Button(
+                            action: {
+                                taskManager
+                                    .removeTaskFromCurrentList(
+                                        task
+                                    )
+                                taskManager
+                                    .saveTasks()
+                            }) {
+                                Label(
+                                    NSLocalizedString(
+                                        "Delete Task",
+                                        comment: "Delete Task"
+                                    ),
+                                    systemImage: "trash"
+                                )
                         }
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(
                         Rectangle()
-                            .fill(.red)
+                            .fill(Color.red)
                             .padding(2)
                             .cornerRadius(15)
                     )
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            withAnimation {
+                                taskManager.removeTaskFromCurrentList(task)
+                                taskManager.saveTasks()
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
                 }
                 .onDelete { indexSet in
                     indexSet.forEach { index in
@@ -73,18 +122,12 @@ struct DoItLaterView: View {
             }
             .listStyle(PlainListStyle())
             .scrollContentBackground(.hidden)
-            .background(.clear)
+            .background(Color.clear)
             .cornerRadius(20)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(NSLocalizedString("Do It Later", comment: "Do It Later"))
-                        .font(CustomFont.title.font)
-                        .foregroundColor(.customRed)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-            }
-            FoldingButtonBar(isExpanded: $isExpanded)
+            
+            Spacer()
+            
+            FoldingButtonBarView(isExpanded: $isExpanded)
                 .padding(.bottom, 8)
         }
         .padding()
@@ -92,16 +135,14 @@ struct DoItLaterView: View {
         .onDisappear {
             presentationMode.wrappedValue.dismiss()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(NSLocalizedString("Do It Later", comment: "Do It Later"))
+                    .font(CustomFont.title.font)
+                    .foregroundColor(.customRed)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+        }
     }
-}
-
-#Preview {
-    let mockTasks = [
-        Task(id: UUID(), name: "Task 1", priority: .importantAndUrgent),
-        Task(id: UUID(), name: "Task 2", priority: .importantButNotUrgent),
-        Task(id: UUID(), name: "Task 3", priority: .urgentButNotImportant)
-    ]
-    
-    return DoItLaterView(tasks: .constant(mockTasks))
-        .environmentObject(TaskManager())
 }

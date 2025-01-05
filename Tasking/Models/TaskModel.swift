@@ -11,18 +11,8 @@ struct Task: Identifiable, Equatable, Hashable, Codable {
     var id = UUID()
     var name: String
     var priority: Priority?
-    var hasAlarm = false
-    var hasNotification = false
     var completed: Bool = false
-    var scheduled: Bool = false
-    
-    mutating func toggleAlarm() {
-        hasAlarm.toggle()
-    }
-    
-    mutating func toggleNotification() {
-        hasNotification.toggle()
-    }
+    var completionDate: Date?
 }
 
 public enum Priority: String, CaseIterable, Hashable, Codable {

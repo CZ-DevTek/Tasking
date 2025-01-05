@@ -89,6 +89,8 @@ class TaskManager: ObservableObject {
     func markTaskAsCompleted(for task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].completed.toggle()
+            
+            addDate(to: &tasks[index])
         }
         saveCompletedTasks()
     }
@@ -314,6 +316,11 @@ class TaskManager: ObservableObject {
         saveCompletedTasks()
         saveAllCompletedTasks()
     }
+    
+    private func addDate(to task: inout Task) {
+           task.completionDate = Date()
+       }
+    
     private func addPrefix(for priority: Priority) -> String {
         switch priority {
             case .importantAndUrgent:
@@ -405,6 +412,38 @@ class TaskManager: ObservableObject {
                 return AnyView(DelegateItView().environmentObject(self))
             case .notImportantNotUrgent:
                 return AnyView(DoItLaterView(tasks: .constant([])).environmentObject(self))
+        }
+    }
+    
+    func getCompletionData(for timeFrame: TimeFrame) -> [[Double]] {
+        let calendar = Calendar.current
+        
+        func countTasks(for date: Date, from tasks: [Task]) -> Double {
+            return Double(tasks.filter { calendar.isDate($0.completionDate ?? Date(), inSameDayAs: date) }.count)
+        }
+        
+        let timeInterval: Calendar.Component
+        let range: Int
+        
+        switch timeFrame {
+            case .week:
+                timeInterval = .day
+                range = 7
+            case .month:
+                timeInterval = .weekOfYear
+                range = 4
+            case .year:
+                timeInterval = .month
+                range = 12
+        }
+        
+        return (0..<range).map { index in
+            let date = calendar.date(byAdding: timeInterval, value: -index, to: Date())!
+            return [
+                countTasks(for: date, from: completedDoTasks),
+                countTasks(for: date, from: completedScheduleTasks),
+                countTasks(for: date, from: completedDelegateTasks)
+            ]
         }
     }
 }

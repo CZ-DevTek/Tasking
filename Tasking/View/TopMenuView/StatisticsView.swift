@@ -5,12 +5,15 @@
 //  Created by Carlos Garcia Perez on 13/11/24.
 
 import SwiftUI
+import Charts
 
 struct StatisticsView: View {
     @EnvironmentObject private var taskManager: TaskManager
+    @EnvironmentObject private var statisticsManager: StatisticsManager
     @Environment(\.presentationMode) var presentationMode
     @State private var updateCounter: Int = 0
     let priority: Priority
+    @State private var selectedTimeFrame: TimeFrame = .week
 
     var body: some View {
         NavigationView {
@@ -21,60 +24,78 @@ struct StatisticsView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
-                            .font(.subheadline)
-                            .foregroundColor(.white)
+                        HeaderSection(taskManager: taskManager)
+                        Divider()
+
+                        PieChartSection(taskManager: taskManager)
+                            .frame(height: 200)
+                            .padding(.vertical)
 
                         Divider()
 
-                        PieChartView(
-                            data: [
-                                Double(taskManager.completedDoTasks.count),
-                                Double(taskManager.completedScheduleTasks.count),
-                                Double(taskManager.completedDelegateTasks.count)
-                            ],
-                            colors: [.customGreen, .customYellow, .customBlue],
-                            labels: ["Do It Now", "Schedule It", "Delegate It"]
-                        )
-                        .frame(height: 300)
-                        .padding(.vertical)
-
-                        Divider()
-
-                        VStack(alignment: .leading, spacing: 10) {
-                            StatisticRow(
-                                title: NSLocalizedString("Total Completed Tasks", comment: "Total Completed Tasks"),
-                                count: taskManager.allCompletedTasks.count
-                            )
-                            StatisticRow(
-                                title: NSLocalizedString("Do It Now", comment: "Do It Now"),
-                                count: taskManager.completedDoTasks.count
-                            )
-                            StatisticRow(
-                                title: NSLocalizedString("Schedule It", comment: "Schedule It"),
-                                count: taskManager.completedScheduleTasks.count
-                            )
-                            StatisticRow(
-                                title: NSLocalizedString("Delegate It", comment: "Delegate It"),
-                                count: taskManager.completedDelegateTasks.count
-                            )
-                        }
-                        .padding(.vertical)
+                        StatisticsSection(taskManager: taskManager)
+                            .padding(.vertical)
                     }
+                    VStack {
+                                Picker("Time Frame", selection: $selectedTimeFrame) {
+                                    Text("Week").tag(TimeFrame.week)
+                                    Text("Month").tag(TimeFrame.month)
+                                    Text("Year").tag(TimeFrame.year)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                                .padding()
+                                
+                                BarChartView(timeFrame: selectedTimeFrame)
+                                    .environmentObject(statisticsManager)
+                            }
                     .padding()
                 }
             }
             .navigationBarTitle(
-                Text(NSLocalizedString("Statistics", comment: "Statistics"))
-                )
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "chevron.backward")
-                    .font(.headline)
-                    .foregroundColor(.white)
-            })
+                Text(NSLocalizedString("Statistics", comment: "Statistics")),
+                displayMode: .inline
+            )
+            .navigationBarItems(leading: GoBackButton(presentationMode: presentationMode))
+        }
+    }
+}
+
+struct HeaderSection: View {
+    let taskManager: TaskManager
+
+    var body: some View {
+        HStack {
+            Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
+                .font(.subheadline)
+                .foregroundColor(.white)
+        }
+    }
+}
+
+struct StatisticsSection: View {
+    let taskManager: TaskManager
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            StatisticRow(title: NSLocalizedString("Total Completed Tasks", comment: "Total Completed Tasks"), count: taskManager.allCompletedTasks.count)
+            StatisticRow(title: NSLocalizedString("Do It Now", comment: "Do It Now"), count: taskManager.completedDoTasks.count)
+            StatisticRow(title: NSLocalizedString("Schedule It", comment: "Schedule It"), count: taskManager.completedScheduleTasks.count)
+            StatisticRow(title: NSLocalizedString("Delegate It", comment: "Delegate It"), count: taskManager.completedDelegateTasks.count)
+        }
+    }
+}
+
+
+struct GoBackButton: View {
+    var presentationMode: Binding<PresentationMode>
+
+    var body: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.backward")
+                .font(.headline)
+                .foregroundColor(.white)
         }
     }
 }
@@ -94,67 +115,3 @@ struct StatisticRow: View {
         }
     }
 }
-
-struct PieChartView: View {
-    let data: [Double]
-    let colors: [Color]
-    let labels: [String]
-
-    var body: some View {
-        GeometryReader { geometry in
-            let total = data.reduce(0, +)
-            let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            
-            ZStack {
-                ForEach(data.indices, id: \.self) { index in
-                    PieSliceView(
-                        startAngle: angle(for: index, in: data, total: total),
-                        endAngle: angle(for: index + 1, in: data, total: total),
-                        color: colors[index]
-                    )
-                }
-
-                VStack {
-                    Text(NSLocalizedString("Completed Tasks", comment: "Completed Tasks"))
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    Text("\(Int(total))")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.white)
-                }
-                .position(center)
-            }
-        }
-    }
-
-    private func angle(for index: Int, in data: [Double], total: Double) -> Angle {
-        let sum = data.prefix(index).reduce(0, +)
-        return Angle(degrees: sum / total * 360)
-    }
-}
-
-struct PieSliceView: View {
-    let startAngle: Angle
-    let endAngle: Angle
-    let color: Color
-
-    var body: some View {
-        GeometryReader { geometry in
-            Path { path in
-                let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                path.move(to: center)
-                path.addArc(
-                    center: center,
-                    radius: min(geometry.size.width, geometry.size.height) / 2,
-                    startAngle: startAngle,
-                    endAngle: endAngle,
-                    clockwise: false
-                )
-            }
-            .fill(color)
-        }
-    }
-}
-
-

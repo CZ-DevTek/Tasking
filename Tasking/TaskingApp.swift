@@ -13,7 +13,7 @@ struct MyApp: App {
     @StateObject private var taskManager = TaskManager()
     @State private var showLandingView = true
     @StateObject private var languageManager = LanguageManager()
-    
+    @StateObject private var statisticsManager = StatisticsManager()
     
     init() {
         Bundle.setLanguage(selectedLanguage)
@@ -31,6 +31,7 @@ struct MyApp: App {
                 HomeView()
                     .environmentObject(languageManager)
                     .environmentObject(taskManager)
+                    .environmentObject(statisticsManager)
                     .onAppear {
                         languageManager.syncWithSelectedLanguage(selectedLanguage)
                         taskManager.loadTasks()
